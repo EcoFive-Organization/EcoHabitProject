@@ -2,7 +2,7 @@ package pe.edu.upc.ecohabitproyecto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+//Recomendado ejecutar la linea 7, primera opción
 @SpringBootApplication
 public class EcoHabitProyectoApplication {
 
