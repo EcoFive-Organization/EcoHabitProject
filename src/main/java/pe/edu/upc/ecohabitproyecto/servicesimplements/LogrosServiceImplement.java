@@ -17,7 +17,7 @@ public class LogrosServiceImplement implements ILogrosService {
     }
 
     @Override
-    public void insert(Logros software) {
-        lR.save(software);
+    public void insert(Logros logros) {
+        lR.save(logros);
     }
 }

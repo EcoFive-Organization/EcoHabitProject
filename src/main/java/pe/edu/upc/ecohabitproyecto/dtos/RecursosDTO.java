@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 
 public class RecursosDTO {
 
-    // Traer los atributos de la clase, que está en la carpeta emtities
+    // Traer los atributos de la clase, que está en la carpeta entities
     private int recurso_id;
     private String recurso_nombre;
 
