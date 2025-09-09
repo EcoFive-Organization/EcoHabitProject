@@ -1,9 +1,9 @@
-package pe.edu.upc.ecohabit.servicesimplements;
+package pe.edu.upc.ecohabitproyecto.servicesimplements;
 
 import org.springframework.stereotype.Service;
-import pe.edu.upc.ecohabit.entities.Social_Plataformas;
-import pe.edu.upc.ecohabit.repositories.ISocial_PlataformasRepository;
-import pe.edu.upc.ecohabit.servicesinterfaces.ISocial_PlataformasService;
+import pe.edu.upc.ecohabitproyecto.entities.Social_Plataformas;
+import pe.edu.upc.ecohabitproyecto.repositories.ISocial_PlataformasRepository;
+import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ISocial_PlataformasService;
 
 import java.util.List;
 

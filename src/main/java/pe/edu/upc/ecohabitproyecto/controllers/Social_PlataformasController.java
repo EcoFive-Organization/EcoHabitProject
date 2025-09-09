@@ -1,12 +1,12 @@
-package pe.edu.upc.ecohabit.controllers;
+package pe.edu.upc.ecohabitproyecto.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.ecohabit.dtos.Social_PlataformasDTO;
-import pe.edu.upc.ecohabit.entities.Social_Plataformas;
-import pe.edu.upc.ecohabit.servicesinterfaces.ISocial_PlataformasService;
+import pe.edu.upc.ecohabitproyecto.dtos.Social_PlataformasDTO;
+import pe.edu.upc.ecohabitproyecto.entities.Social_Plataformas;
+import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ISocial_PlataformasService;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package pe.edu.upc.ecohabit.entities;
+package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
 

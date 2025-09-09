@@ -1,4 +1,4 @@
-package pe.edu.upc.ecohabit.dtos;
+package pe.edu.upc.ecohabitproyecto.dtos;
 
 public class Social_PlataformasDTO {
     private int plataforma_id;

@@ -1,6 +1,7 @@
-package pe.edu.upc.ecohabit.servicesinterfaces;
+package pe.edu.upc.ecohabitproyecto.servicesinterfaces;
 
-import pe.edu.upc.ecohabit.entities.Social_Plataformas;
+import pe.edu.upc.ecohabitproyecto.entities.Social_Plataformas;
+
 import java.util.List;
 
 public interface ISocial_PlataformasService {
