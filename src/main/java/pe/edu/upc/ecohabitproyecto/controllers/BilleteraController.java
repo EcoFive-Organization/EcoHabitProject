@@ -12,22 +12,21 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/usuario_billetera")
 public class BilleteraController {
-    @Autowired // Para traer la clase del service
-    private IBilleteraService usuarioBilleteraService;
+    @Autowired
+    private IBilleteraService bS;
 
     @GetMapping
-    public List<BilleteraDTO> listar(){
-        return usuarioBilleteraService.list().stream().map(x->{
-            ModelMapper mapper = new ModelMapper();
-            return mapper.map(x, BilleteraDTO.class);
+    public List<BilleteraDTO>listar(){
+        return bS.list().stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x,BilleteraDTO.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    public void insertar(@RequestBody BilleteraDTO usuarioBilleteraDTO){
-
-        ModelMapper mapper = new ModelMapper();
-        Billetera usuarioBilletera = mapper.map(usuarioBilleteraDTO, Billetera.class);
-        usuarioBilleteraService.insert(usuarioBilletera);
+    public void insertar(@RequestBody BilleteraDTO s){
+        ModelMapper m = new ModelMapper();
+        Billetera soft=m.map(s, Billetera.class);
+        bS.insert(soft);
     }
 }
