@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IContenido_EducativoService {
 
-    public List<Contenido_Educativo> list();
+    public List<Contenido_Educativo>list();
 
     public void insert(Contenido_Educativo contenido_educativo);
 
