@@ -3,7 +3,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Roles")
+@Table(name = "Rol")
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
