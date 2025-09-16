@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "Reaccion")
 public class Reaccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +25,6 @@ public class Reaccion {
     @ManyToOne
     @JoinColumn(name = "id_publicacion", nullable = false)
     private Publicacion publicacion;
-
 
     public Reaccion() {}
 

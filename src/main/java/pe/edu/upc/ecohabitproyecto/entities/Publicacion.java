@@ -3,7 +3,10 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "Publicacion")
 public class Publicacion {
 
     @Id
@@ -33,13 +36,11 @@ public class Publicacion {
     @JoinColumn(name = "id_foro", nullable = false) //FK
     private Foro foro;
 
-    @OneToMany
-    @JoinColumn(name = "id_reaccion", nullable = false)
-    private Reaccion reaccion;
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
+    private List<Reaccion> reacciones;
 
-    @OneToMany
-    @JoinColumn(name = "id_comentario", nullable = false)
-    private Comentario comentario;
+    @OneToMany(mappedBy = "publicacion", cascade =  CascadeType.ALL)
+    private List<Comentario> comentarios;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
@@ -48,7 +49,7 @@ public class Publicacion {
 
     public Publicacion() {}
 
-    public Publicacion(int id_publicacion, String titulo, String contenido, String privacidad, Date fecha, int vistas, int compartidos, Foro foro, Reaccion reaccion, Comentario comentario, Usuario usuario) {
+    public Publicacion(int id_publicacion, String titulo, String contenido, String privacidad, Date fecha, int vistas, int compartidos, Foro foro, List<Reaccion> reacciones, List<Comentario> comentarios, Usuario usuario) {
         this.id_publicacion = id_publicacion;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -57,8 +58,8 @@ public class Publicacion {
         this.vistas = vistas;
         this.compartidos = compartidos;
         this.foro = foro;
-        this.reaccion = reaccion;
-        this.comentario = comentario;
+        this.reacciones = reacciones;
+        this.comentarios = comentarios;
         this.usuario = usuario;
     }
 
@@ -126,20 +127,20 @@ public class Publicacion {
         this.foro = foro;
     }
 
-    public Reaccion getReaccion() {
-        return reaccion;
+    public List<Reaccion> getReacciones() {
+        return reacciones;
     }
 
-    public void setReaccion(Reaccion reaccion) {
-        this.reaccion = reaccion;
+    public void setReacciones(List<Reaccion> reacciones) {
+        this.reacciones = reacciones;
     }
 
-    public Comentario getComentario() {
-        return comentario;
+    public List<Comentario> getComentarios() {
+        return comentarios;
     }
 
-    public void setComentario(Comentario comentario) {
-        this.comentario = comentario;
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     public Usuario getUsuario() {

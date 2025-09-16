@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "Comentario")
 public class Comentario {
 
     @Id
@@ -24,6 +26,8 @@ public class Comentario {
     @ManyToOne
     @JoinColumn(name = "id_publicacion", nullable = false)
     private Publicacion publicacion;
+
+    public Comentario() {}
 
     public Comentario(int id_comentario, String contenido, Date fecha, Usuario usuario, Publicacion publicacion) {
         this.id_comentario = id_comentario;
