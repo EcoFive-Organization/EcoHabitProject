@@ -10,7 +10,7 @@ import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IBilleteraService;
 import java.util.List;
 import java.util.stream.Collectors;
 @RestController
-@RequestMapping("/usuario_billetera")
+@RequestMapping("/billeteras")
 public class BilleteraController {
     @Autowired
     private IBilleteraService bS;
