@@ -4,28 +4,26 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Roles")
-public class Roles {
+public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rol_id;
+    private int id_rol;
 
     @Column(name = "nombre_rol", nullable = false, length = 50)
     private String nombre_rol;
 
-    public Roles() {
+    @Column(name = "descripcion", nullable = false, length = 50)
+    private String descripcion;
+
+    public Rol() {
     }
 
-    public Roles(int rol_id, String nombre_rol) {
-        this.rol_id = rol_id;
-        this.nombre_rol = nombre_rol;
+    public int getId_rol() {
+        return id_rol;
     }
 
-    public int getRol_id() {
-        return rol_id;
-    }
-
-    public void setRol_id(int rol_id) {
-        this.rol_id = rol_id;
+    public void setId_rol(int id_rol) {
+        this.id_rol = id_rol;
     }
 
     public String getNombre_rol() {
@@ -34,5 +32,13 @@ public class Roles {
 
     public void setNombre_rol(String nombre_rol) {
         this.nombre_rol = nombre_rol;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
