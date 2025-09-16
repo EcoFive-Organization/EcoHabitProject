@@ -26,6 +26,11 @@ public class TransaccionServiceImplement implements ITransaccionService {
     }
 
     @Override
+    public Transaccion listId(int id) {
+        return tR.findById(id).orElse(null);
+    }
+
+    @Override
     public void delete(int id) {
         tR.deleteById(id);
     }
