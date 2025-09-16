@@ -19,17 +19,18 @@ public class RolController {
     private IRolService rS;
 
     @GetMapping
-    public List<RolDTO> listar(){
-        return rS.list().stream().map(x->{
+    public List<RolDTO> listar() {
+        return rS.list().stream().map(x -> {
             ModelMapper mapper = new ModelMapper();
             return mapper.map(x, RolDTO.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    public void insertar(@RequestBody RolDTO rolDTO){
+    public void insertar(@RequestBody RolDTO rolDTO) {
 
         ModelMapper mapper = new ModelMapper();
         Rol rol = mapper.map(rolDTO, Rol.class);
         rS.insert(rol);
     }
+}
