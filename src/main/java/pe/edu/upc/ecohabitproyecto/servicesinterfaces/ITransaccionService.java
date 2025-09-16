@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ITransaccionService {
     public List<Transaccion> list();
-    public Transaccion insert(Transaccion transaccion);
+    public void insert(Transaccion transaccion);
     public void delete(int id);
     public void update(Transaccion transaccion);
 }
