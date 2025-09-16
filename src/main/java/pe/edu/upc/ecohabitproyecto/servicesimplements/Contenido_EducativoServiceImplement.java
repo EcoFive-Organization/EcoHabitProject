@@ -12,13 +12,34 @@ import java.util.List;
 public class Contenido_EducativoServiceImplement implements IContenido_EducativoService {
     @Autowired
     private IContenido_EducativoRepository contenido_educativoRepository;
+
+    // Listar
     @Override
     public List<Contenido_Educativo> list() {
         return contenido_educativoRepository.findAll();
     }
 
+    // Registrar
     @Override
     public void insert(Contenido_Educativo contenido_educativo) {
         contenido_educativoRepository.save(contenido_educativo);
+    }
+
+    // Eliminar
+    @Override
+    public void delete(int id) {
+        contenido_educativoRepository.deleteById(id);
+    }
+
+    // Modificar
+    @Override
+    public void update(Contenido_Educativo contenido_educativo) {
+        contenido_educativoRepository.save(contenido_educativo);
+    }
+
+    // Listar por id
+    @Override
+    public Contenido_Educativo listId(int id) {
+        return contenido_educativoRepository.findById(id).orElse(null);
     }
 }
