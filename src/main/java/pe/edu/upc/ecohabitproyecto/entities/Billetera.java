@@ -15,13 +15,13 @@ public class Billetera {
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    @Column(name = "balance_puntos", nullable = false, precision = 12, scale = 2)
-    private BigDecimal balance_puntos;
+    @Column(name = "saldo", nullable = false, precision = 12, scale = 2)
+    private BigDecimal saldo;
 
-    public Billetera(int billetera_id, Usuario usuario, BigDecimal balance_puntos) {
+    public Billetera(int billetera_id, Usuario usuario, BigDecimal saldo) {
         this.billetera_id = billetera_id;
         this.usuario = usuario;
-        this.balance_puntos = balance_puntos;
+        this.saldo = saldo;
     }
 
     public Billetera() {}
@@ -42,11 +42,7 @@ public class Billetera {
         this.usuario = usuario;
     }
 
-    public BigDecimal getBalance_puntos() {
-        return balance_puntos;
-    }
+    public BigDecimal getSaldo() { return saldo; }
 
-    public void setBalance_puntos(BigDecimal balance_puntos) {
-        this.balance_puntos = balance_puntos;
-    }
+    public void setSaldo(BigDecimal saldo) { this.saldo = saldo; }
 }
