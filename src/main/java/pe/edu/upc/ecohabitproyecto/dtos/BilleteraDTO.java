@@ -1,6 +1,7 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
 import jakarta.persistence.*;
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.math.BigDecimal;
 
