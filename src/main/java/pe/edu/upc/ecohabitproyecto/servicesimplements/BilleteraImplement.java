@@ -11,17 +11,17 @@ import java.util.List;
 @Service
 public class BilleteraImplement implements IBilleteraService {
     @Autowired
-    private IBilleteraRepository billeteraRepository;
+    private IBilleteraRepository bR;
 
     @Override
     public List<Billetera> list(){
         // Listar
-        return billeteraRepository.findAll();
+        return bR.findAll();
     }
 
     @Override
     public void insert(Billetera billetera) {
         // Registrar
-        billeteraRepository.save(billetera);
+        bR.save(billetera);
     }
 }

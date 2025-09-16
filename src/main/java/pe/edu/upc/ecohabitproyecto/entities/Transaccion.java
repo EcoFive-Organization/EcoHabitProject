@@ -4,6 +4,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
@@ -24,9 +25,9 @@ public class Transaccion {
     private BigDecimal monto;
 
     @Column(name = "fecha", nullable = false)
-    private Instant fecha;
+    private Timestamp fecha;
 
-    public Transaccion(int id_transaccion, Billetera billetera, String tipo, BigDecimal monto, Instant fecha) {
+    public Transaccion(int id_transaccion, Billetera billetera, String tipo, BigDecimal monto, Timestamp fecha) {
         this.id_transaccion = id_transaccion;
         this.billetera = billetera;
         this.tipo = tipo;
@@ -68,11 +69,11 @@ public class Transaccion {
         this.monto = monto;
     }
 
-    public Instant getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(Instant fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 }
