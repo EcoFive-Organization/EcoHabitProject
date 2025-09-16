@@ -1,7 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.servicesinterfaces;
 
 import pe.edu.upc.ecohabitproyecto.entities.Contenido_Educativo;
-import pe.edu.upc.ecohabitproyecto.repositories.IContenido_EducativoRepository;
 
 import java.util.List;
 
