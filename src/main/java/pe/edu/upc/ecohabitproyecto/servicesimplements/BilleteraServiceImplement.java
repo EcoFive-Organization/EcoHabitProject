@@ -9,7 +9,7 @@ import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IBilleteraService;
 import java.util.List;
 
 @Service
-public class BilleteraImplement implements IBilleteraService {
+public class BilleteraServiceImplement implements IBilleteraService {
     @Autowired
     private IBilleteraRepository bR;
 
