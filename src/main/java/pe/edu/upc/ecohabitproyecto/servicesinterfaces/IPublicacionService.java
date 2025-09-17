@@ -9,4 +9,10 @@ public interface IPublicacionService {
     public List<Publicacion> list();
 
     public void insert(Publicacion publicacion);
+
+    public Publicacion listId(int id);
+
+    public void delete(int id);
+
+    public void update(Publicacion publicacion);
 }

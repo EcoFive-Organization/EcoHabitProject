@@ -22,4 +22,19 @@ public class ForoServiceImplement implements IForoService {
     public void insert(Foro foro) {
         iForoRepository.save(foro);
     }
+
+    @Override
+    public Foro listId(Integer id) {
+        return iForoRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(int id) {
+        iForoRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Foro foro) {
+        iForoRepository.save(foro);
+    }
 }

@@ -11,4 +11,10 @@ public interface IForoService {
 
     public void insert(Foro foro);
 
+    public Foro listId(Integer id);
+
+    public void delete(int id);
+
+    public void update(Foro foro);
+
 }

@@ -20,6 +20,21 @@ public class IReaccionServiceImplement implements IReaccionService {
 
     @Override
     public void insert(Reaccion reaccion) {
+        reaccionRepository.save(reaccion);
+    }
 
+    @Override
+    public Reaccion listId(int id) {
+        return reaccionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(int id) {
+        reaccionRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Reaccion reaccion) {
+        reaccionRepository.save(reaccion);
     }
 }

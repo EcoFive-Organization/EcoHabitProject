@@ -22,4 +22,19 @@ public class IComentarioServiceImplement implements IComentarioService {
     public void insert(Comentario comentario){
         comentarioRepository.save(comentario);
     }
+
+    @Override
+    public Comentario listId(int id) {
+        return comentarioRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(int id) {
+        comentarioRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Comentario comentario) {
+        comentarioRepository.save(comentario);
+    }
 }
