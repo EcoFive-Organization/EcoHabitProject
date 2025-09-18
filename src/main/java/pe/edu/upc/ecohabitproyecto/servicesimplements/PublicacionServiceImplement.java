@@ -23,4 +23,19 @@ public class PublicacionServiceImplement implements IPublicacionService {
     public void insert(Publicacion publicacion) {
         publicacionRepository.save(publicacion);
     }
+
+    @Override
+    public Publicacion listId(int id) {
+        return publicacionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(int id) {
+        publicacionRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Publicacion publicacion) {
+        publicacionRepository.save(publicacion);
+    }
 }

@@ -10,4 +10,10 @@ public interface IReaccionService {
     public List<Reaccion> list();
 
     public void insert(Reaccion reaccion);
+
+    public Reaccion listId(int id);
+
+    public void delete(int id);
+
+    public void update(Reaccion reaccion);
 }

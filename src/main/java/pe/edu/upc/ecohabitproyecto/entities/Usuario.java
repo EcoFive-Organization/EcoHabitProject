@@ -23,7 +23,7 @@ public class Usuario {
     @Column(name = "fecha_registro", nullable = true)
     private Timestamp fecha_registro;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_rol")
     private Usuario usuario;
 
