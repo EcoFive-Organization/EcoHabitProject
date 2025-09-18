@@ -4,9 +4,7 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.ecohabitproyecto.dtos.BilleteraDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.ConsumoDTO;
-import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 

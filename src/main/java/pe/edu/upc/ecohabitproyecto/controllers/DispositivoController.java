@@ -8,11 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.DispositivoDTOInsert;
 import pe.edu.upc.ecohabitproyecto.dtos.DispositivoDTOList;
-import pe.edu.upc.ecohabitproyecto.dtos.TransaccionDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
-import pe.edu.upc.ecohabitproyecto.entities.Transaccion;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDispositivoService;
-import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ITransaccionService;
 
 import java.util.List;
 import java.util.stream.Collectors;
