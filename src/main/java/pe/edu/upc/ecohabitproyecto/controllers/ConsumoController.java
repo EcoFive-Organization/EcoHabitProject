@@ -1,32 +1,38 @@
 package pe.edu.upc.ecohabitproyecto.controllers;
 
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.BilleteraDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.ConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
-import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IBilleteraService;
+import pe.edu.upc.ecohabitproyecto.entities.Consumo;
+import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @RestController
-@RequestMapping("/billeteras")
-public class BilleteraController {
+@RequestMapping("/consumos")
+public class ConsumoController {
+
     @Autowired
-    private IBilleteraService bS;
+    private IConsumoService cS;
 
     @GetMapping
-    public List<BilleteraDTO>listar(){
-        return bS.list().stream().map(x->{
+    public List<ConsumoDTO> listar(){
+        return cS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
-            return m.map(x,BilleteraDTO.class);
+                return m.map(x,ConsumoDTO.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    public void insertar(@RequestBody BilleteraDTO s){
+    public void insertar(@RequestBody ConsumoDTO s){
         ModelMapper m = new ModelMapper();
-        Billetera bill=m.map(s, Billetera.class);
-        bS.insert(bill);
+        Consumo cons=m.map(s, Consumo.class);
+        cS.insert(cons);
     }
+
 }
