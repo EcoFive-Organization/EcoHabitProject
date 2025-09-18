@@ -3,9 +3,7 @@ package pe.edu.upc.ecohabitproyecto.servicesimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
-import pe.edu.upc.ecohabitproyecto.entities.Transaccion;
 import pe.edu.upc.ecohabitproyecto.repositories.IDispositivoRepository;
-import pe.edu.upc.ecohabitproyecto.repositories.ITransaccionRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDispositivoService;
 
 import java.util.List;
