@@ -9,7 +9,7 @@ import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IReaccionService;
 import java.util.List;
 
 @Service
-public class IReaccionServiceImplement implements IReaccionService {
+public class ReaccionServiceImplement implements IReaccionService {
     @Autowired
     private IReaccionRepository reaccionRepository;
 

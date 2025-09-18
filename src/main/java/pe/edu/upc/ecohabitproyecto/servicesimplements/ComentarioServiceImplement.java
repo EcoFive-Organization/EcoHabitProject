@@ -9,7 +9,7 @@ import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IComentarioService;
 import java.util.List;
 
 @Service
-public class IComentarioServiceImplement implements IComentarioService {
+public class ComentarioServiceImplement implements IComentarioService {
     @Autowired
     private IComentarioRepository comentarioRepository;
 
