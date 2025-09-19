@@ -11,10 +11,10 @@ import java.sql.Timestamp;
 public class Consumo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idConsumo;
+    private int id_consumo;
 
     @ManyToOne
-    @JoinColumn(name = "idDispositivo")
+    @JoinColumn(name = "id_Dispositivo")
     private Dispositivo dispositivo;
 
     @Column(name = "tipo", nullable = false, length = 20)
@@ -26,8 +26,8 @@ public class Consumo {
     @Column(name = "unidad", nullable = true, length = 20)
     private String unidad;
 
-    @Column(name = "origenConsumo", nullable = true, length = 100)
-    private String origenConsumo;
+    @Column(name = "origen_consumo", nullable = true, length = 100)
+    private String origen_consumo;
 
     @Column(name = "fecha", nullable = false)
     private Timestamp fecha;
@@ -35,25 +35,25 @@ public class Consumo {
     @Column(name = "umbral", nullable = false)
     private int umbral;
 
-    public Consumo(int idConsumo, Dispositivo dispositivo, String tipo, BigDecimal valor, String unidad, String origenConsumo, Timestamp fecha, int umbral) {
-        this.idConsumo = idConsumo;
+    public Consumo(int id_consumo, Dispositivo dispositivo, String tipo, BigDecimal valor, String unidad, String origen_consumo, Timestamp fecha, int umbral) {
+        this.id_consumo = id_consumo;
         this.dispositivo = dispositivo;
         this.tipo = tipo;
         this.valor = valor;
         this.unidad = unidad;
-        this.origenConsumo = origenConsumo;
+        this.origen_consumo = origen_consumo;
         this.fecha = fecha;
         this.umbral = umbral;
     }
 
     public Consumo() {}
 
-    public int getIdConsumo() {
-        return idConsumo;
+    public int getId_consumo() {
+        return id_consumo;
     }
 
-    public void setIdConsumo(int idConsumo) {
-        this.idConsumo = idConsumo;
+    public void setId_consumo(int id_consumo) {
+        this.id_consumo = id_consumo;
     }
 
     public Dispositivo getDispositivo() {
@@ -88,12 +88,12 @@ public class Consumo {
         this.unidad = unidad;
     }
 
-    public String getOrigenConsumo() {
-        return origenConsumo;
+    public String getOrigen_consumo() {
+        return origen_consumo;
     }
 
-    public void setOrigenConsumo(String origenConsumo) {
-        this.origenConsumo = origenConsumo;
+    public void setOrigen_consumo(String origen_consumo) {
+        this.origen_consumo = origen_consumo;
     }
 
     public Timestamp getFecha() {

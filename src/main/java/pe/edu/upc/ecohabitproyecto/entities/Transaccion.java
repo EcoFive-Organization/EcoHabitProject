@@ -12,10 +12,10 @@ import java.time.Instant;
 public class Transaccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idTransaccion;
+    private int id_transaccion;
 
     @ManyToOne
-    @JoinColumn(name = "idBilletera")
+    @JoinColumn(name = "id_billetera")
     private Billetera billetera;
 
     @Column(name = "tipo", nullable = false, length = 20)
@@ -27,8 +27,8 @@ public class Transaccion {
     @Column(name = "fecha", nullable = false)
     private Timestamp fecha;
 
-    public Transaccion(int idTransaccion, Billetera billetera, String tipo, BigDecimal monto, Timestamp fecha) {
-        this.idTransaccion = idTransaccion;
+    public Transaccion(int id_transaccion, Billetera billetera, String tipo, BigDecimal monto, Timestamp fecha) {
+        this.id_transaccion = id_transaccion;
         this.billetera = billetera;
         this.tipo = tipo;
         this.monto = monto;
@@ -37,12 +37,12 @@ public class Transaccion {
 
     public Transaccion() {}
 
-    public int getIdTransaccion() {
-        return idTransaccion;
+    public int getId_transaccion() {
+        return id_transaccion;
     }
 
-    public void setIdTransaccion(int idTransaccion) {
-        this.idTransaccion = idTransaccion;
+    public void setId_transaccion(int id_transaccion) {
+        this.id_transaccion = id_transaccion;
     }
 
     public Billetera getBilletera() {

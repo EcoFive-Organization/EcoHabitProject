@@ -2,8 +2,10 @@ package pe.edu.upc.ecohabitproyecto.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pe.edu.upc.ecohabitproyecto.entities.Metodo_Pago;
+import pe.edu.upc.ecohabitproyecto.entities.ContenidoEducativo;
 
 @Repository
-public interface IMetodo_PagoRepository extends JpaRepository<Metodo_Pago, Integer> {
+public interface IContenidoEducativoRepository extends JpaRepository<ContenidoEducativo, Integer>
+{
+
 }

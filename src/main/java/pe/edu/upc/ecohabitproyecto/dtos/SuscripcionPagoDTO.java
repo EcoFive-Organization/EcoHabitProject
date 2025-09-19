@@ -1,28 +1,25 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import pe.edu.upc.ecohabitproyecto.entities.Metodo_Pago;
+import pe.edu.upc.ecohabitproyecto.entities.MetodoPago;
 import pe.edu.upc.ecohabitproyecto.entities.Suscripcion;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-public class Suscripcion_PagoDTO {
-    private int id_suscripcion_pago;
+public class SuscripcionPagoDTO {
+    private int idSuscripcionPago;
     private BigDecimal monto;
     private Timestamp fecha;
     private String estado;
     private Suscripcion suscripcion;
-    private Metodo_Pago metodo_pago;
+    private MetodoPago metodo_pago;
 
-    public int getId_suscripcion_pago() {
-        return id_suscripcion_pago;
+    public int getIdSuscripcionPago() {
+        return idSuscripcionPago;
     }
 
-    public void setId_suscripcion_pago(int id_suscripcion_pago) {
-        this.id_suscripcion_pago = id_suscripcion_pago;
+    public void setIdSuscripcionPago(int idSuscripcionPago) {
+        this.idSuscripcionPago = idSuscripcionPago;
     }
 
     public BigDecimal getMonto() {
@@ -57,11 +54,11 @@ public class Suscripcion_PagoDTO {
         this.suscripcion = suscripcion;
     }
 
-    public Metodo_Pago getMetodo_pago() {
+    public MetodoPago getMetodo_pago() {
         return metodo_pago;
     }
 
-    public void setMetodo_pago(Metodo_Pago metodo_pago) {
+    public void setMetodo_pago(MetodoPago metodo_pago) {
         this.metodo_pago = metodo_pago;
     }
 }

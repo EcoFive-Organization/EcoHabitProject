@@ -7,31 +7,35 @@ import java.sql.Timestamp;
 
 
 @Entity
-@Table(name = "Suscripcion_Pago")
-public class Suscripcion_Pago {
+@Table(name = "SuscripcionPago")
+public class SuscripcionPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_suscripcion_pago;
+    private int idSuscripcionPago;
 
     @Column(name = "monto", precision = 12, scale = 2)
     private BigDecimal monto;
 
-    @Column(name = "fecha",nullable = true)
+    @Column(name = "fecha")
     private Timestamp fecha;
 
-    @Column(name = "estado", nullable = true, length = 20)
+    @Column(name = "estado", length = 20)
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_suscripcion")
+    @JoinColumn(name = "idSuscripcion")
     private Suscripcion suscripcion;
 
     @ManyToOne
-    @JoinColumn(name = "id_metodo_pago")
-    private Metodo_Pago metodo_pago;
+    @JoinColumn(name = "idMetodoPago")
+    private MetodoPago metodo_pago;
 
-    public Suscripcion_Pago(int id_suscripcion_pago, BigDecimal monto, Timestamp fecha, String estado, Suscripcion suscripcion, Metodo_Pago metodo_pago) {
-        this.id_suscripcion_pago = id_suscripcion_pago;
+    public SuscripcionPago() {
+
+    }
+
+    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, Timestamp fecha, String estado, Suscripcion suscripcion, MetodoPago metodo_pago) {
+        this.idSuscripcionPago = idSuscripcionPago;
         this.monto = monto;
         this.fecha = fecha;
         this.estado = estado;
@@ -39,16 +43,12 @@ public class Suscripcion_Pago {
         this.metodo_pago = metodo_pago;
     }
 
-    public Suscripcion_Pago() {
-
+    public int getIdSuscripcionPago() {
+        return idSuscripcionPago;
     }
 
-    public int getId_suscripcion_pago() {
-        return id_suscripcion_pago;
-    }
-
-    public void setId_suscripcion_pago(int id_suscripcion_pago) {
-        this.id_suscripcion_pago = id_suscripcion_pago;
+    public void setIdSuscripcionPago(int idSuscripcionPago) {
+        this.idSuscripcionPago = idSuscripcionPago;
     }
 
     public BigDecimal getMonto() {
@@ -83,11 +83,11 @@ public class Suscripcion_Pago {
         this.suscripcion = suscripcion;
     }
 
-    public Metodo_Pago getMetodo_pago() {
+    public MetodoPago getMetodo_pago() {
         return metodo_pago;
     }
 
-    public void setMetodo_pago(Metodo_Pago metodo_pago) {
+    public void setMetodo_pago(MetodoPago metodo_pago) {
         this.metodo_pago = metodo_pago;
     }
 }

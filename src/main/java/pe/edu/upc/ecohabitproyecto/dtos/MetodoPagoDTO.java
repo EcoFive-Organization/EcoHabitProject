@@ -1,26 +1,23 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.sql.Timestamp;
 
-public class Metodo_PagoDTO {
-    private int id_metodo_pago;
+public class MetodoPagoDTO {
+    private int idMetodoPago;
     private String tipo;
     private String detalles;
     private boolean activo;
-    private Timestamp fecha_registro;
+    private Timestamp fechaRegistro;
     private Usuario usuario;
 
-    public int getId_metodo_pago() {
-        return id_metodo_pago;
+    public int getIdMetodoPago() {
+        return idMetodoPago;
     }
 
-    public void setId_metodo_pago(int id_metodo_pago) {
-        this.id_metodo_pago = id_metodo_pago;
+    public void setIdMetodoPago(int idMetodoPago) {
+        this.idMetodoPago = idMetodoPago;
     }
 
     public String getTipo() {
@@ -47,12 +44,12 @@ public class Metodo_PagoDTO {
         this.activo = activo;
     }
 
-    public Timestamp getFecha_registro() {
-        return fecha_registro;
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     public Usuario getUsuario() {

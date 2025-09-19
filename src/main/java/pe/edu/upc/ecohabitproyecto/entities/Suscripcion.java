@@ -10,43 +10,43 @@ import java.sql.Timestamp;
 public class Suscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_suscripcion;
+    private int idSuscripcion;
 
     @Column(name = "plan", nullable = false, length = 50)
     private String plan;
 
-    @Column(name = "fecha_inicio", nullable = false)
-    private Date fecha_inicio;
+    @Column(name = "fechaInicio", nullable = false)
+    private Date fechaInicio;
 
-    @Column(name = "fecha_fin", nullable = true)
-    private Date fecha_fin;
+    @Column(name = "fechaFin")
+    private Date fechaFin;
 
-    @Column(name = "estado", nullable = true, length = 20)
+    @Column(name = "estado", length = 20)
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
-
-    public Suscripcion(int id_suscripcion, String plan, Date fecha_inicio, Date fecha_fin, String estado, Usuario usuario) {
-        this.id_suscripcion = id_suscripcion;
-        this.plan = plan;
-        this.fecha_inicio = fecha_inicio;
-        this.fecha_fin = fecha_fin;
-        this.estado = estado;
-        this.usuario = usuario;
-    }
 
     public Suscripcion() {
 
     }
 
-    public int getId_suscripcion() {
-        return id_suscripcion;
+    public Suscripcion(int idSuscripcion, String plan, Date fechaInicio, Date fechaFin, String estado, Usuario usuario) {
+        this.idSuscripcion = idSuscripcion;
+        this.plan = plan;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.estado = estado;
+        this.usuario = usuario;
     }
 
-    public void setId_suscripcion(int id_suscripcion) {
-        this.id_suscripcion = id_suscripcion;
+    public int getIdSuscripcion() {
+        return idSuscripcion;
+    }
+
+    public void setIdSuscripcion(int idSuscripcion) {
+        this.idSuscripcion = idSuscripcion;
     }
 
     public String getPlan() {
@@ -57,20 +57,20 @@ public class Suscripcion {
         this.plan = plan;
     }
 
-    public Date getFecha_inicio() {
-        return fecha_inicio;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public Date getFecha_fin() {
-        return fecha_fin;
+    public Date getFechaFin() {
+        return fechaFin;
     }
 
-    public void setFecha_fin(Date fecha_fin) {
-        this.fecha_fin = fecha_fin;
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public String getEstado() {

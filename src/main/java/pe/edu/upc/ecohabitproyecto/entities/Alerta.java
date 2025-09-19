@@ -3,7 +3,6 @@ package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity

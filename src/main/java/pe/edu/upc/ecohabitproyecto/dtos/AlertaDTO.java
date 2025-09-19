@@ -2,23 +2,23 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class AlertaDTO {
 
-    private int id_alerta;
+    private int idAlerta;
     private Consumo consumo;
-    private String tipo_alerta;
+    private String tipoAlerta;
     private String mensaje;
-    private Timestamp fecha;
+    private java.sql.Timestamp fecha;
     private boolean leida;
 
-    public int getId_alerta() {
-        return id_alerta;
+    public int getIdAlerta() {
+        return idAlerta;
     }
 
-    public void setId_alerta(int id_alerta) {
-        this.id_alerta = id_alerta;
+    public void setIdAlerta(int idAlerta) {
+        this.idAlerta = idAlerta;
     }
 
     public Consumo getConsumo() {
@@ -29,12 +29,12 @@ public class AlertaDTO {
         this.consumo = consumo;
     }
 
-    public String getTipo_alerta() {
-        return tipo_alerta;
+    public String getTipoAlerta() {
+        return tipoAlerta;
     }
 
-    public void setTipo_alerta(String tipo_alerta) {
-        this.tipo_alerta = tipo_alerta;
+    public void setTipoAlerta(String tipoAlerta) {
+        this.tipoAlerta = tipoAlerta;
     }
 
     public String getMensaje() {

@@ -69,15 +69,15 @@ public class PublicacionController {
         Publicacion publicacion = m.map(dto, Publicacion.class);
 
         // Validación de existencia
-        Publicacion existente = publicacionService.listId(publicacion.getId_publicacion());
+        Publicacion existente = publicacionService.listId(publicacion.getIdPublicacion());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + publicacion.getId_publicacion());
+                    .body("No se puede modificar. No existe un registro con el ID: " + publicacion.getIdPublicacion());
         }
 
         // Actualización si pasa validaciones
         publicacionService.update(publicacion);
-        return ResponseEntity.ok("Registro con ID " + publicacion.getId_publicacion() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + publicacion.getIdPublicacion() + " modificado correctamente.");
     }
 
 }

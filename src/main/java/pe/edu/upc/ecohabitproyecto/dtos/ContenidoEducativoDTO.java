@@ -1,26 +1,21 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 import java.util.Date;
 
-public class Contenido_EducativoDTO {
-    private int id_contenidoEducativo;
+public class ContenidoEducativoDTO {
+    private int idContenidoEducativo;
     private String titulo;
     private String tipo;
     private String url;
     private String descripcion;
-    private Date fecha_publicacion;
+    private Date fechaPublicacion;
 
-    public int getId_contenidoEducativo() {
-        return id_contenidoEducativo;
+    public int getIdContenidoEducativo() {
+        return idContenidoEducativo;
     }
 
-    public void setId_contenidoEducativo(int id_contenidoEducativo) {
-        this.id_contenidoEducativo = id_contenidoEducativo;
+    public void setIdContenidoEducativo(int idContenidoEducativo) {
+        this.idContenidoEducativo = idContenidoEducativo;
     }
 
     public String getTitulo() {
@@ -55,11 +50,11 @@ public class Contenido_EducativoDTO {
         this.descripcion = descripcion;
     }
 
-    public Date getFecha_publicacion() {
-        return fecha_publicacion;
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
     }
 
-    public void setFecha_publicacion(Date fecha_publicacion) {
-        this.fecha_publicacion = fecha_publicacion;
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
     }
 }

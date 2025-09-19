@@ -9,28 +9,30 @@ public class Foro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_foro;
+    private int idForo;
 
     @Column(name = "titulo",  nullable = false, length = 200)
     private String titulo;
 
-    @Column(name = "descripcion", nullable = false, length = 255)
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    public Foro() {}
+    public Foro() {
 
-    public Foro(int id_foro, String titulo, String descripcion) {
-        this.id_foro = id_foro;
+    }
+
+    public Foro(int idForo, String titulo, String descripcion) {
+        this.idForo = idForo;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
 
-    public int getId_foro() {
-        return id_foro;
+    public int getIdForo() {
+        return idForo;
     }
 
-    public void setId_foro(int id_foro) {
-        this.id_foro = id_foro;
+    public void setIdForo(int idForo) {
+        this.idForo = idForo;
     }
 
     public String getTitulo() {

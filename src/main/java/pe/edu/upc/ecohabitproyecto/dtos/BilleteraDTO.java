@@ -1,22 +1,21 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.*;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.math.BigDecimal;
 
 public class BilleteraDTO {
     // Traer atributos de la carpeta entities
-    private int billetera_id;
+    private int idBilletera;
     private Usuario usuario;
     private BigDecimal saldo;
 
-    public int getBilletera_id() {
-        return billetera_id;
+    public int getIdBilletera() {
+        return idBilletera;
     }
 
-    public void setBilletera_id(int billetera_id) {
-        this.billetera_id = billetera_id;
+    public void setIdBilletera(int idBilletera) {
+        this.idBilletera = idBilletera;
     }
 
     public Usuario getUsuario() {
@@ -27,7 +26,11 @@ public class BilleteraDTO {
         this.usuario = usuario;
     }
 
-    public BigDecimal getSaldo() { return saldo; }
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
 
-    public void setSaldo(BigDecimal saldo) { this.saldo = saldo; }
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
 }

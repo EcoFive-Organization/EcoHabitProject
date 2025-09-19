@@ -71,15 +71,15 @@ public class ComentarioController {
         Comentario comentario = m.map(dto, Comentario.class);
 
         // Validación de existencia
-        Comentario existente = comentarioService.listId(comentario.getId_comentario());
+        Comentario existente = comentarioService.listId(comentario.getIdComentario());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + comentario.getId_comentario());
+                    .body("No se puede modificar. No existe un registro con el ID: " + comentario.getIdComentario());
         }
 
         // Actualización si pasa validaciones
         comentarioService.update(comentario);
-        return ResponseEntity.ok("Registro con ID " + comentario.getId_comentario() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + comentario.getIdComentario() + " modificado correctamente.");
     }
 
 }

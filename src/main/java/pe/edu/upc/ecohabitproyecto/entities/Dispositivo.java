@@ -11,10 +11,10 @@ public class Dispositivo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idDispositivo;
+    private int id_dispositivo;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "id_Usuario")
     private Usuario usuario;
 
     @Column(name = "nombre", nullable = false, length = 100)
@@ -26,26 +26,26 @@ public class Dispositivo {
     @Column(name = "ubicacion", nullable = true, length = 100)
     private String ubicacion;
 
-    @Column(name = "fechaRegistro", nullable = false)
-    private Timestamp fechaRegistro;
+    @Column(name = "fecha_registro", nullable = false)
+    private Timestamp fecha_registro;
 
-    public Dispositivo(int idDispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, Timestamp fechaRegistro) {
-        this.idDispositivo = idDispositivo;
+    public Dispositivo(int id_dispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, Timestamp fecha_registro) {
+        this.id_dispositivo = id_dispositivo;
         this.usuario = usuario;
         this.nombre = nombre;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
-        this.fechaRegistro = fechaRegistro;
+        this.fecha_registro = fecha_registro;
     }
 
     public Dispositivo() {}
 
-    public int getIdDispositivo() {
-        return idDispositivo;
+    public int getId_dispositivo() {
+        return id_dispositivo;
     }
 
-    public void setIdDispositivo(int idDispositivo) {
-        this.idDispositivo = idDispositivo;
+    public void setId_dispositivo(int id_dispositivo) {
+        this.id_dispositivo = id_dispositivo;
     }
 
     public Usuario getUsuario() {
@@ -80,11 +80,11 @@ public class Dispositivo {
         this.ubicacion = ubicacion;
     }
 
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
+    public Timestamp getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setFecha_registro(Timestamp fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
 }

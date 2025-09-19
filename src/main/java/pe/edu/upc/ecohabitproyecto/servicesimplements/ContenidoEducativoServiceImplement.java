@@ -2,26 +2,26 @@ package pe.edu.upc.ecohabitproyecto.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.ecohabitproyecto.entities.Contenido_Educativo;
-import pe.edu.upc.ecohabitproyecto.repositories.IContenido_EducativoRepository;
-import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IContenido_EducativoService;
+import pe.edu.upc.ecohabitproyecto.entities.ContenidoEducativo;
+import pe.edu.upc.ecohabitproyecto.repositories.IContenidoEducativoRepository;
+import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IContenidoEducativoService;
 
 import java.util.List;
 
 @Service
-public class Contenido_EducativoServiceImplement implements IContenido_EducativoService {
+public class ContenidoEducativoServiceImplement implements IContenidoEducativoService {
     @Autowired
-    private IContenido_EducativoRepository contenido_educativoRepository;
+    private IContenidoEducativoRepository contenido_educativoRepository;
 
     // Listar
     @Override
-    public List<Contenido_Educativo> list() {
+    public List<ContenidoEducativo> list() {
         return contenido_educativoRepository.findAll();
     }
 
     // Registrar
     @Override
-    public void insert(Contenido_Educativo contenido_educativo) {
+    public void insert(ContenidoEducativo contenido_educativo) {
         contenido_educativoRepository.save(contenido_educativo);
     }
 
@@ -33,13 +33,13 @@ public class Contenido_EducativoServiceImplement implements IContenido_Educativo
 
     // Modificar
     @Override
-    public void update(Contenido_Educativo contenido_educativo) {
+    public void update(ContenidoEducativo contenido_educativo) {
         contenido_educativoRepository.save(contenido_educativo);
     }
 
     // Listar por id
     @Override
-    public Contenido_Educativo listId(int id) {
+    public ContenidoEducativo listId(int id) {
         return contenido_educativoRepository.findById(id).orElse(null);
     }
 }

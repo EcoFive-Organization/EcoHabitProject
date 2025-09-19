@@ -6,11 +6,11 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Contenido_Educativo")
-public class Contenido_Educativo {
+@Table(name = "ContenidoEducativo")
+public class ContenidoEducativo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_contenidoEducativo;
+    private int idContenidoEducativo;
 
     @Column(name = "titulo",  nullable = false, length = 200)
     private String titulo;
@@ -18,32 +18,32 @@ public class Contenido_Educativo {
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
-    @Column(name = "url", nullable = false, length = 255)
+    @Column(name = "url", nullable = false)
     private String url;
 
-    @Column(name = "descripcion", nullable = false, length = 255)
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @Column(name = "fecha_publicacion", nullable = false)
-    private Date fecha_publicacion;
+    @Column(name = "fechaPublicacion", nullable = false)
+    private Date fechaPublicacion;
 
-    public Contenido_Educativo() {}
+    public ContenidoEducativo() {}
 
-    public Contenido_Educativo(int id_contenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fecha_publicacion) {
-        this.id_contenidoEducativo = id_contenidoEducativo;
+    public ContenidoEducativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fechaPublicacion) {
+        this.idContenidoEducativo = idContenidoEducativo;
         this.titulo = titulo;
         this.tipo = tipo;
         this.url = url;
         this.descripcion = descripcion;
-        this.fecha_publicacion = fecha_publicacion;
+        this.fechaPublicacion = fechaPublicacion;
     }
 
-    public int getId_contenidoEducativo() {
-        return id_contenidoEducativo;
+    public int getIdContenidoEducativo() {
+        return idContenidoEducativo;
     }
 
-    public void setId_contenidoEducativo(int id_contenidoEducativo) {
-        this.id_contenidoEducativo = id_contenidoEducativo;
+    public void setIdContenidoEducativo(int idContenidoEducativo) {
+        this.idContenidoEducativo = idContenidoEducativo;
     }
 
     public String getTitulo() {
@@ -78,11 +78,11 @@ public class Contenido_Educativo {
         this.descripcion = descripcion;
     }
 
-    public Date getFecha_publicacion() {
-        return fecha_publicacion;
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
     }
 
-    public void setFecha_publicacion(Date fecha_publicacion) {
-        this.fecha_publicacion = fecha_publicacion;
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
     }
 }

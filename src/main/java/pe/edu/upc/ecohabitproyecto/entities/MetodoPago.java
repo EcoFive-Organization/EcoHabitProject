@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "Metodo_Pago")
-public class Metodo_Pago {
+@Table(name = "MetodoPago")
+public class MetodoPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_metodo_pago;
+    private int idMetodoPago;
 
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
@@ -17,35 +17,35 @@ public class Metodo_Pago {
     @Column(name = "detalles", nullable = false, length = 100)
     private String detalles;
 
-    @Column(name = "activo", nullable = true, length = 150)
+    @Column(name = "activo", length = 150)
     private boolean activo;
 
-    @Column(name = "fecha_registro", nullable = true)
-    private Timestamp fecha_registro;
+    @Column(name = "fechaRegistro")
+    private Timestamp fechaRegistro;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    public Metodo_Pago(int id_metodo_pago, String tipo, String detalles, boolean activo, Timestamp fecha_registro, Usuario usuario) {
-        this.id_metodo_pago = id_metodo_pago;
+    public MetodoPago() {
+
+    }
+
+    public MetodoPago(int idMetodoPago, String tipo, String detalles, boolean activo, Timestamp fechaRegistro, Usuario usuario) {
+        this.idMetodoPago = idMetodoPago;
         this.tipo = tipo;
         this.detalles = detalles;
         this.activo = activo;
-        this.fecha_registro = fecha_registro;
+        this.fechaRegistro = fechaRegistro;
         this.usuario = usuario;
     }
 
-    public Metodo_Pago() {
-
+    public int getIdMetodoPago() {
+        return idMetodoPago;
     }
 
-    public int getId_metodo_pago() {
-        return id_metodo_pago;
-    }
-
-    public void setId_metodo_pago(int id_metodo_pago) {
-        this.id_metodo_pago = id_metodo_pago;
+    public void setIdMetodoPago(int idMetodoPago) {
+        this.idMetodoPago = idMetodoPago;
     }
 
     public String getTipo() {
@@ -72,12 +72,12 @@ public class Metodo_Pago {
         this.activo = activo;
     }
 
-    public Timestamp getFecha_registro() {
-        return fecha_registro;
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     public Usuario getUsuario() {

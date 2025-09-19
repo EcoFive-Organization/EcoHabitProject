@@ -2,22 +2,22 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class DispositivoDTOInsert {
-    private int id_dispositivo;
+    private int idDispositivo;
     private Usuario usuario;
     private String nombre;
     private String tipo;
     private String ubicacion;
-    private Timestamp fecha_registro;
+    private Timestamp fechaRegistro;
 
-    public int getId_dispositivo() {
-        return id_dispositivo;
+    public int getIdDispositivo() {
+        return idDispositivo;
     }
 
-    public void setId_dispositivo(int id_dispositivo) {
-        this.id_dispositivo = id_dispositivo;
+    public void setIdDispositivo(int idDispositivo) {
+        this.idDispositivo = idDispositivo;
     }
 
     public Usuario getUsuario() {
@@ -52,11 +52,11 @@ public class DispositivoDTOInsert {
         this.ubicacion = ubicacion;
     }
 
-    public Timestamp getFecha_registro() {
-        return fecha_registro;
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }
