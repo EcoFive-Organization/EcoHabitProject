@@ -12,14 +12,14 @@ public class Alerta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_alerta;
+    private int idAlerta;
 
     @ManyToOne
-    @JoinColumn(name = "id_Consumo")
+    @JoinColumn(name = "idConsumo")
     private Consumo consumo;
 
-    @Column(name = "tipo_alerta", nullable = false, length = 50)
-    private String tipo_alerta;
+    @Column(name = "tipoAlerta", nullable = false, length = 50)
+    private String tipoAlerta;
 
     @Lob
     @Column(name = "mensaje", nullable = false)
@@ -33,21 +33,21 @@ public class Alerta {
 
     public Alerta() {}
 
-    public Alerta(int id_alerta, Consumo consumo, String tipo_alerta, String mensaje, Timestamp fecha, boolean leida) {
-        this.id_alerta = id_alerta;
+    public Alerta(int idAlerta, Consumo consumo, String tipoAlerta, String mensaje, Timestamp fecha, boolean leida) {
+        this.idAlerta = idAlerta;
         this.consumo = consumo;
-        this.tipo_alerta = tipo_alerta;
+        this.tipoAlerta = tipoAlerta;
         this.mensaje = mensaje;
         this.fecha = fecha;
         this.leida = leida;
     }
 
-    public int getId_alerta() {
-        return id_alerta;
+    public int getIdAlerta() {
+        return idAlerta;
     }
 
-    public void setId_alerta(int id_alerta) {
-        this.id_alerta = id_alerta;
+    public void setIdAlerta(int idAlerta) {
+        this.idAlerta = idAlerta;
     }
 
     public Consumo getConsumo() {
@@ -58,12 +58,12 @@ public class Alerta {
         this.consumo = consumo;
     }
 
-    public String getTipo_alerta() {
-        return tipo_alerta;
+    public String getTipoAlerta() {
+        return tipoAlerta;
     }
 
-    public void setTipo_alerta(String tipo_alerta) {
-        this.tipo_alerta = tipo_alerta;
+    public void setTipoAlerta(String tipoAlerta) {
+        this.tipoAlerta = tipoAlerta;
     }
 
     public String getMensaje() {
