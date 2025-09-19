@@ -1,10 +1,11 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
+
 public class RecompensaDTO {
     private Integer idRecompensa;
     private String nombre;
     private String descripcion;
-    private Integer costoPuntos;
+    private int costoPuntos;
 
     public Integer getIdRecompensa() {
         return idRecompensa;
@@ -30,11 +31,11 @@ public class RecompensaDTO {
         this.descripcion = descripcion;
     }
 
-    public Integer getCostoPuntos() {
+    public int getCostoPuntos() {
         return costoPuntos;
     }
 
-    public void setCostoPuntos(Integer costoPuntos) {
+    public void setCostoPuntos(int costoPuntos) {
         this.costoPuntos = costoPuntos;
     }
 }

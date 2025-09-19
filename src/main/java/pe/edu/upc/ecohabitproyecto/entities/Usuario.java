@@ -9,9 +9,9 @@ import java.sql.Timestamp;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_usuario;
+    private int idUsuario;
 
-    @Column(name = "nombre", nullable = true, length = 100)
+    @Column(name = "nombre", length = 100)
     private String nombre;
 
     @Column(name = "apellido", nullable = false, length = 100)
@@ -20,31 +20,35 @@ public class Usuario {
     @Column(name = "email", nullable = false, length = 150)
     private String email;
 
-    @Column(name = "fecha_registro", nullable = true)
-    private Timestamp fecha_registro;
+    @Column(name = "passwordHash", nullable = false)
+    private String passwordHash;
+
+    @Column(name = "fechaRegistro")
+    private Timestamp fechaRegistro;
 
     @ManyToOne
-    @JoinColumn(name = "id_rol")
-    private Usuario usuario;
+    @JoinColumn(name = "idRol")
+    private Rol rol;
 
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, String nombre, String apellido, String email, Timestamp fecha_registro, Usuario usuario) {
-        this.id_usuario = id_usuario;
+    public Usuario(int idUsuario, String nombre, String apellido, String email, String passwordHash, Timestamp fechaRegistro, Rol rol) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.fecha_registro = fecha_registro;
-        this.usuario = usuario;
+        this.passwordHash = passwordHash;
+        this.fechaRegistro = fechaRegistro;
+        this.rol = rol;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -71,19 +75,27 @@ public class Usuario {
         this.email = email;
     }
 
-    public Timestamp getFecha_registro() {
-        return fecha_registro;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

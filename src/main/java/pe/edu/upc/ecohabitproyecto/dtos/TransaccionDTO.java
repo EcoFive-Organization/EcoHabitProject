@@ -1,24 +1,23 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.*;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.sql.Timestamp;
 
 public class TransaccionDTO {
-    private int id_transaccion;
+    private int idTransaccion;
     private Billetera billetera;
     private String tipo;
     private BigDecimal monto;
-    private Instant fecha;
+    private Timestamp fecha;
 
-    public int getId_transaccion() {
-        return id_transaccion;
+    public int getIdTransaccion() {
+        return idTransaccion;
     }
 
-    public void setId_transaccion(int id_transaccion) {
-        this.id_transaccion = id_transaccion;
+    public void setIdTransaccion(int idTransaccion) {
+        this.idTransaccion = idTransaccion;
     }
 
     public Billetera getBilletera() {
@@ -45,11 +44,11 @@ public class TransaccionDTO {
         this.monto = monto;
     }
 
-    public Instant getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(Instant fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 }

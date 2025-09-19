@@ -1,0 +1,93 @@
+package pe.edu.upc.ecohabitproyecto.entities;
+
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
+
+@Entity
+@Table(name = "SuscripcionPago")
+public class SuscripcionPago {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idSuscripcionPago;
+
+    @Column(name = "monto", precision = 12, scale = 2)
+    private BigDecimal monto;
+
+    @Column(name = "fecha")
+    private Timestamp fecha;
+
+    @Column(name = "estado", length = 20)
+    private String estado;
+
+    @ManyToOne
+    @JoinColumn(name = "idSuscripcion")
+    private Suscripcion suscripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "idMetodoPago")
+    private MetodoPago metodo_pago;
+
+    public SuscripcionPago() {
+
+    }
+
+    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, Timestamp fecha, String estado, Suscripcion suscripcion, MetodoPago metodo_pago) {
+        this.idSuscripcionPago = idSuscripcionPago;
+        this.monto = monto;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.suscripcion = suscripcion;
+        this.metodo_pago = metodo_pago;
+    }
+
+    public int getIdSuscripcionPago() {
+        return idSuscripcionPago;
+    }
+
+    public void setIdSuscripcionPago(int idSuscripcionPago) {
+        this.idSuscripcionPago = idSuscripcionPago;
+    }
+
+    public BigDecimal getMonto() {
+        return monto;
+    }
+
+    public void setMonto(BigDecimal monto) {
+        this.monto = monto;
+    }
+
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Suscripcion getSuscripcion() {
+        return suscripcion;
+    }
+
+    public void setSuscripcion(Suscripcion suscripcion) {
+        this.suscripcion = suscripcion;
+    }
+
+    public MetodoPago getMetodo_pago() {
+        return metodo_pago;
+    }
+
+    public void setMetodo_pago(MetodoPago metodo_pago) {
+        this.metodo_pago = metodo_pago;
+    }
+}

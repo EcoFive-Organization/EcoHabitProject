@@ -1,26 +1,31 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
+import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+
 import java.util.Date;
 
 public class ReaccionDTO {
-    private int id_reaccion;
-    private String tipo_reaccion;
+    private int idReaccion;
+    private String tipoReaccion;
     private Date fecha;
+    private Usuario usuario;
+    private Publicacion publicacion;
 
-    public int getId_reaccion() {
-        return id_reaccion;
+    public int getIdReaccion() {
+        return idReaccion;
     }
 
-    public void setId_reaccion(int id_reaccion) {
-        this.id_reaccion = id_reaccion;
+    public void setIdReaccion(int idReaccion) {
+        this.idReaccion = idReaccion;
     }
 
-    public String getTipo_reaccion() {
-        return tipo_reaccion;
+    public String getTipoReaccion() {
+        return tipoReaccion;
     }
 
-    public void setTipo_reaccion(String tipo_reaccion) {
-        this.tipo_reaccion = tipo_reaccion;
+    public void setTipoReaccion(String tipoReaccion) {
+        this.tipoReaccion = tipoReaccion;
     }
 
     public Date getFecha() {
@@ -29,5 +34,21 @@ public class ReaccionDTO {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Publicacion getPublicacion() {
+        return publicacion;
+    }
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
     }
 }

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Logro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_logro")
+    @Column(name = "idLogro")
     private Integer idLogro;
 
     @Column(name = "nombre", length = 150, nullable = false)
@@ -20,11 +20,25 @@ public class Logro {
     @Column(name = "puntos", nullable = false)
     private Integer puntos;
 
-    @Column(name = "id_recompensa", nullable = false)
-    private Integer idRecompensa;
+    @ManyToOne
+    @JoinColumn(name = "idRecompensa")
+    private Recompensa recompensa;
 
     @Column(name = "estado", length = 20, nullable = false)
     private String estado;
+
+    public Logro(){
+
+    }
+
+    public Logro(Integer idLogro, String nombre, String descripcion, Integer puntos, Recompensa recompensa, String estado) {
+        this.idLogro = idLogro;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.puntos = puntos;
+        this.recompensa = recompensa;
+        this.estado = estado;
+    }
 
     public Integer getIdLogro() {
         return idLogro;
@@ -58,12 +72,12 @@ public class Logro {
         this.puntos = puntos;
     }
 
-    public Integer getIdRecompensa() {
-        return idRecompensa;
+    public Recompensa getRecompensa() {
+        return recompensa;
     }
 
-    public void setIdRecompensa(Integer idRecompensa) {
-        this.idRecompensa = idRecompensa;
+    public void setRecompensa(Recompensa recompensa) {
+        this.recompensa = recompensa;
     }
 
     public String getEstado() {

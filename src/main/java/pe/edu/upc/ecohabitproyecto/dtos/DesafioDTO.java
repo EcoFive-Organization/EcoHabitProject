@@ -4,20 +4,19 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class DesafioDTO {
-    private Integer idDesafio;
+    private int idDesafio;
     private String nombre;
     private String descripcion;
     private String tipo;
     private BigDecimal objetivo;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private Integer idRecompensa;
 
-    public Integer getIdDesafio() {
+    public int getIdDesafio() {
         return idDesafio;
     }
 
-    public void setIdDesafio(Integer idDesafio) {
+    public void setIdDesafio(int idDesafio) {
         this.idDesafio = idDesafio;
     }
 
@@ -67,13 +66,5 @@ public class DesafioDTO {
 
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    public Integer getIdRecompensa() {
-        return idRecompensa;
-    }
-
-    public void setIdRecompensa(Integer idRecompensa) {
-        this.idRecompensa = idRecompensa;
     }
 }

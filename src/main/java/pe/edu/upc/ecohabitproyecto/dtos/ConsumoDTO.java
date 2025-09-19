@@ -3,24 +3,24 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 
 import java.math.BigDecimal;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class ConsumoDTO {
-    private int id_consumo;
+    private int idConsumo;
     private Dispositivo dispositivo;
     private String tipo;
     private BigDecimal valor;
     private String unidad;
-    private String origen_consumo;
+    private String origenConsumo;
     private Timestamp fecha;
     private int umbral;
 
-    public int getId_consumo() {
-        return id_consumo;
+    public int getIdConsumo() {
+        return idConsumo;
     }
 
-    public void setId_consumo(int id_consumo) {
-        this.id_consumo = id_consumo;
+    public void setIdConsumo(int idConsumo) {
+        this.idConsumo = idConsumo;
     }
 
     public Dispositivo getDispositivo() {
@@ -55,12 +55,12 @@ public class ConsumoDTO {
         this.unidad = unidad;
     }
 
-    public String getOrigen_consumo() {
-        return origen_consumo;
+    public String getOrigenConsumo() {
+        return origenConsumo;
     }
 
-    public void setOrigen_consumo(String origen_consumo) {
-        this.origen_consumo = origen_consumo;
+    public void setOrigenConsumo(String origenConsumo) {
+        this.origenConsumo = origenConsumo;
     }
 
     public Timestamp getFecha() {

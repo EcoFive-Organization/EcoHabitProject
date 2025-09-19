@@ -62,12 +62,12 @@ public class TransaccionController {
     public ResponseEntity<String> modificar(@RequestBody TransaccionDTO dto) {
         ModelMapper m = new ModelMapper();
         Transaccion t = m.map(dto, Transaccion.class);
-        Transaccion existente = tS.listId(t.getId_transaccion());
+        Transaccion existente = tS.listId(t.getIdTransaccion());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + t.getId_transaccion());
+                    .body("No se puede modificar. No existe un registro con el ID: " + t.getIdTransaccion());
         }
         tS.update(t);
-        return ResponseEntity.ok("Registro con ID " + t.getId_transaccion() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + t.getIdTransaccion() + " modificado correctamente.");
     }
 }

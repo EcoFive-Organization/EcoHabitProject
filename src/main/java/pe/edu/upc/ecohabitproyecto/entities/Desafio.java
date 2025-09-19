@@ -11,8 +11,7 @@ import java.time.LocalDate;
 public class Desafio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_desafio")
-    private Integer idDesafio;
+    private int idDesafio;
 
     @Column(name = "nombre", length = 150, nullable = false)
     private String nombre;
@@ -26,20 +25,36 @@ public class Desafio {
     @Column(name = "objetivo", nullable = false)
     private BigDecimal objetivo;
 
-    @Column(name = "fecha_inicio")
+    @Column(name = "fechaInicio")
     private LocalDate fechaInicio;
 
-    @Column(name = "fecha_fin")
+    @Column(name = "fechaFin")
     private LocalDate fechaFin;
 
-    @Column(name = "id_recompensa")
-    private Integer idRecompensa;
+    @ManyToOne
+    @JoinColumn(name = "idRecompensa")
+    private Recompensa recompensa;
 
-    public Integer getIdDesafio() {
+    public Desafio() {
+
+    }
+
+    public Desafio(int idDesafio, String nombre, String descripcion, String tipo, BigDecimal objetivo, LocalDate fechaInicio, LocalDate fechaFin, Recompensa recompensa) {
+        this.idDesafio = idDesafio;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.objetivo = objetivo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.recompensa = recompensa;
+    }
+
+    public int getIdDesafio() {
         return idDesafio;
     }
 
-    public void setIdDesafio(Integer idDesafio) {
+    public void setIdDesafio(int idDesafio) {
         this.idDesafio = idDesafio;
     }
 
@@ -91,11 +106,11 @@ public class Desafio {
         this.fechaFin = fechaFin;
     }
 
-    public Integer getIdRecompensa() {
-        return idRecompensa;
+    public Recompensa getRecompensa() {
+        return recompensa;
     }
 
-    public void setIdRecompensa(Integer idRecompensa) {
-        this.idRecompensa = idRecompensa;
+    public void setRecompensa(Recompensa recompensa) {
+        this.recompensa = recompensa;
     }
 }

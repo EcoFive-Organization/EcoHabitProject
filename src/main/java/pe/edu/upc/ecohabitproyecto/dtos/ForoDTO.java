@@ -1,18 +1,16 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.Column;
-
 public class ForoDTO {
-    private int id_foro;
+    private int idForo;
     private String titulo;
     private String descripcion;
 
-    public int getId_foro() {
-        return id_foro;
+    public int getIdForo() {
+        return idForo;
     }
 
-    public void setId_foro(int id_foro) {
-        this.id_foro = id_foro;
+    public void setIdForo(int idForo) {
+        this.idForo = idForo;
     }
 
     public String getTitulo() {

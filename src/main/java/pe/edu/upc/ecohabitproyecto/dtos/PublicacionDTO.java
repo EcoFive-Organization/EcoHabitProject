@@ -1,24 +1,27 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.Column;
+import pe.edu.upc.ecohabitproyecto.entities.Foro;
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.util.Date;
 
 public class PublicacionDTO {
-    private int id_publicacion;
+    private int idPublicacion;
     private String titulo;
     private String contenido;
     private String privacidad;
     private Date fecha;
     private int vistas;
-    private int compartidos;
+    private int compartidos;//FK
+    private Foro foro;
+    private Usuario usuario;
 
-    public int getId_publicacion() {
-        return id_publicacion;
+    public int getIdPublicacion() {
+        return idPublicacion;
     }
 
-    public void setId_publicacion(int id_publicacion) {
-        this.id_publicacion = id_publicacion;
+    public void setIdPublicacion(int idPublicacion) {
+        this.idPublicacion = idPublicacion;
     }
 
     public String getTitulo() {
@@ -67,5 +70,21 @@ public class PublicacionDTO {
 
     public void setCompartidos(int compartidos) {
         this.compartidos = compartidos;
+    }
+
+    public Foro getForo() {
+        return foro;
+    }
+
+    public void setForo(Foro foro) {
+        this.foro = foro;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

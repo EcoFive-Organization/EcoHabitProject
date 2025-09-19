@@ -69,15 +69,15 @@ public class ForoController {
         Foro foro = m.map(dto, Foro.class);
 
         // Validación de existencia
-        Foro existente = iForoService.listId(foro.getId_foro());
+        Foro existente = iForoService.listId(foro.getIdForo());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + foro.getId_foro());
+                    .body("No se puede modificar. No existe un registro con el ID: " + foro.getIdForo());
         }
 
         // Actualización si pasa validaciones
         iForoService.update(foro);
-        return ResponseEntity.ok("Registro con ID " + foro.getId_foro() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + foro.getIdForo() + " modificado correctamente.");
     }
 
 
