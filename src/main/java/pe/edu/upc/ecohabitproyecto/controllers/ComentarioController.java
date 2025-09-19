@@ -20,7 +20,7 @@ public class ComentarioController {
     @Autowired
     private IComentarioService comentarioService;
 
-    // Listar
+    // Listar comentarios
     @GetMapping
     public List<ComentarioDTO> listar(){
         return comentarioService.list().stream().map(x->{
@@ -29,7 +29,7 @@ public class ComentarioController {
         }).collect(Collectors.toList());
     }
 
-    // Registrar
+    // Registrar un comentario
     @PostMapping
     public void insertar(@RequestBody ComentarioDTO comentarioDTO){
         ModelMapper mapper = new ModelMapper();

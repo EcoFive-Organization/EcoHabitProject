@@ -20,6 +20,7 @@ public class ForoController {
     @Autowired
     private IForoService iForoService;
 
+    // Listar foros
     @GetMapping
     public List<ForoDTO> listar() {
         return iForoService.list().stream().map(x->{
@@ -28,6 +29,7 @@ public class ForoController {
         }).collect(Collectors.toList());
     }
 
+    // Registrar un foro
     @PostMapping
     public void insertar(@RequestBody ForoDTO foroDTO) {
         ModelMapper modelMapper = new ModelMapper();

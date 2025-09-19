@@ -18,6 +18,7 @@ public class ReaccionController {
     @Autowired
     private IReaccionService reaccionService;
 
+    // Listar las reacciones
     @GetMapping
     public List<ReaccionDTO> listar(){
         return reaccionService.list().stream().map(x-> {
@@ -26,6 +27,7 @@ public class ReaccionController {
         }).collect(Collectors.toList());
     }
 
+    // Registrar una reacción
     @PostMapping
     public void insertar(@RequestBody ReaccionDTO dto){
         ModelMapper mapper = new ModelMapper();
