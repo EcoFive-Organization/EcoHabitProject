@@ -6,16 +6,16 @@ import java.math.BigDecimal;
 
 public class BilleteraDTO {
     // Traer atributos de la carpeta entities
-    private int billetera_Id;
+    private int idBilletera;
     private Usuario usuario;
     private BigDecimal saldo;
 
-    public int getBilletera_Id() {
-        return billetera_Id;
+    public int getIdBilletera() {
+        return idBilletera;
     }
 
-    public void setBilletera_Id(int billetera_Id) {
-        this.billetera_Id = billetera_Id;
+    public void setIdBilletera(int idBilletera) {
+        this.idBilletera = idBilletera;
     }
 
     public Usuario getUsuario() {
