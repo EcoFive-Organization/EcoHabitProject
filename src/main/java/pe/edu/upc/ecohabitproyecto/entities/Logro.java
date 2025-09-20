@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 public class Logro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idLogro")
     private Integer idLogro;
 
     @Column(name = "nombre", length = 150, nullable = false)
@@ -21,7 +20,7 @@ public class Logro {
     private Integer puntos;
 
     @ManyToOne
-    @JoinColumn(name = "idRecompensa")
+    @JoinColumn(name = "idRecompensa", nullable = false)
     private Recompensa recompensa;
 
     @Column(name = "estado", length = 20, nullable = false)

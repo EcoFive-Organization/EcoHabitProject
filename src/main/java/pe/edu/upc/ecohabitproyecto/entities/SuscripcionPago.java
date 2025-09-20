@@ -16,18 +16,18 @@ public class SuscripcionPago {
     @Column(name = "monto", precision = 12, scale = 2)
     private BigDecimal monto;
 
-    @Column(name = "fecha")
+    @Column(name = "fecha", nullable = false)
     private Timestamp fecha;
 
-    @Column(name = "estado", length = 20)
+    @Column(name = "estado", nullable = false, length = 20)
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "idSuscripcion")
+    @JoinColumn(name = "idSuscripcion", nullable = false)
     private Suscripcion suscripcion;
 
     @ManyToOne
-    @JoinColumn(name = "idMetodoPago")
+    @JoinColumn(name = "idMetodoPago", nullable = false)
     private MetodoPago metodo_pago;
 
     public SuscripcionPago() {

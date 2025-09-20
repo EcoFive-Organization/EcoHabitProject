@@ -18,14 +18,14 @@ public class Suscripcion {
     @Column(name = "fechaInicio", nullable = false)
     private Date fechaInicio;
 
-    @Column(name = "fechaFin")
+    @Column(name = "fechaFin", nullable = false)
     private Date fechaFin;
 
-    @Column(name = "estado", length = 20)
+    @Column(name = "estado", nullable = false, length = 20)
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     public Suscripcion() {

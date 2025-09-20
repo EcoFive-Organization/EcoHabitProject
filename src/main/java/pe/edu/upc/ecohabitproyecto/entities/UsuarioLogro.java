@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class UsuarioLogro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usuarioLogroId")
     private int usuarioLogroId;
 
     @ManyToOne

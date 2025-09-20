@@ -55,7 +55,6 @@ public class ContenidoEducativoController {
         ContenidoEducativo contenidoEducativo = modelMapper.map(dto, ContenidoEducativo.class);
 
         ContenidoEducativo existe = contenido_educativoService.listId(contenidoEducativo.getIdContenidoEducativo());
-        Contenido_Educativo existe = contenido_educativoService.listId(contenidoEducativo.getIdContenidoEducativo());
 
         if (existe == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

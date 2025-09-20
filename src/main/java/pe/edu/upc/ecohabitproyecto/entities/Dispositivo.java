@@ -14,16 +14,16 @@ public class Dispositivo {
     private int idDispositivo;
 
     @ManyToOne
-    @JoinColumn(name = "id_Usuario")
+    @JoinColumn(name = "id_Usuario", nullable = false)
     private Usuario usuario;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(name = "tipo", nullable = true, length = 50)
+    @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
-    @Column(name = "ubicacion", nullable = true, length = 100)
+    @Column(name = "ubicacion", nullable = false, length = 100)
     private String ubicacion;
 
     @Column(name = "fecha_registro", nullable = false)

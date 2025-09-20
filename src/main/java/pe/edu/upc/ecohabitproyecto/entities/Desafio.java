@@ -32,7 +32,7 @@ public class Desafio {
     private LocalDate fechaFin;
 
     @ManyToOne
-    @JoinColumn(name = "idRecompensa")
+    @JoinColumn(name = "idRecompensa", nullable = false)
     private Recompensa recompensa;
 
     public Desafio() {

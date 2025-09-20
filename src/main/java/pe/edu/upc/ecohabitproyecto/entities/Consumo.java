@@ -14,7 +14,7 @@ public class Consumo {
     private int id_consumo;
 
     @ManyToOne
-    @JoinColumn(name = "id_Dispositivo")
+    @JoinColumn(name = "id_Dispositivo", nullable = false)
     private Dispositivo dispositivo;
 
     @Column(name = "tipo", nullable = false, length = 20)
@@ -23,10 +23,10 @@ public class Consumo {
     @Column(name = "valor", nullable = false, precision = 12, scale = 2)
     private BigDecimal valor;
 
-    @Column(name = "unidad", nullable = true, length = 20)
+    @Column(name = "unidad", nullable = false, length = 20)
     private String unidad;
 
-    @Column(name = "origen_consumo", nullable = true, length = 100)
+    @Column(name = "origen_consumo", nullable = false, length = 100)
     private String origen_consumo;
 
     @Column(name = "fecha", nullable = false)

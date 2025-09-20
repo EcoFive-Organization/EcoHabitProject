@@ -22,20 +22,12 @@ public class Usuario {
 
     @Column(name = "passwordHash", nullable = false, length = 150)
     private String passwordHash;
-    @Column(name = "passwordHash", nullable = false)
-    private String passwordHash;
 
     @Column(name = "fechaRegistro", nullable = true)
     private Timestamp fechaRegistro;
 
     @ManyToOne // varios usuarios pueden pertenecer a un rol
     @JoinColumn(name = "idRol", nullable = false)
-    private Rol rol;
-    @Column(name = "fechaRegistro")
-    private Timestamp fechaRegistro;
-
-    @ManyToOne
-    @JoinColumn(name = "idRol")
     private Rol rol;
 
     public Usuario() {

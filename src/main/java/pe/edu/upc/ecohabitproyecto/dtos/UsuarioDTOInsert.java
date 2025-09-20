@@ -16,8 +16,6 @@ public class UsuarioDTOInsert {
     private String passwordHash;
     private Timestamp fechaRegistro;
     private Rol rol;
-    private String passwordHash;
-    private Timestamp fechaRegistro;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -61,25 +59,17 @@ public class UsuarioDTOInsert {
 
     public Timestamp getFechaRegistro() {
         return fechaRegistro;
-    public String getPasswordHash() {
-        return passwordHash;
     }
 
     public void setFechaRegistro(Timestamp fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
 
     public Rol getRol() {
         return rol;
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
     }
 
     public void setRol(Rol rol) {
         this.rol = rol;
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
     }
 }

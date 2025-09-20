@@ -16,7 +16,6 @@ public class Transaccion {
 
     @ManyToOne
     @JoinColumn(name = "idBilletera", nullable = false)
-    @JoinColumn(name = "idBilletera")
     private Billetera billetera;
 
     @Column(name = "tipo", nullable = false, length = 20)

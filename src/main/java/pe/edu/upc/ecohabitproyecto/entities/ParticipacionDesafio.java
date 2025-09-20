@@ -18,13 +18,13 @@ public class ParticipacionDesafio {
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "idDesafio")
+    @JoinColumn(name = "idDesafio", nullable = false)
     private Desafio desafio;
 
     @Column(name = "progreso", nullable = false, precision = 12, scale = 2)
     private BigDecimal progreso;
 
-    @Column(name = "estado", length = 20)
+    @Column(name = "estado", nullable = false, length = 20)
     private String estado;
 
     @Column(name = "fecha", nullable = false)
