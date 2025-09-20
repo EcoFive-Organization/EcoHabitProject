@@ -37,4 +37,9 @@ public class ForoServiceImplement implements IForoService {
     public void update(Foro foro) {
         iForoRepository.save(foro);
     }
+
+    @Override
+    public List<String[]> quantityPostByForum() {
+        return iForoRepository.postQuantityByForum();
+    }
 }
