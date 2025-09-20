@@ -17,4 +17,8 @@ public interface IForoService {
 
     public void update(Foro foro);
 
+    // Cantidad de publicaciones según foro
+    public List<String[]> quantityPostByForum();
+
+
 }

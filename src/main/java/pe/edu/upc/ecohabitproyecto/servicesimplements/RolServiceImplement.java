@@ -20,4 +20,9 @@ public class RolServiceImplement implements IRolService {
     public void insert(Rol rol) {
         rR.save(rol);
     }
+
+    @Override
+    public List<String[]> quantityUserByRol() {
+        return rR.userQuantityByRol();
+    }
 }
