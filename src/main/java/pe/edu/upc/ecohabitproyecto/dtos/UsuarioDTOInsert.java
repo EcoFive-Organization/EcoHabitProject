@@ -1,23 +1,28 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import pe.edu.upc.ecohabitproyecto.entities.Rol;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.sql.Timestamp;
 
 public class UsuarioDTOInsert {
-    private int id_usuario;
+    private int idUsuario;
     private String nombre;
     private String apellido;
     private String email;
-    private Timestamp fecha_registro;
-    private Usuario usuario;
+    private String passwordHash;
+    private Timestamp fechaRegistro;
+    private Rol rol;
 
-    public int getId_usuario() {
-        return id_usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -44,19 +49,27 @@ public class UsuarioDTOInsert {
         this.email = email;
     }
 
-    public Timestamp getFecha_registro() {
-        return fecha_registro;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

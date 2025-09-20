@@ -3,24 +3,24 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 import jakarta.persistence.Column;
 
 public class RolDTO {
-    private int id_rol;
-    private String nombre_rol;
+    private int idRol;
+    private String nombreRol;
     private String descripcion;
 
-    public int getId_rol() {
-        return id_rol;
+    public int getIdRol() {
+        return idRol;
     }
 
-    public void setId_rol(int id_rol) {
-        this.id_rol = id_rol;
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
 
-    public String getNombre_rol() {
-        return nombre_rol;
+    public String getNombreRol() {
+        return nombreRol;
     }
 
-    public void setNombre_rol(String nombre_rol) {
-        this.nombre_rol = nombre_rol;
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
     }
 
     public String getDescripcion() {

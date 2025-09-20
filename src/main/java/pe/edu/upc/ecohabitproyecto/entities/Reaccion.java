@@ -9,47 +9,47 @@ import java.util.Date;
 public class Reaccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_reaccion;
+    private int idReaccion;
 
-    @Column(name = "tipo_reaccion",  nullable = false, length = 20)
-    private String tipo_reaccion;
+    @Column(name = "tipoReaccion",  nullable = false, length = 20)
+    private String tipoReaccion;
 
     @Column(name = "fecha", nullable = false)
     private Date fecha;
 
     // Relaciones
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "id_publicacion", nullable = false)
+    @JoinColumn(name = "idPublicacion", nullable = false)
     private Publicacion publicacion;
 
     public Reaccion() {}
 
-    public Reaccion(int id_reaccion, String tipo_reaccion, Date fecha, Usuario usuario, Publicacion publicacion) {
-        this.id_reaccion = id_reaccion;
-        this.tipo_reaccion = tipo_reaccion;
+    public Reaccion(int idReaccion, String tipoReaccion, Date fecha, Usuario usuario, Publicacion publicacion) {
+        this.idReaccion = idReaccion;
+        this.tipoReaccion = tipoReaccion;
         this.fecha = fecha;
         this.usuario = usuario;
         this.publicacion = publicacion;
     }
 
-    public int getId_reaccion() {
-        return id_reaccion;
+    public int getIdReaccion() {
+        return idReaccion;
     }
 
-    public void setId_reaccion(int id_reaccion) {
-        this.id_reaccion = id_reaccion;
+    public void setIdReaccion(int idReaccion) {
+        this.idReaccion = idReaccion;
     }
 
-    public String getTipo_reaccion() {
-        return tipo_reaccion;
+    public String getTipoReaccion() {
+        return tipoReaccion;
     }
 
-    public void setTipo_reaccion(String tipo_reaccion) {
-        this.tipo_reaccion = tipo_reaccion;
+    public void setTipoReaccion(String tipoReaccion) {
+        this.tipoReaccion = tipoReaccion;
     }
 
     public Date getFecha() {

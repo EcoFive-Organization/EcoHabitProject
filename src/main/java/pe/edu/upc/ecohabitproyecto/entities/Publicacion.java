@@ -11,7 +11,7 @@ public class Publicacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_publicacion;
+    private int idPublicacion;
 
     @Column(name = "titulo", nullable = false, length = 200)
     private String titulo;
@@ -33,7 +33,7 @@ public class Publicacion {
 
     // Relaciones
     @ManyToOne
-    @JoinColumn(name = "id_foro", nullable = false) //FK
+    @JoinColumn(name = "idForo", nullable = false) //FK
     private Foro foro;
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
@@ -43,14 +43,14 @@ public class Publicacion {
     private List<Comentario> comentarios;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
 
     public Publicacion() {}
 
-    public Publicacion(int id_publicacion, String titulo, String contenido, String privacidad, Date fecha, int vistas, int compartidos, Foro foro, List<Reaccion> reacciones, List<Comentario> comentarios, Usuario usuario) {
-        this.id_publicacion = id_publicacion;
+    public Publicacion(int idPublicacion, String titulo, String contenido, String privacidad, Date fecha, int vistas, int compartidos, Foro foro, List<Reaccion> reacciones, List<Comentario> comentarios, Usuario usuario) {
+        this.idPublicacion = idPublicacion;
         this.titulo = titulo;
         this.contenido = contenido;
         this.privacidad = privacidad;
@@ -63,12 +63,12 @@ public class Publicacion {
         this.usuario = usuario;
     }
 
-    public int getId_publicacion() {
-        return id_publicacion;
+    public int getIdPublicacion() {
+        return idPublicacion;
     }
 
-    public void setId_publicacion(int id_publicacion) {
-        this.id_publicacion = id_publicacion;
+    public void setIdPublicacion(int idPublicacion) {
+        this.idPublicacion = idPublicacion;
     }
 
     public String getTitulo() {

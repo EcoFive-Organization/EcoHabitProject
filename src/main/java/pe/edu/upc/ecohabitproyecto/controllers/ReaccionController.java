@@ -69,15 +69,15 @@ public class ReaccionController {
         Reaccion reaccion = m.map(dto, Reaccion.class);
 
         // Validación de existencia
-        Reaccion existente = reaccionService.listId(reaccion.getId_reaccion());
+        Reaccion existente = reaccionService.listId(reaccion.getIdReaccion());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + reaccion.getId_reaccion());
+                    .body("No se puede modificar. No existe un registro con el ID: " + reaccion.getIdReaccion());
         }
 
         // Actualización si pasa validaciones
         reaccionService.update(reaccion);
-        return ResponseEntity.ok("Registro con ID " + reaccion.getId_reaccion() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + reaccion.getIdReaccion() + " modificado correctamente.");
     }
 
 }

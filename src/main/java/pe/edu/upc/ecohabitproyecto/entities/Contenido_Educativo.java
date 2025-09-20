@@ -10,7 +10,7 @@ import java.util.Date;
 public class Contenido_Educativo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_contenidoEducativo;
+    private int idContenidoEducativo;
 
     @Column(name = "titulo",  nullable = false, length = 200)
     private String titulo;
@@ -24,26 +24,26 @@ public class Contenido_Educativo {
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
 
-    @Column(name = "fecha_publicacion", nullable = false)
-    private Date fecha_publicacion;
+    @Column(name = "fechaPublicacion", nullable = false)
+    private Date fechaPublicacion;
 
     public Contenido_Educativo() {}
 
-    public Contenido_Educativo(int id_contenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fecha_publicacion) {
-        this.id_contenidoEducativo = id_contenidoEducativo;
+    public Contenido_Educativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fechaPublicacion) {
+        this.idContenidoEducativo = idContenidoEducativo;
         this.titulo = titulo;
         this.tipo = tipo;
         this.url = url;
         this.descripcion = descripcion;
-        this.fecha_publicacion = fecha_publicacion;
+        this.fechaPublicacion = fechaPublicacion;
     }
 
-    public int getId_contenidoEducativo() {
-        return id_contenidoEducativo;
+    public int getIdContenidoEducativo() {
+        return idContenidoEducativo;
     }
 
-    public void setId_contenidoEducativo(int id_contenidoEducativo) {
-        this.id_contenidoEducativo = id_contenidoEducativo;
+    public void setIdContenidoEducativo(int idContenidoEducativo) {
+        this.idContenidoEducativo = idContenidoEducativo;
     }
 
     public String getTitulo() {
@@ -78,11 +78,11 @@ public class Contenido_Educativo {
         this.descripcion = descripcion;
     }
 
-    public Date getFecha_publicacion() {
-        return fecha_publicacion;
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
     }
 
-    public void setFecha_publicacion(Date fecha_publicacion) {
-        this.fecha_publicacion = fecha_publicacion;
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
     }
 }

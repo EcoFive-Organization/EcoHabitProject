@@ -10,7 +10,7 @@ public class Comentario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_comentario;
+    private int idComentario;
 
     @Column(name = "contenido", nullable = false, length = 255)
     private String contenido;
@@ -20,29 +20,29 @@ public class Comentario {
 
     // Relaciones
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "id_publicacion", nullable = false)
+    @JoinColumn(name = "idPublicacion", nullable = false)
     private Publicacion publicacion;
 
     public Comentario() {}
 
-    public Comentario(int id_comentario, String contenido, Date fecha, Usuario usuario, Publicacion publicacion) {
-        this.id_comentario = id_comentario;
+    public Comentario(int idComentario, String contenido, Date fecha, Usuario usuario, Publicacion publicacion) {
+        this.idComentario = idComentario;
         this.contenido = contenido;
         this.fecha = fecha;
         this.usuario = usuario;
         this.publicacion = publicacion;
     }
 
-    public int getId_comentario() {
-        return id_comentario;
+    public int getIdComentario() {
+        return idComentario;
     }
 
-    public void setId_comentario(int id_comentario) {
-        this.id_comentario = id_comentario;
+    public void setIdComentario(int idComentario) {
+        this.idComentario = idComentario;
     }
 
     public String getContenido() {

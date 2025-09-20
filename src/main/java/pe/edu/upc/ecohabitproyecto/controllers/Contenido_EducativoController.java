@@ -54,11 +54,11 @@ public class Contenido_EducativoController {
         ModelMapper modelMapper = new ModelMapper();
         Contenido_Educativo contenidoEducativo = modelMapper.map(dto, Contenido_Educativo.class);
 
-        Contenido_Educativo existe = contenido_educativoService.listId(contenidoEducativo.getId_contenidoEducativo());
+        Contenido_Educativo existe = contenido_educativoService.listId(contenidoEducativo.getIdContenidoEducativo());
 
         if (existe == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + contenidoEducativo.getId_contenidoEducativo());
+                    .body("No se puede modificar. No existe un registro con el ID: " + contenidoEducativo.getIdContenidoEducativo());
         }
 
         contenido_educativoService.update(contenidoEducativo);

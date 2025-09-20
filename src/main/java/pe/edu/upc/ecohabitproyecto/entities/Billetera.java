@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class Billetera {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int billetera_id;
+    private int idBilletera;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
@@ -18,20 +18,20 @@ public class Billetera {
     @Column(name = "saldo", nullable = false, precision = 12, scale = 2)
     private BigDecimal saldo;
 
-    public Billetera(int billetera_id, Usuario usuario, BigDecimal saldo) {
-        this.billetera_id = billetera_id;
+    public Billetera() {}
+
+    public Billetera(int idBilletera, Usuario usuario, BigDecimal saldo) {
+        this.idBilletera = idBilletera;
         this.usuario = usuario;
         this.saldo = saldo;
     }
 
-    public Billetera() {}
-
-    public int getBilletera_id() {
-        return billetera_id;
+    public int getIdBilletera() {
+        return idBilletera;
     }
 
-    public void setBilletera_id(int billetera_id) {
-        this.billetera_id = billetera_id;
+    public void setIdBilletera(int idBilletera) {
+        this.idBilletera = idBilletera;
     }
 
     public Usuario getUsuario() {
@@ -42,7 +42,11 @@ public class Billetera {
         this.usuario = usuario;
     }
 
-    public BigDecimal getSaldo() { return saldo; }
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
 
-    public void setSaldo(BigDecimal saldo) { this.saldo = saldo; }
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
 }
