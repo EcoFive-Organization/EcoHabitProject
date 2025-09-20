@@ -31,6 +31,8 @@ public class ContenidoEducativo {
 
     public ContenidoEducativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fechaPublicacion) {
         this.idContenidoEducativo = idContenidoEducativo;
+    public Contenido_Educativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fechaPublicacion) {
+        this.idContenidoEducativo = idContenidoEducativo;
         this.titulo = titulo;
         this.tipo = tipo;
         this.url = url;

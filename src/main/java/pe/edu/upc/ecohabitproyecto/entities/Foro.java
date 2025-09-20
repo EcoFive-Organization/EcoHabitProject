@@ -23,6 +23,8 @@ public class Foro {
 
     public Foro(int idForo, String titulo, String descripcion) {
         this.idForo = idForo;
+    public Foro(int idForo, String titulo, String descripcion) {
+        this.idForo = idForo;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }

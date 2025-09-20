@@ -15,6 +15,7 @@ public class Transaccion {
     private int idTransaccion;
 
     @ManyToOne
+    @JoinColumn(name = "idBilletera", nullable = false)
     @JoinColumn(name = "idBilletera")
     private Billetera billetera;
 

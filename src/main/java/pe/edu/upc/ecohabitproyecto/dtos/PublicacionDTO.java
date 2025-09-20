@@ -2,6 +2,9 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 
 import pe.edu.upc.ecohabitproyecto.entities.Foro;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+import jakarta.persistence.Column;
+import pe.edu.upc.ecohabitproyecto.entities.Foro;
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.util.Date;
 
@@ -13,6 +16,9 @@ public class PublicacionDTO {
     private Date fecha;
     private int vistas;
     private int compartidos;//FK
+    private Foro foro;
+    private Usuario usuario;
+    private int compartidos;
     private Foro foro;
     private Usuario usuario;
 

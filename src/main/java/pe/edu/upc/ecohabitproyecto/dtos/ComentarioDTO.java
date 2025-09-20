@@ -3,6 +3,12 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+
 import java.util.Date;
 
 public class ComentarioDTO {
