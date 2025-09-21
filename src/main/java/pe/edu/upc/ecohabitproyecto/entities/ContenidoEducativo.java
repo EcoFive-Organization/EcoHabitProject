@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Contenido_Educativo")
-public class Contenido_Educativo {
+public class ContenidoEducativo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idContenidoEducativo;
@@ -27,9 +27,9 @@ public class Contenido_Educativo {
     @Column(name = "fechaPublicacion", nullable = false)
     private Date fechaPublicacion;
 
-    public Contenido_Educativo() {}
+    public ContenidoEducativo() {}
 
-    public Contenido_Educativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fechaPublicacion) {
+    public ContenidoEducativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fechaPublicacion) {
         this.idContenidoEducativo = idContenidoEducativo;
         this.titulo = titulo;
         this.tipo = tipo;
