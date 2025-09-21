@@ -10,15 +10,21 @@ public interface IContenidoEducativoService {
     public List<ContenidoEducativo>list();
 
     // Registrar
-    public void insert(ContenidoEducativo contenido_educativo);
+    public void registrarContenidoEducativo(ContenidoEducativo contenido_educativo);
 
     // Eliminar
-    public void delete(int id);
+    public void eliminarContenidoEducativo(int id);
 
     // Modificar
-    public void update(ContenidoEducativo contenido_educativo);
+    public void modificarContenidoEducativo(ContenidoEducativo contenido_educativo);
 
     // Listar por id (importante para el delete)
     public ContenidoEducativo listId(int id);
+
+    // Listar por tipo Lectura
+    public List<String[]> getLecturasEducativas();
+
+    // Listar por tipo Video
+    public List<String[]> getVideosEducativos();
 
 }

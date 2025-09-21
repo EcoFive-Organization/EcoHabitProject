@@ -7,14 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.ContenidoEducativoDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.ListarTipoContenidoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.ContenidoEducativo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IContenidoEducativoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/contenidos_educativos")
+@RequestMapping("/educacion")
 public class ContenidoEducativoController {
     @Autowired
     private IContenidoEducativoService contenido_educativoService;
@@ -33,7 +35,7 @@ public class ContenidoEducativoController {
     public void insertar(@RequestBody ContenidoEducativoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         ContenidoEducativo contenidoEducativo = modelMapper.map(dto, ContenidoEducativo.class);
-        contenido_educativoService.insert(contenidoEducativo);
+        contenido_educativoService.registrarContenidoEducativo(contenidoEducativo);
     }
 
     // Eliminar fisico
@@ -44,7 +46,7 @@ public class ContenidoEducativoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        contenido_educativoService.delete(id);
+        contenido_educativoService.eliminarContenidoEducativo(id);
         return ResponseEntity.ok("Registro eliminado con exito");
     }
 
@@ -61,10 +63,60 @@ public class ContenidoEducativoController {
                     .body("No se puede modificar. No existe un registro con el ID: " + contenidoEducativo.getIdContenidoEducativo());
         }
 
-        contenido_educativoService.update(contenidoEducativo);
+        contenido_educativoService.modificarContenidoEducativo(contenidoEducativo);
         return  ResponseEntity.ok("Registro modificado con exito");
 
     }
+
+    // Listar tipo Lectura
+    @GetMapping("/lecturas")
+    public ResponseEntity<?> obtenerLecturas() {
+        List<ListarTipoContenidoDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = contenido_educativoService.getLecturasEducativas(); // aqui están las cantidades
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros.");
+        }
+
+        for(String[] columna : fila) {
+            ListarTipoContenidoDTO dto = new ListarTipoContenidoDTO();
+            dto.setTitulo(columna[0]);
+            dto.setDescripcion(columna[1]);
+            dto.setUrl(columna[2]);
+            dto.setTipo(columna[3]);
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+
+    }
+
+    // Listar tipo Video
+    @GetMapping("/videos")
+    public ResponseEntity<?> obtenerVideos() {
+        List<ListarTipoContenidoDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = contenido_educativoService.getVideosEducativos(); // aqui están los datos
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros.");
+        }
+
+        for(String[] columna : fila) {
+            ListarTipoContenidoDTO dto = new ListarTipoContenidoDTO();
+            dto.setTitulo(columna[0]);
+            dto.setDescripcion(columna[1]);
+            dto.setUrl(columna[2]);
+            dto.setTipo(columna[3]);
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+
+    }
+
+
 
 
 }

@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ContenidoEducativo")
+@Table(name = "Contenido_Educativo")
 public class ContenidoEducativo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +18,10 @@ public class ContenidoEducativo {
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
-    @Column(name = "url", nullable = false)
+    @Column(name = "url", nullable = false, length = 255)
     private String url;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
 
     @Column(name = "fechaPublicacion", nullable = false)
