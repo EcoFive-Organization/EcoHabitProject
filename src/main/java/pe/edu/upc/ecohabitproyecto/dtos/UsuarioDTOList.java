@@ -2,7 +2,6 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 
 public class UsuarioDTOList {
     private String nombre;
-    private String apellido;
     private String email;
 
     public String getNombre() {
@@ -11,14 +10,6 @@ public class UsuarioDTOList {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public String getEmail() {

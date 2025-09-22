@@ -3,6 +3,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
@@ -14,33 +15,28 @@ public class Usuario {
     @Column(name = "nombre", length = 100)
     private String nombre;
 
-    @Column(name = "apellido", nullable = false, length = 100)
-    private String apellido;
-
     @Column(name = "email", nullable = false, length = 150)
     private String email;
 
     @Column(name = "passwordHash", nullable = false, length = 150)
     private String passwordHash;
 
-    @Column(name = "fechaRegistro", nullable = true)
-    private Timestamp fechaRegistro;
+    private Boolean enabled;
 
-    @ManyToOne // varios usuarios pueden pertenecer a un rol
-    @JoinColumn(name = "idRol", nullable = false)
-    private Rol rol;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idUsuario")
+    private List<Rol> roles;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombre, String apellido, String email, String passwordHash, Timestamp fechaRegistro, Rol rol) {
+    public Usuario(int idUsuario, String nombre, String email, String passwordHash, Boolean enabled, List<Rol> roles) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.fechaRegistro = fechaRegistro;
-        this.rol = rol;
+        this.enabled = enabled;
+        this.roles = roles;
     }
 
     public int getIdUsuario() {
@@ -59,14 +55,6 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -83,19 +71,19 @@ public class Usuario {
         this.passwordHash = passwordHash;
     }
 
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public Rol getRol() {
-        return rol;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }

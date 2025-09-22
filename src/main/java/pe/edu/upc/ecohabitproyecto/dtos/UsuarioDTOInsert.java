@@ -11,11 +11,9 @@ import java.sql.Timestamp;
 public class UsuarioDTOInsert {
     private int idUsuario;
     private String nombre;
-    private String apellido;
     private String email;
     private String passwordHash;
-    private Timestamp fechaRegistro;
-    private Rol rol;
+    private Boolean enabled;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -31,14 +29,6 @@ public class UsuarioDTOInsert {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public String getEmail() {
@@ -57,19 +47,11 @@ public class UsuarioDTOInsert {
         this.passwordHash = passwordHash;
     }
 
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
