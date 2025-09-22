@@ -2,6 +2,8 @@ package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Rol")
 public class Rol {

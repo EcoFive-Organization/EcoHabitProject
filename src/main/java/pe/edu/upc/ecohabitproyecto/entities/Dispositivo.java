@@ -14,7 +14,7 @@ public class Dispositivo {
     private int idDispositivo;
 
     @ManyToOne
-    @JoinColumn(name = "id_Usuario", nullable = false)
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     @Column(name = "nombre", nullable = false, length = 100)

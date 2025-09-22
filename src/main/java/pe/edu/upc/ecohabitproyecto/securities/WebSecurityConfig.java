@@ -61,7 +61,8 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login").permitAll()
+                        // Permite acceso a los endpoints de login, registro y autenticación para todos.
+                        .requestMatchers("/login", "/register", "/authenticate").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

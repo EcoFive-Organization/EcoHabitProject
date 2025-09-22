@@ -2,8 +2,9 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.ecohabitproyecto.dtos.UsuarioDTOInsert;
 import pe.edu.upc.ecohabitproyecto.dtos.UsuarioDTOList;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IUsuarioService;
@@ -25,10 +26,14 @@ public class UsuarioController {
         }).collect(Collectors.toList());
     }
 
-    @PostMapping
-    public void insertar(@RequestBody UsuarioDTOInsert l){
-        ModelMapper m = new ModelMapper();
-        Usuario user = m.map(l, Usuario.class);
-        uS.insert(user);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable int id) {
+        Usuario u = uS.listId(id);
+        if (u == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id + " para eliminar.");
+        }
+        uS.delete(id);
+        return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 }
