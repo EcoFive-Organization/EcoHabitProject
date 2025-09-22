@@ -39,4 +39,9 @@ public class TransaccionServiceImplement implements ITransaccionService {
     public void update(Transaccion transaccion) {
         tR.save(transaccion);
     }
+
+    @Override
+    public List<Transaccion> findAllByTransaccion() {
+        return tR.findAllByTransaccion();
+    }
 }

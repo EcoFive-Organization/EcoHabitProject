@@ -10,4 +10,5 @@ public interface ITransaccionService {
     public Transaccion listId(int id);
     public void delete(int id);
     public void update(Transaccion transaccion);
+    public List<Transaccion> findAllByTransaccion();
 }
