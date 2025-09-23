@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface IAlertaRepository extends JpaRepository<Alerta,Integer> {
-    @Query(value = "SELECT a.id_alerta,a.fecha,a.mensaje,a.id_consumo,d.ubicacion\n" +
+    @Query(value = "SELECT a.id_alerta,a.fecha,a.mensaje,a.id_consumo\n" +
             "FROM alerta a\n" +
             "JOIN consumo c ON a.id_consumo = c.id_consumo\n" +
             "JOIN dispositivo d ON c.id_dispositivo = d.id_dispositivo;", nativeQuery = true)
