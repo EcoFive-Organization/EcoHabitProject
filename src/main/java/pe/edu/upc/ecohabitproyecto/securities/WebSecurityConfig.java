@@ -62,7 +62,12 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         // Permite acceso a los endpoints de login, registro y autenticación para todos.
-                        .requestMatchers("/login", "/register", "/authenticate").permitAll()
+                        .requestMatchers("/login",
+                                "/register",
+                                "/authenticate",
+                                "/v3/api-docs/**",
+                                "swagger-ui/**",
+                                "swagger_ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
