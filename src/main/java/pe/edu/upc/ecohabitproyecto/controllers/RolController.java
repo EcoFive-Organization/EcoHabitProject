@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.QuantityPostForumDTO;
-import pe.edu.upc.ecohabitproyecto.dtos.QuantityUserByRolDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.RolDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Rol;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IRolService;
