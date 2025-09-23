@@ -63,13 +63,13 @@ public class DispositivoController {
     public ResponseEntity<String> modificar(@RequestBody DispositivoDTOInsert dto) {
         ModelMapper m = new ModelMapper();
         Dispositivo d = m.map(dto, Dispositivo.class);
-        Dispositivo existente = dS.listId(d.getIdDispositivo());
+        Dispositivo existente = dS.listId(d.getId_dispositivo());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + d.getIdDispositivo());
+                    .body("No se puede modificar. No existe un registro con el ID: " + d.getId_dispositivo());
         }
         dS.update(d);
-        return ResponseEntity.ok("Registro con ID " + d.getIdDispositivo() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + d.getId_dispositivo() + " modificado correctamente.");
     }
 
 }

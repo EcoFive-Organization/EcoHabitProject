@@ -20,4 +20,9 @@ public class AlertaServiceImplement implements IAlertaService {
 
     @Override
     public void insert(Alerta alerta) { aS.save(alerta); }
+
+    @Override
+    public List<Object[]> findAllByIdAlerta() {
+        return aS.findAllByIdAlerta();
+    }
 }
