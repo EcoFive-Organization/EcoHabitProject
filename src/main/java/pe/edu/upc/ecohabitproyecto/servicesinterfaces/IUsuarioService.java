@@ -13,4 +13,9 @@ public interface IUsuarioService {
 
     public void delete(int id);
 
+    // Listar por cantidad de Usuarios según el rol
+    public List<String[]> getUsuariosRol();
+
+    // Listar por cantidad de Usuarios, estado y rol
+    public List<String[]> getUsuariosEstadoRol();
 }
