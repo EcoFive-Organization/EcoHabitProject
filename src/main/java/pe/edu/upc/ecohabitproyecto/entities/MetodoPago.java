@@ -17,14 +17,14 @@ public class MetodoPago {
     @Column(name = "detalles", nullable = false, length = 100)
     private String detalles;
 
-    @Column(name = "activo", length = 150)
+    @Column(name = "activo", nullable = false, length = 150)
     private boolean activo;
 
-    @Column(name = "fechaRegistro")
+    @Column(name = "fechaRegistro", nullable = false)
     private Timestamp fechaRegistro;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     public MetodoPago() {

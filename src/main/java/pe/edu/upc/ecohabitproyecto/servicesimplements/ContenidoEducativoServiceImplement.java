@@ -21,19 +21,19 @@ public class ContenidoEducativoServiceImplement implements IContenidoEducativoSe
 
     // Registrar
     @Override
-    public void insert(ContenidoEducativo contenido_educativo) {
+    public void registrarContenidoEducativo(ContenidoEducativo contenido_educativo) {
         contenido_educativoRepository.save(contenido_educativo);
     }
 
     // Eliminar
     @Override
-    public void delete(int id) {
+    public void eliminarContenidoEducativo(int id) {
         contenido_educativoRepository.deleteById(id);
     }
 
     // Modificar
     @Override
-    public void update(ContenidoEducativo contenido_educativo) {
+    public void modificarContenidoEducativo(ContenidoEducativo contenido_educativo) {
         contenido_educativoRepository.save(contenido_educativo);
     }
 
@@ -41,5 +41,17 @@ public class ContenidoEducativoServiceImplement implements IContenidoEducativoSe
     @Override
     public ContenidoEducativo listId(int id) {
         return contenido_educativoRepository.findById(id).orElse(null);
+    }
+
+    // Listar de tipo Lectura
+    @Override
+    public List<String[]> getLecturasEducativas() {
+        return contenido_educativoRepository.buscarLectura();
+    }
+
+    // Listar de tipo Video
+    @Override
+    public List<String[]> getVideosEducativos() {
+        return contenido_educativoRepository.buscarVideo();
     }
 }

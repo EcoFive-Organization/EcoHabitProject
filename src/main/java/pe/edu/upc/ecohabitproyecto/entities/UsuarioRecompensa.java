@@ -11,15 +11,15 @@ public class UsuarioRecompensa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuarioRecompensa;
 
-    @Column(name = "fecha")
+    @Column(name = "fecha", nullable = false)
     private Timestamp fecha;
 
     @ManyToOne
-    @JoinColumn(name = "idRecompensa")
+    @JoinColumn(name = "idRecompensa", nullable = false)
     private Recompensa recompensa;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     public UsuarioRecompensa() {

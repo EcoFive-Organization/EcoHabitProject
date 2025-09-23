@@ -12,7 +12,7 @@ public class Billetera {
     private int idBilletera;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     @Column(name = "saldo", nullable = false, precision = 12, scale = 2)

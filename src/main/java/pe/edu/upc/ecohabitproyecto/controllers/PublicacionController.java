@@ -20,6 +20,7 @@ public class PublicacionController {
     @Autowired
     private IPublicacionService publicacionService;
 
+    // Listar publicaciones
     @GetMapping
     public List<PublicacionDTO> listar(){
         return publicacionService.list().stream().map(x -> {
@@ -28,6 +29,7 @@ public class PublicacionController {
         }).collect(Collectors.toList());
     }
 
+    // Registrar una publicacion
     @PostMapping
     public void insertar(@RequestBody PublicacionDTO publicacionDTO){
         ModelMapper mapper = new ModelMapper();

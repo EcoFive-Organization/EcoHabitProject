@@ -14,7 +14,7 @@ public class Alerta {
     private int idAlerta;
 
     @ManyToOne
-    @JoinColumn(name = "idConsumo")
+    @JoinColumn(name = "idConsumo", nullable = false)
     private Consumo consumo;
 
     @Column(name = "tipoAlerta", nullable = false, length = 50)

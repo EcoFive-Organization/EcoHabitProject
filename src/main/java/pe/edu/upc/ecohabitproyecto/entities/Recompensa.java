@@ -7,13 +7,12 @@ import jakarta.persistence.*;
 public class Recompensa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idRecompensa")
     private Integer idRecompensa;
 
     @Column(name = "nombre", length = 150, nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion", columnDefinition = "text")
+    @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
 
     @Column(name = "costoPuntos", nullable = false)
