@@ -2,6 +2,7 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.DesafioDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Desafio;
@@ -43,6 +44,13 @@ public class DesafioController {
         ModelMapper m = new ModelMapper();
         Desafio e = m.map(dto, Desafio.class);
         dS.update(e);
+    }
+    @PostMapping("/api/desafios/unirse")
+    public ResponseEntity<Void> unirseAlDesafio(
+            @RequestParam Integer idUsuario,
+            @RequestParam Integer idDesafio) {
+        dS.unirseADesafio(idUsuario, idDesafio);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
