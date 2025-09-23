@@ -10,4 +10,35 @@ public class CantidadAlarmasDTO {
     private String mensaje;
     private Timestamp fecha;
 
+    public int getIdAlerta() {
+        return idAlerta;
+    }
+
+    public void setIdAlerta(int idAlerta) {
+        this.idAlerta = idAlerta;
+    }
+
+    public Consumo getConsumo() {
+        return consumo;
+    }
+
+    public void setConsumo(Consumo consumo) {
+        this.consumo = consumo;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
 }
