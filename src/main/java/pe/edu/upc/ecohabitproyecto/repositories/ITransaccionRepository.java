@@ -12,5 +12,5 @@ public interface ITransaccionRepository extends JpaRepository<Transaccion,Intege
     @Query(value = "SELECT t.id_transaccion, t.id_billetera,t.monto,t.fecha\n" +
             "FROM transaccion t\n" +
             "JOIN billetera b ON t.id_billetera = b.id_billetera;", nativeQuery = true)
-    public List<Transaccion> findAllByTransaccion();
+    public List<Object> findAllByTransaccion();
 }

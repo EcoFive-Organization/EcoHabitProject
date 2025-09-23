@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.ecohabitproyecto.dtos.CantidadTransaccionesDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.TransaccionDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Transaccion;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ITransaccionService;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -62,12 +67,36 @@ public class TransaccionController {
     public ResponseEntity<String> modificar(@RequestBody TransaccionDTO dto) {
         ModelMapper m = new ModelMapper();
         Transaccion t = m.map(dto, Transaccion.class);
-        Transaccion existente = tS.listId(t.getId_transaccion());
+        Transaccion existente = tS.listId(t.getIdTransaccion());
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + t.getId_transaccion());
+                    .body("No se puede modificar. No existe un registro con el ID: " + t.getIdTransaccion());
         }
         tS.update(t);
-        return ResponseEntity.ok("Registro con ID " + t.getId_transaccion() + " modificado correctamente.");
+        return ResponseEntity.ok("Registro con ID " + t.getIdTransaccion() + " modificado correctamente.");
+    }
+    @GetMapping("/cantidades")
+    public ResponseEntity<?> obtenerCantidadTransacciones() {
+
+        List<CantidadTransaccionesDTO> listaDTO = new ArrayList<>();
+        List<Object[]> fila = (List<Object[]>) tS.findAllByTransaccion();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros ");
+        }
+
+        for (Object[] columna : fila) {
+            CantidadTransaccionesDTO dto = new CantidadTransaccionesDTO();
+
+            dto.setIdTransaccion(((Number) columna[0]).intValue());
+            dto.setBilletera(((Number) columna[1]).intValue());
+            dto.setMonto(BigDecimal.valueOf(((Number) columna[2]).floatValue()));
+            dto.setFecha(Timestamp.valueOf(columna[3].toString()));
+
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
     }
 }
