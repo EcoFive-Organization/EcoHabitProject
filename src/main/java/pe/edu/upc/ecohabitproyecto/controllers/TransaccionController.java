@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.CantidadTransaccionesDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.TransaccionDTO;
+import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 import pe.edu.upc.ecohabitproyecto.entities.Transaccion;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ITransaccionService;
 
@@ -90,7 +91,7 @@ public class TransaccionController {
             CantidadTransaccionesDTO dto = new CantidadTransaccionesDTO();
 
             dto.setIdTransaccion(((Number) columna[0]).intValue());
-            dto.setBilletera(((Number) columna[1]).intValue());
+            dto.setBilletera((Billetera) columna[1]);
             dto.setMonto(BigDecimal.valueOf(((Number) columna[2]).floatValue()));
             dto.setFecha(Timestamp.valueOf(columna[3].toString()));
 

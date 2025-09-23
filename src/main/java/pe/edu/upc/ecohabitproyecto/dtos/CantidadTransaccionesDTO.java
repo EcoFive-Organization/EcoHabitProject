@@ -23,7 +23,7 @@ public class CantidadTransaccionesDTO {
         return billetera;
     }
 
-    public void setBilletera(int billetera) {
+    public void setBilletera(Billetera billetera) {
         this.billetera = billetera;
     }
 
