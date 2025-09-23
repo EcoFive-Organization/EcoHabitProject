@@ -7,8 +7,4 @@ import java.util.List;
 public interface IRolService {
     public List<Rol> list();
     public void insert(Rol rol);
-
-    // Cantidad de usuarios según rol
-    public List<String[]> quantityUserByRol();
-
 }
