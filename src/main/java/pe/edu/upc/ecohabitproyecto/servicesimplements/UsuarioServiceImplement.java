@@ -49,4 +49,14 @@ public class UsuarioServiceImplement implements IUsuarioService {
         uR.deleteById(id);
     }
 
+    @Override
+    public List<String[]> getUsuariosRol() {
+        return uR.contarUsuariosRol();
+    }
+
+    @Override
+    public List<String[]> getUsuariosEstadoRol() {
+        return uR.contarUsuariosEstadoRol();
+    }
+
 }
