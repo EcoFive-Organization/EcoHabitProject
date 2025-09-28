@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//Entrar a Swagger: http://localhost:8080/swagger-ui/index.html#/
+
 @RestController
 @RequestMapping("/alertas")
 public class AlertaCotroller {

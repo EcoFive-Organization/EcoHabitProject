@@ -2,7 +2,6 @@ package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
