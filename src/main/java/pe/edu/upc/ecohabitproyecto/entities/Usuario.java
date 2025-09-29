@@ -20,6 +20,7 @@ public class Usuario {
     @Column(name = "passwordHash", nullable = false, length = 150)
     private String passwordHash;
 
+    @Column(name = "enabled", nullable = false)
     private Boolean enabled;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
