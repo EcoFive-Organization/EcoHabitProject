@@ -38,4 +38,9 @@ public class PublicacionServiceImplement implements IPublicacionService {
     public void update(Publicacion publicacion) {
         publicacionRepository.save(publicacion);
     }
+
+    @Override
+    public List<String[]> getCantidadReacciones() {
+        return publicacionRepository.getCantidadReacciones();
+    }
 }
