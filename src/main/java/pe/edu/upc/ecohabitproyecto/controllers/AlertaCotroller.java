@@ -2,18 +2,11 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.AlertaDTO;
-import pe.edu.upc.ecohabitproyecto.dtos.CantidadAlarmasDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Alerta;
-import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IAlertaService;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

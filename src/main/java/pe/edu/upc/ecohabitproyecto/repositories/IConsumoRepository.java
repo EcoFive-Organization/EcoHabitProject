@@ -12,5 +12,5 @@ import java.util.List;
 public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
     @Query(value = "SELECT tipo, COUNT(id_consumo) AS cantidad_consumos FROM consumo\n" +
             "GROUP BY tipo ORDER BY cantidad_consumos DESC;", nativeQuery = true)
-    List<String[]> findAllByTipoConsumo();
+    List<Object[]> findAllByTipoConsumo();
 }
