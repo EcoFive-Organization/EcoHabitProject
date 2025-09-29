@@ -2,7 +2,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Comentario")
@@ -16,7 +16,7 @@ public class Comentario {
     private String contenido;
 
     @Column(name = "fecha",  nullable = false)
-    private Date fecha;
+    private LocalDate fecha;
 
     // Relaciones
     @ManyToOne
@@ -29,7 +29,7 @@ public class Comentario {
 
     public Comentario() {}
 
-    public Comentario(int idComentario, String contenido, Date fecha, Usuario usuario, Publicacion publicacion) {
+    public Comentario(int idComentario, String contenido, LocalDate fecha, Usuario usuario, Publicacion publicacion) {
         this.idComentario = idComentario;
         this.contenido = contenido;
         this.fecha = fecha;
@@ -53,11 +53,11 @@ public class Comentario {
         this.contenido = contenido;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
