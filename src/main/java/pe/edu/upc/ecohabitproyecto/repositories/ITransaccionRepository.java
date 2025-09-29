@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface ITransaccionRepository extends JpaRepository<Transaccion,Integer> {
-    @Query(value = "SELECT t.id_transaccion, t.id_billetera,t.monto,t.fecha\n" +
-            "FROM transaccion t\n" +
-            "JOIN billetera b ON t.id_billetera = b.id_billetera;", nativeQuery = true)
-    public List<Object[]> findAllByTransaccion();
+    @Query(value = "SELECT t.tipo AS tipo_transaccion, SUM(t.monto) AS monto_total_transacciones,\n" +
+            "COUNT(t.id_transaccio) AS cantidad_transacciones, COUNT(DISTINCT t.id_billetera) AS cantidad_billeteras_unicas\n" +
+            "FROM transaccion t GROUP BY t.tipo ORDER BY monto_total_transacciones DESC;", nativeQuery = true)
+    List<Object[]> TransaccionesTotales();
 }

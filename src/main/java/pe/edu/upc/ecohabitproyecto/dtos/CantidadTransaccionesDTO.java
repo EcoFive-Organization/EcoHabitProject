@@ -6,40 +6,40 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class CantidadTransaccionesDTO {
-    private int idTransaccion;
-    private Billetera billetera;
-    private BigDecimal monto;
-    private Timestamp fecha;
+    private String tipo;
+    private BigDecimal montoTotal;
+    private Long cantidadTransacciones;
+    private Long cantidadBilleterasUnicas;
 
-    public int getIdTransaccion() {
-        return idTransaccion;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setIdTransaccion(int idTransaccion) {
-        this.idTransaccion = idTransaccion;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Billetera getBilletera() {
-        return billetera;
+    public BigDecimal getMontoTotal() {
+        return montoTotal;
     }
 
-    public void setBilletera(Billetera billetera) {
-        this.billetera = billetera;
+    public void setMontoTotal(BigDecimal montoTotal) {
+        this.montoTotal = montoTotal;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public Long getCantidadTransacciones() {
+        return cantidadTransacciones;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setCantidadTransacciones(Long cantidadTransacciones) {
+        this.cantidadTransacciones = cantidadTransacciones;
     }
 
-    public Timestamp getFecha() {
-        return fecha;
+    public Long getCantidadBilleterasUnicas() {
+        return cantidadBilleterasUnicas;
     }
 
-    public void setFecha(Timestamp fecha) {
-        this.fecha = fecha;
+    public void setCantidadBilleterasUnicas(Long cantidadBilleterasUnicas) {
+        this.cantidadBilleterasUnicas = cantidadBilleterasUnicas;
     }
 }

@@ -41,7 +41,7 @@ public class TransaccionServiceImplement implements ITransaccionService {
     }
 
     @Override
-    public List<Object[]> findAllByTransaccion() {
-        return tR.findAllByTransaccion();
+    public List<Object[]> TransaccionesTotales() {
+        return tR.TransaccionesTotales();
     }
 }

@@ -76,25 +76,24 @@ public class TransaccionController {
         tS.update(t);
         return ResponseEntity.ok("Registro con ID " + t.getIdTransaccion() + " modificado correctamente.");
     }
-    @GetMapping("/cantidades")
-    public ResponseEntity<?> obtenerCantidadTransacciones() {
 
+    @GetMapping("/DetallesTransaccionesPorTipo")
+    public ResponseEntity<?> obtenerDetallesTransaccionesPorTipo() {
         List<CantidadTransaccionesDTO> listaDTO = new ArrayList<>();
-        List<Object[]> fila = (List<Object[]>) tS.findAllByTransaccion();
+        // Llama al nuevo método. Necesitarás implementarlo en tu servicio primero.
+        List<Object[]> fila = tS.TransaccionesTotales();
 
         if (fila.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron registros ");
+                    .body("No se encontraron detalles de transacciones por tipo.");
         }
 
         for (Object[] columna : fila) {
             CantidadTransaccionesDTO dto = new CantidadTransaccionesDTO();
-
-            dto.setIdTransaccion(((Number) columna[0]).intValue());
-            dto.setBilletera((Billetera) columna[1]);
-            dto.setMonto(BigDecimal.valueOf(((Number) columna[2]).floatValue()));
-            dto.setFecha(Timestamp.valueOf(columna[3].toString()));
-
+            dto.setTipo((String) columna[0]);
+            dto.setMontoTotal((BigDecimal) columna[1]);
+            dto.setCantidadTransacciones(((Number) columna[2]).longValue());
+            dto.setCantidadBilleterasUnicas(((Number) columna[3]).longValue());
             listaDTO.add(dto);
         }
 
