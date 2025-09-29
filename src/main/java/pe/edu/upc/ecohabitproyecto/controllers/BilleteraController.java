@@ -11,13 +11,13 @@ import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IBilleteraService;
 import java.util.List;
 import java.util.stream.Collectors;
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/billeteras")
 public class BilleteraController {
     @Autowired
     private IBilleteraService bS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public List<BilleteraDTO>listar(){
         return bS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();

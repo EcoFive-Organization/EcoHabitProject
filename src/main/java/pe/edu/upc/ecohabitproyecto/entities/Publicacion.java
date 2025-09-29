@@ -2,6 +2,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Publicacion {
     private String privacidad;
 
     @Column(name = "fecha", nullable = false)
-    private Date fecha;
+    private LocalDate fecha;
 
     @Column(name = "vistas", nullable = false)
     private int vistas;
@@ -49,7 +50,7 @@ public class Publicacion {
 
     public Publicacion() {}
 
-    public Publicacion(int idPublicacion, String titulo, String contenido, String privacidad, Date fecha, int vistas, int compartidos, Foro foro, List<Reaccion> reacciones, List<Comentario> comentarios, Usuario usuario) {
+    public Publicacion(int idPublicacion, String titulo, String contenido, String privacidad, LocalDate fecha, int vistas, int compartidos, Foro foro, List<Reaccion> reacciones, List<Comentario> comentarios, Usuario usuario) {
         this.idPublicacion = idPublicacion;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -95,11 +96,11 @@ public class Publicacion {
         this.privacidad = privacidad;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

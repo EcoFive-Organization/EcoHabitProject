@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.QuantityPostForumDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.RolDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.RolDTOList;
 import pe.edu.upc.ecohabitproyecto.entities.Rol;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IRolService;
 
@@ -23,10 +24,10 @@ public class RolController {
     private IRolService rS;
 
     @GetMapping
-    public List<RolDTO> listar() {
+    public List<RolDTOList> listar() {
         return rS.list().stream().map(x -> {
             ModelMapper mapper = new ModelMapper();
-            return mapper.map(x, RolDTO.class);
+            return mapper.map(x, RolDTOList.class);
         }).collect(Collectors.toList());
     }
 

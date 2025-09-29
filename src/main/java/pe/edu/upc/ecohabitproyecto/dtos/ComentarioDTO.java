@@ -3,18 +3,12 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
-import pe.edu.upc.ecohabitproyecto.entities.Usuario;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ComentarioDTO {
     private int idComentario;
     private String contenido;
-    private Date fecha;
+    private LocalDate fecha;
     private Usuario usuario;
     private Publicacion publicacion;
 
@@ -34,11 +28,11 @@ public class ComentarioDTO {
         this.contenido = contenido;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
