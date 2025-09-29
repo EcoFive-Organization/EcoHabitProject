@@ -40,27 +40,5 @@ public class AlertaCotroller {
         Alerta aler=m.map(s, Alerta.class);
         aS.insert(aler);
     }
-    @GetMapping("/CantidadAlerta")
-    public ResponseEntity<?> obtenerAlertas() {
-        List<CantidadAlarmasDTO> listaDTO = new ArrayList<>();
-        List<Object[]> fila = aS.findAllByIdAlerta(); // 👈 tu repositorio
-
-        if (fila.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron alertas");
-        }
-
-        for (Object[] columna : fila) {
-            CantidadAlarmasDTO dto = new CantidadAlarmasDTO();
-
-            dto.setIdAlerta(((Number) columna[0]).intValue());
-            dto.setFecha(Timestamp.valueOf(columna[1].toString()));
-            dto.setMensaje((String) columna[2]);
-            dto.setConsumo((Consumo) columna[3]);
-            listaDTO.add(dto);
-        }
-
-        return ResponseEntity.ok(listaDTO);
-    }
 
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface IConsumoService {
     public List<Consumo> list();
     public void insert(Consumo consumo);
+    List<String[]> findAllByTipoConsumo();
+
 }
