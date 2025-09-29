@@ -3,7 +3,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Contenido_Educativo")
@@ -25,11 +25,11 @@ public class ContenidoEducativo {
     private String descripcion;
 
     @Column(name = "fechaPublicacion", nullable = false)
-    private Date fechaPublicacion;
+    private LocalDate fechaPublicacion;
 
     public ContenidoEducativo() {}
 
-    public ContenidoEducativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, Date fechaPublicacion) {
+    public ContenidoEducativo(int idContenidoEducativo, String titulo, String tipo, String url, String descripcion, LocalDate fechaPublicacion) {
         this.idContenidoEducativo = idContenidoEducativo;
         this.titulo = titulo;
         this.tipo = tipo;
@@ -78,11 +78,11 @@ public class ContenidoEducativo {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 }

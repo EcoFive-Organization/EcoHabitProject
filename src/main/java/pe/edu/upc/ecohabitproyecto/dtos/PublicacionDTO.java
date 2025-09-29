@@ -1,11 +1,10 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import jakarta.persistence.*;
 import pe.edu.upc.ecohabitproyecto.entities.*;
 import pe.edu.upc.ecohabitproyecto.entities.Foro;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PublicacionDTO {
@@ -13,7 +12,7 @@ public class PublicacionDTO {
     private String titulo;
     private String contenido;
     private String privacidad;
-    private Date fecha;
+    private LocalDate fecha;
     private int vistas;
     private int compartidos;
     private Foro foro;
@@ -53,11 +52,11 @@ public class PublicacionDTO {
         this.privacidad = privacidad;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
