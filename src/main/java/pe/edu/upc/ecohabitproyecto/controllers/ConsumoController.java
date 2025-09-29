@@ -48,14 +48,8 @@ public class ConsumoController {
 
         for (Object[] columna : fila) {
             CantidadConsumoDTO dto = new CantidadConsumoDTO();
-
-            // columna[0] es el 'tipo' (String)
             dto.setTipo((String) columna[0]);
-
-            // columna[1] es el 'COUNT(id_consumo)' (Generalmente un BigInteger o Long)
-            // Usamos .longValue() para asegurar el tipo de dato correcto
             dto.setCantidad(((Number) columna[1]).longValue());
-
             listaDTO.add(dto);
         }
 
