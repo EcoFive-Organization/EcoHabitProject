@@ -1,5 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -25,46 +26,57 @@ public class Usuario {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Rol> roles;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Dispositivo> dispositivos;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<UsuarioRecompensa> usuarioRecompensas;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Suscripcion> suscripciones;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<UsuarioLogro> usuarioLogros;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<MetodoPago> metodoPagos;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Publicacion> publicaciones;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Reaccion> reacciones;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<ParticipacionDesafio> participacionDesafios;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Billetera> billeteras;
 
     public Usuario() {
