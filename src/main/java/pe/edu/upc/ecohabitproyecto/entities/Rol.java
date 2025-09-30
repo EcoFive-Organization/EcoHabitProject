@@ -1,5 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Rol {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+    @JsonIgnore
     private Usuario usuario;
 
     public Rol() {

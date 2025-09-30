@@ -1,5 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -35,16 +36,20 @@ public class Publicacion {
     // Relaciones
     @ManyToOne
     @JoinColumn(name = "idForo", nullable = false) //FK
+    @JsonIgnore
     private Foro foro;
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Reaccion> reacciones;
 
     @OneToMany(mappedBy = "publicacion", cascade =  CascadeType.ALL)
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+    @JsonIgnore
     private Usuario usuario;
 
 
