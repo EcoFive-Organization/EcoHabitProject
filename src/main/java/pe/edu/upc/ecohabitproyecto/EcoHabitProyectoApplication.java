@@ -8,6 +8,7 @@ public class EcoHabitProyectoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcoHabitProyectoApplication.class, args);
+        System.out.println("Hello World");
 	}
 
 }
