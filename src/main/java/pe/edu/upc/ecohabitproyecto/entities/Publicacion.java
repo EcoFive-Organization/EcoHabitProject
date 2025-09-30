@@ -1,7 +1,9 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Publicacion {
     private String privacidad;
 
     @Column(name = "fecha", nullable = false)
-    private Date fecha;
+    private LocalDate fecha;
 
     @Column(name = "vistas", nullable = false)
     private int vistas;
@@ -34,22 +36,26 @@ public class Publicacion {
     // Relaciones
     @ManyToOne
     @JoinColumn(name = "idForo", nullable = false) //FK
+    @JsonIgnore
     private Foro foro;
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Reaccion> reacciones;
 
     @OneToMany(mappedBy = "publicacion", cascade =  CascadeType.ALL)
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+    @JsonIgnore
     private Usuario usuario;
 
 
     public Publicacion() {}
 
-    public Publicacion(int idPublicacion, String titulo, String contenido, String privacidad, Date fecha, int vistas, int compartidos, Foro foro, List<Reaccion> reacciones, List<Comentario> comentarios, Usuario usuario) {
+    public Publicacion(int idPublicacion, String titulo, String contenido, String privacidad, LocalDate fecha, int vistas, int compartidos, Foro foro, List<Reaccion> reacciones, List<Comentario> comentarios, Usuario usuario) {
         this.idPublicacion = idPublicacion;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -95,11 +101,11 @@ public class Publicacion {
         this.privacidad = privacidad;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

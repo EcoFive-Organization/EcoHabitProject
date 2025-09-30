@@ -15,4 +15,8 @@ public interface IPublicacionService {
     public void delete(int id);
 
     public void update(Publicacion publicacion);
+
+    // Cantidad de Reacciones por Titulo de Publicacion
+    public List<String[]> getCantidadReacciones();
+
 }

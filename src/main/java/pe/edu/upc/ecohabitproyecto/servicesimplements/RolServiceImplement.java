@@ -21,8 +21,4 @@ public class RolServiceImplement implements IRolService {
         rR.save(rol);
     }
 
-    @Override
-    public List<String[]> quantityUserByRol() {
-        return rR.userQuantityByRol();
-    }
 }

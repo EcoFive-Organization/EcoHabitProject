@@ -19,4 +19,9 @@ public class ConsumoServiceImplement implements IConsumoService {
 
     @Override
     public void insert(Consumo consumo) { cR.save(consumo); }
+
+    @Override
+    public List<Object[]> findAllByTipoConsumo() {
+        return cR.findAllByTipoConsumo();
+    }
 }

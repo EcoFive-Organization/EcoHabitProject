@@ -15,4 +15,7 @@ public interface IDesafioService {
     void delete(int id);
 
     void update(Desafio desafio);
+
+    void unirseADesafio(Integer idUsuario, Integer idDesafio);
+
 }

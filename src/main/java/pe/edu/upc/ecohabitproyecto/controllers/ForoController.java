@@ -22,7 +22,7 @@ public class ForoController {
     @Autowired
     private IForoService iForoService;
 
-    // Listar foros
+    // Listar los foros registrados
     @GetMapping
     public List<ForoDTO> listar() {
         return iForoService.list().stream().map(x->{

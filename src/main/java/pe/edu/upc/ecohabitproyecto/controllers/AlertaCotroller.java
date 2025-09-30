@@ -33,4 +33,5 @@ public class AlertaCotroller {
         Alerta aler=m.map(s, Alerta.class);
         aS.insert(aler);
     }
+
 }

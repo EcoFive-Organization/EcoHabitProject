@@ -6,11 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.ecohabitproyecto.dtos.CantidadTransaccionesDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.TransaccionDTO;
+import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 import pe.edu.upc.ecohabitproyecto.entities.Transaccion;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ITransaccionService;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -69,5 +75,28 @@ public class TransaccionController {
         }
         tS.update(t);
         return ResponseEntity.ok("Registro con ID " + t.getIdTransaccion() + " modificado correctamente.");
+    }
+
+    @GetMapping("/DetallesTransaccionesPorTipo")
+    public ResponseEntity<?> obtenerDetallesTransaccionesPorTipo() {
+        List<CantidadTransaccionesDTO> listaDTO = new ArrayList<>();
+        // Llama al nuevo método. Necesitarás implementarlo en tu servicio primero.
+        List<Object[]> fila = tS.TransaccionesTotales();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron detalles de transacciones por tipo.");
+        }
+
+        for (Object[] columna : fila) {
+            CantidadTransaccionesDTO dto = new CantidadTransaccionesDTO();
+            dto.setTipo((String) columna[0]);
+            dto.setMontoTotal((BigDecimal) columna[1]);
+            dto.setCantidadTransacciones(((Number) columna[2]).longValue());
+            dto.setCantidadBilleterasUnicas(((Number) columna[3]).longValue());
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
     }
 }

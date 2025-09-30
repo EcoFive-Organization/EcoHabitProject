@@ -15,4 +15,7 @@ public interface ILogroService {
     void delete(int id);
 
     void update(Logro logro);
+
+    void desbloquearLogro(Integer idUsuario, String nombreLogro);
+
 }

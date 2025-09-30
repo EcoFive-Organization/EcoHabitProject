@@ -1,6 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ContenidoEducativoDTO {
     private int idContenidoEducativo;
@@ -8,7 +8,7 @@ public class ContenidoEducativoDTO {
     private String tipo;
     private String url;
     private String descripcion;
-    private Date fechaPublicacion;
+    private LocalDate fechaPublicacion;
 
     public int getIdContenidoEducativo() {
         return idContenidoEducativo;
@@ -50,11 +50,11 @@ public class ContenidoEducativoDTO {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 }

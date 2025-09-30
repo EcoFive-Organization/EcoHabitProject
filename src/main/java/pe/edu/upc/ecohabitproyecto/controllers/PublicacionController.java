@@ -4,17 +4,19 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.ecohabitproyecto.dtos.CantidadReaccionesPublicacionDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.PublicacionDTO;
-import pe.edu.upc.ecohabitproyecto.dtos.ReaccionDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
-import pe.edu.upc.ecohabitproyecto.entities.Reaccion;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IPublicacionService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/publicaciones")
 public class PublicacionController {
     @Autowired
@@ -81,5 +83,28 @@ public class PublicacionController {
         publicacionService.update(publicacion);
         return ResponseEntity.ok("Registro con ID " + publicacion.getIdPublicacion() + " modificado correctamente.");
     }
+
+    // Cantidad de publicaciones según foro
+    @GetMapping("/cantidadReacciones")
+    public ResponseEntity<?> getCantidadReacciones() {
+        List<CantidadReaccionesPublicacionDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = publicacionService.getCantidadReacciones(); // aqui están las cantidades
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros.");
+        }
+
+        for(String[] columna : fila) {
+            CantidadReaccionesPublicacionDTO dto = new CantidadReaccionesPublicacionDTO();
+            dto.setTitulo(columna[0]); // primera columna "Nombre foro"
+            dto.setCantidadReacciones(Integer.parseInt(columna[1])); // segunda columna "Cantidad Publicaciones"
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+
+    }
+
 
 }

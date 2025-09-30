@@ -27,56 +27,67 @@ public class Usuario {
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Rol> roles;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Dispositivo> dispositivos;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<UsuarioRecompensa> usuarioRecompensas;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Suscripcion> suscripciones;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<UsuarioLogro> usuarioLogros;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<MetodoPago> metodoPagos;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Publicacion> publicaciones;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Comentario> comentarios;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Reaccion> reacciones;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<ParticipacionDesafio> participacionDesafios;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private List<Billetera> billeteras;
 
     public Usuario() {

@@ -5,4 +5,5 @@ import pe.edu.upc.ecohabitproyecto.entities.UsuarioLogro;
 
 @Repository
 public interface IUsuarioLogroRepository extends JpaRepository<UsuarioLogro,Integer> {
+    boolean existsByUsuario_IdUsuarioAndIdLogro(Integer usuarioId, Integer logroId);
 }
