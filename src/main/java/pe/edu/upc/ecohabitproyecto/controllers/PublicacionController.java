@@ -36,7 +36,7 @@ public class PublicacionController {
     public void insertar(@RequestBody PublicacionDTO publicacionDTO){
         ModelMapper mapper = new ModelMapper();
         Publicacion publicacion = mapper.map(publicacionDTO, Publicacion.class);
-        publicacionService.insert(publicacion);
+        publicacionService.crearPublicacion(publicacion);
     }
 
     // Listar por id
@@ -61,7 +61,7 @@ public class PublicacionController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        publicacionService.delete(id);
+        publicacionService.eliminarPublicacion(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
@@ -80,7 +80,7 @@ public class PublicacionController {
         }
 
         // Actualización si pasa validaciones
-        publicacionService.update(publicacion);
+        publicacionService.modificarPublicacion(publicacion);
         return ResponseEntity.ok("Registro con ID " + publicacion.getIdPublicacion() + " modificado correctamente.");
     }
 

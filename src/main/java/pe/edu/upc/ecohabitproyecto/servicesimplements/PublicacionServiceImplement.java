@@ -20,7 +20,7 @@ public class PublicacionServiceImplement implements IPublicacionService {
     }
 
     @Override
-    public void insert(Publicacion publicacion) {
+    public void crearPublicacion(Publicacion publicacion) {
         publicacionRepository.save(publicacion);
     }
 
@@ -30,12 +30,12 @@ public class PublicacionServiceImplement implements IPublicacionService {
     }
 
     @Override
-    public void delete(int id) {
+    public void eliminarPublicacion(int id) {
         publicacionRepository.deleteById(id);
     }
 
     @Override
-    public void update(Publicacion publicacion) {
+    public void modificarPublicacion(Publicacion publicacion) {
         publicacionRepository.save(publicacion);
     }
 

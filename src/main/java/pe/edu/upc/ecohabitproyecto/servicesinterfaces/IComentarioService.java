@@ -7,12 +7,15 @@ import java.util.List;
 public interface IComentarioService {
     public List<Comentario> list();
 
-    public void insert(Comentario comentario);
+    // Registrar
+    public void crearComentario(Comentario comentario);
 
     public Comentario listId(int id);
 
-    public void delete(int id);
+    // Eliminar
+    public void eliminarComentario(int id);
 
-    public void update(Comentario comentario);
+    // Modificar
+    public void modificarComentario(Comentario comentario);
 
 }

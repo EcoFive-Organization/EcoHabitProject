@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.ComentarioDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.ReaccionDTO;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/comentarios")
 public class ComentarioController {
     @Autowired
@@ -34,7 +36,7 @@ public class ComentarioController {
     public void insertar(@RequestBody ComentarioDTO comentarioDTO){
         ModelMapper mapper = new ModelMapper();
         Comentario comentario = mapper.map(comentarioDTO, Comentario.class);
-        comentarioService.insert(comentario);
+        comentarioService.crearComentario(comentario);
     }
 
     // Listar por id
@@ -59,7 +61,7 @@ public class ComentarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        comentarioService.delete(id);
+        comentarioService.eliminarComentario(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
@@ -78,7 +80,7 @@ public class ComentarioController {
         }
 
         // Actualización si pasa validaciones
-        comentarioService.update(comentario);
+        comentarioService.modificarComentario(comentario);
         return ResponseEntity.ok("Registro con ID " + comentario.getIdComentario() + " modificado correctamente.");
     }
 
