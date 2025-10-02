@@ -19,7 +19,7 @@ public class ComentarioServiceImplement implements IComentarioService {
     }
 
     @Override
-    public void insert(Comentario comentario){
+    public void crearComentario(Comentario comentario) {
         comentarioRepository.save(comentario);
     }
 
@@ -29,12 +29,14 @@ public class ComentarioServiceImplement implements IComentarioService {
     }
 
     @Override
-    public void delete(int id) {
+    public void eliminarComentario(int id) {
         comentarioRepository.deleteById(id);
     }
 
     @Override
-    public void update(Comentario comentario) {
+    public void modificarComentario(Comentario comentario) {
         comentarioRepository.save(comentario);
     }
+
+
 }

@@ -8,13 +8,17 @@ public interface IPublicacionService {
 
     public List<Publicacion> list();
 
-    public void insert(Publicacion publicacion);
+    // Registrar
+    public void crearPublicacion(Publicacion publicacion);
 
+    // Listar por id
     public Publicacion listId(int id);
 
-    public void delete(int id);
+    // Eliminar
+    public void eliminarPublicacion(int id);
 
-    public void update(Publicacion publicacion);
+    // Modificar
+    public void modificarPublicacion(Publicacion publicacion);
 
     // Cantidad de Reacciones por Titulo de Publicacion
     public List<String[]> getCantidadReacciones();
