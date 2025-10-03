@@ -32,7 +32,7 @@ public class ReaccionController {
     public void insertar(@RequestBody ReaccionDTO dto){
         ModelMapper mapper = new ModelMapper();
         Reaccion reaccion = mapper.map(dto, Reaccion.class);
-        reaccionService.insert(reaccion);
+        reaccionService.crearReaccion(reaccion);
     }
 
     // Listar por id
@@ -57,7 +57,7 @@ public class ReaccionController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
         }
-        reaccionService.delete(id);
+        reaccionService.eliminarReaccion(id);
         return ResponseEntity.ok("Registro con ID " + id + " eliminado correctamente.");
     }
 
@@ -76,7 +76,7 @@ public class ReaccionController {
         }
 
         // Actualización si pasa validaciones
-        reaccionService.update(reaccion);
+        reaccionService.modificarReaccion(reaccion);
         return ResponseEntity.ok("Registro con ID " + reaccion.getIdReaccion() + " modificado correctamente.");
     }
 

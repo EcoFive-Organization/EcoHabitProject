@@ -41,7 +41,7 @@ public class ContenidoEducativoController {
     // Eliminar fisico
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
-        ContenidoEducativo contenido_educativo = contenido_educativoService.listId(id);
+        ContenidoEducativo contenido_educativo = contenido_educativoService.listIdContenidoEducativo(id);
         if (contenido_educativo == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existe un registro con el ID: " + id);
@@ -56,7 +56,7 @@ public class ContenidoEducativoController {
         ModelMapper modelMapper = new ModelMapper();
         ContenidoEducativo contenidoEducativo = modelMapper.map(dto, ContenidoEducativo.class);
 
-        ContenidoEducativo existe = contenido_educativoService.listId(contenidoEducativo.getIdContenidoEducativo());
+        ContenidoEducativo existe = contenido_educativoService.listIdContenidoEducativo(contenidoEducativo.getIdContenidoEducativo());
 
         if (existe == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -116,6 +116,19 @@ public class ContenidoEducativoController {
 
     }
 
+    // Listar por id
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listId(@PathVariable("id") Integer id) {
+        ContenidoEducativo contenidoEducativo =  contenido_educativoService.listIdContenidoEducativo(id);
+        if (contenidoEducativo == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        ModelMapper modelMapper = new ModelMapper();
+        ContenidoEducativoDTO dto = modelMapper.map(contenidoEducativo, ContenidoEducativoDTO.class);
+        return ResponseEntity.ok(dto);
+    }
 
 
 

@@ -19,7 +19,7 @@ public interface IContenidoEducativoService {
     public void modificarContenidoEducativo(ContenidoEducativo contenido_educativo);
 
     // Listar por id (importante para el delete)
-    public ContenidoEducativo listId(int id);
+    public ContenidoEducativo listIdContenidoEducativo(int id);
 
     // Listar por tipo Lectura
     public List<String[]> getLecturasEducativas();

@@ -2,6 +2,7 @@ package pe.edu.upc.ecohabitproyecto.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.ecohabitproyecto.dtos.HistorialPublicacionDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
 import pe.edu.upc.ecohabitproyecto.repositories.IPublicacionRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IPublicacionService;
@@ -43,4 +44,16 @@ public class PublicacionServiceImplement implements IPublicacionService {
     public List<String[]> getCantidadReacciones() {
         return publicacionRepository.getCantidadReacciones();
     }
+
+    @Override
+    public List<String[]> soloAmigosPublicacion() {
+        return publicacionRepository.soloAmigosPublicacion();
+    }
+
+    @Override
+    public List<String[]> buscarID(int nUsuario) {
+        return publicacionRepository.buscarID(nUsuario);
+    }
+
+
 }

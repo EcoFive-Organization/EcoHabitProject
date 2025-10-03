@@ -19,7 +19,7 @@ public class ReaccionServiceImplement implements IReaccionService {
     }
 
     @Override
-    public void insert(Reaccion reaccion) {
+    public void crearReaccion(Reaccion reaccion) {
         reaccionRepository.save(reaccion);
     }
 
@@ -29,12 +29,12 @@ public class ReaccionServiceImplement implements IReaccionService {
     }
 
     @Override
-    public void delete(int id) {
+    public void eliminarReaccion(int id) {
         reaccionRepository.deleteById(id);
     }
 
     @Override
-    public void update(Reaccion reaccion) {
+    public void modificarReaccion(Reaccion reaccion) {
         reaccionRepository.save(reaccion);
     }
 }
