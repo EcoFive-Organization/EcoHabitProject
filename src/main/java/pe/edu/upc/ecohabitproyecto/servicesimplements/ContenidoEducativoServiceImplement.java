@@ -39,7 +39,7 @@ public class ContenidoEducativoServiceImplement implements IContenidoEducativoSe
 
     // Listar por id
     @Override
-    public ContenidoEducativo listId(int id) {
+    public ContenidoEducativo listIdContenidoEducativo(int id) {
         return contenido_educativoRepository.findById(id).orElse(null);
     }
 

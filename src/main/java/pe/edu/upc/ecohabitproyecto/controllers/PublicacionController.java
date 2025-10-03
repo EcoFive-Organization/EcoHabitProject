@@ -7,10 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.CantidadReaccionesPublicacionDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.HistorialPublicacionDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.PublicacionDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.PublicacionSoloAmigosDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Publicacion;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IPublicacionService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -105,6 +108,59 @@ public class PublicacionController {
         return ResponseEntity.ok(listaDTO);
 
     }
+
+    // Visualizar Solo Amigos
+    @GetMapping("/solo-amigos")
+    public ResponseEntity<?> getSoloAmigos() {
+        List<PublicacionSoloAmigosDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = publicacionService.soloAmigosPublicacion();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros.");
+        }
+
+        for(String[] columna : fila) {
+            PublicacionSoloAmigosDTO dto = new PublicacionSoloAmigosDTO();
+            dto.setTitulo(columna[0]);
+            dto.setContenido(columna[1]);
+            dto.setPrivacidad(columna[2]);
+            dto.setVistas(Integer.parseInt(columna[3]));
+            dto.setCompartidos(Integer.parseInt(columna[4]));
+            dto.setFecha(LocalDate.parse(columna[5]));
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+
+    }
+
+    // Buscar Historial
+    @GetMapping("/historial")
+    public ResponseEntity<?> getHistorial(@RequestParam int nUsuario) {
+        List<String[]> fila = publicacionService.buscarID(nUsuario);
+        List<HistorialPublicacionDTO> listaDTO = new ArrayList<>();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros.");
+        }
+
+        for (String[] columna : fila) {
+            HistorialPublicacionDTO dto = new HistorialPublicacionDTO();
+            dto.setNombre(columna[0]);
+            dto.setTitulo(columna[1]);
+            dto.setContenido(columna[2]);
+            dto.setPrivacidad(columna[3]);
+            dto.setVistas(Integer.parseInt(columna[4]));
+            dto.setCompartidos(Integer.parseInt(columna[5]));
+            dto.setFecha(LocalDate.parse(columna[6]));
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
 
 
 }
