@@ -39,4 +39,13 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         return ud;
     }
+
+    // ✅ METODO FINAL PARA LA HU "SELECCIONAR PLAN"
+    public Integer getIdUsuarioByUsername(String username) {
+        // Usa el metodo findByNombre(String) para encontrar el objeto
+        return repo.findByNombre(username)
+                // Mapea el objeto Usuario a su clave primaria (getIdUsuario())
+                .map(Usuario::getIdUsuario)
+                .orElse(null);
+    }
 }

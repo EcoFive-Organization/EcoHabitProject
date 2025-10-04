@@ -7,4 +7,7 @@ import java.util.List;
 public interface ISuscripcionService {
     public List<Suscripcion> list();
     public void insert(Suscripcion suscripcion);
+
+    public Suscripcion seleccionarPlan(Integer idUsuario, Integer idPlan);
+
 }

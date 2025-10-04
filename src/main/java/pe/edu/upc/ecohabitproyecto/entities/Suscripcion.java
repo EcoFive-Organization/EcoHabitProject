@@ -3,7 +3,8 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "Suscripcion")
@@ -13,19 +14,19 @@ public class Suscripcion {
     private int idSuscripcion;
 
     @Column(name = "fechaInicio", nullable = false)
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fechaFin", nullable = false)
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name = "estado", nullable = false, length = 20)
     private String estado;
 
+    // Relaciones
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
-    // Relaciones
     @ManyToOne
     @JoinColumn(name = "idPlanSuscripcion", nullable = false) //FK
     @JsonIgnore
@@ -35,12 +36,13 @@ public class Suscripcion {
 
     }
 
-    public Suscripcion(int idSuscripcion, String plan, Date fechaInicio, Date fechaFin, String estado, Usuario usuario) {
-        this.idSuscripcion = idSuscripcion;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.estado = estado;
+    public Suscripcion(PlanSuscripcion planSuscripcion, Usuario usuario, String estado, LocalDate fechaFin, LocalDate fechaInicio, int idSuscripcion) {
+        this.planSuscripcion = planSuscripcion;
         this.usuario = usuario;
+        this.estado = estado;
+        this.fechaFin = fechaFin;
+        this.fechaInicio = fechaInicio;
+        this.idSuscripcion = idSuscripcion;
     }
 
     public int getIdSuscripcion() {
@@ -51,19 +53,19 @@ public class Suscripcion {
         this.idSuscripcion = idSuscripcion;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -81,5 +83,13 @@ public class Suscripcion {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public PlanSuscripcion getPlanSuscripcion() {
+        return planSuscripcion;
+    }
+
+    public void setPlanSuscripcion(PlanSuscripcion planSuscripcion) {
+        this.planSuscripcion = planSuscripcion;
     }
 }

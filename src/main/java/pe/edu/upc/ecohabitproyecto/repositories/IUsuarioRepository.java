@@ -6,11 +6,14 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
     public Usuario findOneByEmail(String email);
     public Usuario findOneByNombre(String nombre);
+
+    Optional<Usuario> findByNombre(String nombre);
 
     // Contar cuántos usuarios tienen un rol específico
     @Query(value = " SELECT r.nombre_rol, COUNT(u.id_usuario) FROM usuario u INNER JOIN rol r ON u.id_usuario = r.id_usuario GROUP BY r.nombre_rol", nativeQuery = true)
