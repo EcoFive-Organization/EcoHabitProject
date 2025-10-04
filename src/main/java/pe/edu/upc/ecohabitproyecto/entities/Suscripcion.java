@@ -1,9 +1,9 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "Suscripcion")
@@ -11,9 +11,6 @@ public class Suscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idSuscripcion;
-
-    @Column(name = "plan", nullable = false, length = 50)
-    private String plan;
 
     @Column(name = "fechaInicio", nullable = false)
     private Date fechaInicio;
@@ -28,13 +25,18 @@ public class Suscripcion {
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
+    // Relaciones
+    @ManyToOne
+    @JoinColumn(name = "idPlanSuscripcion", nullable = false) //FK
+    @JsonIgnore
+    private PlanSuscripcion planSuscripcion;
+
     public Suscripcion() {
 
     }
 
     public Suscripcion(int idSuscripcion, String plan, Date fechaInicio, Date fechaFin, String estado, Usuario usuario) {
         this.idSuscripcion = idSuscripcion;
-        this.plan = plan;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.estado = estado;
@@ -47,14 +49,6 @@ public class Suscripcion {
 
     public void setIdSuscripcion(int idSuscripcion) {
         this.idSuscripcion = idSuscripcion;
-    }
-
-    public String getPlan() {
-        return plan;
-    }
-
-    public void setPlan(String plan) {
-        this.plan = plan;
     }
 
     public Date getFechaInicio() {

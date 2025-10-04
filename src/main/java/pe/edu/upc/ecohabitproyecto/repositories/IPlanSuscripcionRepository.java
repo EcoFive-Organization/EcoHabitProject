@@ -2,8 +2,9 @@ package pe.edu.upc.ecohabitproyecto.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pe.edu.upc.ecohabitproyecto.entities.Suscripcion;
+import pe.edu.upc.ecohabitproyecto.entities.PlanSuscripcion;
 
 @Repository
-public interface ISuscripcionRepository extends JpaRepository<Suscripcion, Integer> {
+public interface IPlanSuscripcionRepository extends JpaRepository<PlanSuscripcion, Integer> {
+
 }
