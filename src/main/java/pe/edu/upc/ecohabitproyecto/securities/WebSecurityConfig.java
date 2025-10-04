@@ -37,7 +37,7 @@ public class WebSecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired // <-- AGREGAR ESTO
+    @Autowired
     private JwtLogoutHandler jwtLogoutHandler;
 
     //@Autowired
