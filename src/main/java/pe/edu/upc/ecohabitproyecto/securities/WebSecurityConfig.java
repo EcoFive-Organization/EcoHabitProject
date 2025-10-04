@@ -1,5 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.securities;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -36,9 +37,12 @@ public class WebSecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    @Qualifier("handlerExceptionResolver")
-    private HandlerExceptionResolver exceptionResolver;
+    @Autowired // <-- AGREGAR ESTO
+    private JwtLogoutHandler jwtLogoutHandler;
+
+    //@Autowired
+    //@Qualifier("handlerExceptionResolver")
+    //private HandlerExceptionResolver exceptionResolver;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -71,6 +75,20 @@ public class WebSecurityConfig {
                                 "/swagger_ui.html"
                         ).permitAll()
                         .anyRequest().authenticated()
+                )
+                // AÑADIR LA CONFIGURACIÓN DE LOGOUT (HU39)
+                .logout(logout -> logout
+                        // 1. Endpoint REST para cerrar sesión
+                        .logoutUrl("/logout")
+                        // 2. Ejecuta la lógica de Redis Blacklist
+                        .addLogoutHandler(jwtLogoutHandler)
+                        // 3. Respuesta de éxito REST
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"mensaje\": \"Sesión cerrada con éxito.\"}");
+                            response.getWriter().flush();
+                        })
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)

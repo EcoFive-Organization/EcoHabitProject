@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration; // <-- ¡NUEVA IMPORTACIÓN NECESARIA!
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.Serializable;
 import java.util.Base64;
@@ -78,5 +81,25 @@ public class JwtTokenUtil implements Serializable {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public Duration getRemainingExpiration(String token) {
+        final Date expiration = getExpirationDateFromToken(token);
+        final Date now = new Date();
+
+        // Si el token ya expiró o expira ahora, la duración es cero o negativa.
+        if (expiration.before(now) || expiration.equals(now)) {
+            return Duration.ZERO;
+        }
+
+        // 1. Convertir las fechas a Instant
+        Instant expirationInstant = expiration.toInstant();
+        Instant nowInstant = now.toInstant();
+
+        // 2. Calcular la diferencia en segundos (o milisegundos si prefiere mayor precisión)
+        long diffSeconds = ChronoUnit.SECONDS.between(nowInstant, expirationInstant);
+
+        // 3. Devolver la duración
+        return Duration.ofSeconds(diffSeconds);
     }
 }
