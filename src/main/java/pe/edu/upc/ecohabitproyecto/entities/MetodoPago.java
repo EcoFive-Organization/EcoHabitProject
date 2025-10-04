@@ -64,7 +64,7 @@ public class MetodoPago {
         this.detalles = detalles;
     }
 
-    public boolean isActivo() {
+    public boolean getActivo() {
         return activo;
     }
 

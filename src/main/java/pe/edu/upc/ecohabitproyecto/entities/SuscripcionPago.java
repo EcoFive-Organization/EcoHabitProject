@@ -3,7 +3,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -17,7 +17,7 @@ public class SuscripcionPago {
     private BigDecimal monto;
 
     @Column(name = "fecha", nullable = false)
-    private Timestamp fecha;
+    private LocalDateTime fecha;
 
     @Column(name = "estado", nullable = false, length = 20)
     private String estado;
@@ -28,19 +28,19 @@ public class SuscripcionPago {
 
     @ManyToOne
     @JoinColumn(name = "idMetodoPago", nullable = false)
-    private MetodoPago metodo_pago;
+    private MetodoPago metodoPago;
 
     public SuscripcionPago() {
 
     }
 
-    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, Timestamp fecha, String estado, Suscripcion suscripcion, MetodoPago metodo_pago) {
+    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, LocalDateTime fecha, String estado, Suscripcion suscripcion, MetodoPago metodoPago) {
         this.idSuscripcionPago = idSuscripcionPago;
         this.monto = monto;
         this.fecha = fecha;
         this.estado = estado;
         this.suscripcion = suscripcion;
-        this.metodo_pago = metodo_pago;
+        this.metodoPago = metodoPago;
     }
 
     public int getIdSuscripcionPago() {
@@ -59,11 +59,11 @@ public class SuscripcionPago {
         this.monto = monto;
     }
 
-    public Timestamp getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Timestamp fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
@@ -83,11 +83,11 @@ public class SuscripcionPago {
         this.suscripcion = suscripcion;
     }
 
-    public MetodoPago getMetodo_pago() {
-        return metodo_pago;
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
     }
 
-    public void setMetodo_pago(MetodoPago metodo_pago) {
-        this.metodo_pago = metodo_pago;
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
     }
 }

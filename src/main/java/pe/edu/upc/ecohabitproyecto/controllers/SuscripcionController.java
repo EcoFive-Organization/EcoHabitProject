@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity; // ⬅️ Nuevo import necesario
 import org.springframework.security.core.Authentication; // ⬅️ Nuevo import necesario
 import org.springframework.security.core.context.SecurityContextHolder; // ⬅️ Nuevo import necesario
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.ecohabitproyecto.dtos.ProcesarPagoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.SuscripcionDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.SeleccionarPlanDTO; // ⬅️ Nuevo DTO
 import pe.edu.upc.ecohabitproyecto.entities.Suscripcion;
+import pe.edu.upc.ecohabitproyecto.entities.SuscripcionPago;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ISuscripcionService; // Su interfaz
 import pe.edu.upc.ecohabitproyecto.servicesimplements.JwtUserDetailsService; // ⬅️ Nuevo servicio
 
@@ -64,6 +66,35 @@ public class SuscripcionController {
         } catch (RuntimeException e) {
             // Manejar errores de Plan no encontrado (404/400)
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/procesar-pago")
+    public ResponseEntity<?> procesarPago(@RequestBody ProcesarPagoDTO pagoDTO) {
+
+        // 1. Obtener ID de Usuario desde el Token
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Integer idUsuario = jwtUserDetailsService.getIdUsuarioByUsername(username);
+
+        if (idUsuario == null) {
+            return ResponseEntity.status(401).build();
+        }
+
+        try {
+            // 2. Procesar el Pago
+            SuscripcionPago pagoRealizado = sS.procesarPago(idUsuario, pagoDTO.getIdMetodoPago());
+
+            // 3. Devolver Respuesta
+            if (pagoRealizado.getEstado().equals("EXITOSO")) {
+                return ResponseEntity.ok(pagoRealizado);
+            } else {
+                // 402 Payment Required: Pago registrado como fallido
+                return ResponseEntity.status(402).body(pagoRealizado);
+            }
+        } catch (RuntimeException e) {
+            // 400 Bad Request: Errores de negocio (e.g., "Metodo de pago inactivo")
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
