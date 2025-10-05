@@ -119,5 +119,29 @@ public class SuscripcionServiceImplement implements ISuscripcionService {
 
         return pagoGuardado;
     }
+
+    @Override
+    @Transactional
+    public Suscripcion cancelarSuscripcion(Integer idUsuario) {
+        // 1. Buscar el usuario y su suscripción
+        Suscripcion suscripcion = sR
+                .findByUsuario(uR.findById(idUsuario)
+                        .orElseThrow(() -> new RuntimeException("404: Usuario no encontrado.")))
+                .orElseThrow(() -> new RuntimeException("404: Suscripción no encontrada para el usuario."));
+
+        // 2. Validar el estado actual
+        if (!"ACTIVA".equals(suscripcion.getEstado())) {
+            // Se usa equals y no == para comparar Strings
+            throw new RuntimeException("400: La suscripción no está activa y no puede ser cancelada.");
+        }
+
+        // 3. Aplicar la lógica de cancelación
+        suscripcion.setEstado("CANCELADA");
+        // Nota: Solo actualizamos la fecha de fin a hoy. La fecha original de expiración es irrelevante al cancelar.
+        suscripcion.setFechaFin(LocalDate.now());
+
+        // 4. Guardar los cambios
+        return sR.save(suscripcion);
+    }
 }
 
