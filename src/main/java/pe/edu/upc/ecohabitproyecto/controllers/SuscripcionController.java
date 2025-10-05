@@ -97,4 +97,29 @@ public class SuscripcionController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/cancelar")
+    public ResponseEntity<?> cancelarSuscripcion() {
+
+        // 1. Obtener ID de Usuario desde el Token
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Integer idUsuario = jwtUserDetailsService.getIdUsuarioByUsername(username);
+
+        if (idUsuario == null) {
+            return ResponseEntity.status(401).build(); // No autorizado
+        }
+
+        try {
+            // 2. Cancelar la suscripción
+            Suscripcion suscripcionCancelada = sS.cancelarSuscripcion(idUsuario);
+
+            // 3. Devolver el objeto actualizado
+            return ResponseEntity.ok(suscripcionCancelada);
+
+        } catch (RuntimeException e) {
+            // 400 Bad Request: Errores de negocio (suscripción no activa, no encontrada)
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

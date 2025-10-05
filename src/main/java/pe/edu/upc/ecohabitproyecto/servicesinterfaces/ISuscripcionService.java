@@ -13,4 +13,6 @@ public interface ISuscripcionService {
 
     public SuscripcionPago procesarPago(Integer idUsuario, Integer idMetodoPago);
 
+    public Suscripcion cancelarSuscripcion(Integer idUsuario);
+
 }
