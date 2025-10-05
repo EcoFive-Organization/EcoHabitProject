@@ -18,4 +18,10 @@ public interface IUsuarioService {
 
     // Listar por cantidad de Usuarios, estado y rol
     public List<String[]> getUsuariosEstadoRol();
+
+    // 1. Fase de solicitud (genera token y simula email)
+    String createPasswordResetToken(String email);
+
+    // 2. Fase de restablecimiento (valida token y cambia password)
+    void resetPassword(String token, String newPassword);
 }

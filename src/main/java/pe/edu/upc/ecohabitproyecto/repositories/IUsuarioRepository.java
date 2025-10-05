@@ -13,6 +13,7 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
     public Usuario findOneByEmail(String email);
     public Usuario findOneByNombre(String nombre);
 
+    Optional<Usuario> findByEmail(String email);
     Optional<Usuario> findByNombre(String nombre);
 
     // Contar cuántos usuarios tienen un rol específico
