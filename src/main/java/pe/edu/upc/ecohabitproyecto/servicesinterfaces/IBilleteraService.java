@@ -1,16 +1,24 @@
 package pe.edu.upc.ecohabitproyecto.servicesinterfaces;
-import org.springframework.data.jpa.repository.JpaRepository;
+
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
-import pe.edu.upc.ecohabitproyecto.repositories.IBilleteraRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface IBilleteraService {
-    // Listar
-    public List<Billetera> list();
+    // Listar todas las billeteras
+    List<Billetera> list();
 
-    // Registrar
-    public void insert(Billetera billetera);
+    // Registrar nueva billetera
+    void insert(Billetera billetera);
+
+    // Obtener saldo de puntos de un usuario
     BigDecimal getSaldoPuntos(int idUsuario);
+
+
+    // Acumular puntos en la billetera de un usuario
+    void acumularPuntos(Integer idUsuario, Double puntos);
+
+    // Obtener la billetera completa de un usuario
+    Billetera obtenerBilleteraPorUsuario(Integer idUsuario);
 }
