@@ -9,7 +9,9 @@ import pe.edu.upc.ecohabitproyecto.dtos.ParticipacionDesafioDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Desafio;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDesafioService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,18 +50,19 @@ public class DesafioController {
     }
 
     @PostMapping("/unirse-desafios")
-    public ResponseEntity<Void> unirseDesafios(@RequestBody ParticipacionDesafioDTO dto) {
+    public ResponseEntity<Map<String, Object>> unirseDesafios(@RequestBody ParticipacionDesafioDTO dto) {
 
-        // 1. EXTRAER los IDs de los objetos anidados (Usuario y Desafio)
-        // Asumimos que los IDs vienen cargados dentro del DTO
         Integer idUsuario = dto.getUsuario().getIdUsuario();
         Integer idDesafio = dto.getDesafio().getIdDesafio();
 
-        // 2. LLAMAR al metodo del servicio que maneja la lógica de negocio (tu metodo 'unirseADesafio')
         dS.unirseADesafio(idUsuario, idDesafio);
 
-        // 3. Devolver la respuesta de éxito
-        return ResponseEntity.ok().build();
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensaje", "Usuario inscrito correctamente en el desafío");
+        response.put("idUsuario", idUsuario);
+        response.put("idDesafio", idDesafio);
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
