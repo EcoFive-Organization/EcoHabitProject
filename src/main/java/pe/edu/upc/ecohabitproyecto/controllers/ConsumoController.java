@@ -94,7 +94,7 @@ public class ConsumoController {
             tempDisp.setIdDispositivo(idDispositivo);
             dto.setDispositivo(tempDisp);
             dto.setValor((BigDecimal) columna[2]);
-
+            listaDTO.add(dto);
         }
 
         return ResponseEntity.ok(listaDTO);
