@@ -5,20 +5,11 @@ import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 import java.sql.Timestamp;
 
 public class DispositivoDTOInsert {
-    private int idDispositivo;
+
     private Usuario usuario;
     private String nombre;
     private String tipo;
     private String ubicacion;
-    private Timestamp fechaRegistro;
-
-    public int getIdDispositivo() {
-        return idDispositivo;
-    }
-
-    public void setIdDispositivo(int idDispositivo) {
-        this.idDispositivo = idDispositivo;
-    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -50,13 +41,5 @@ public class DispositivoDTOInsert {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
-    }
-
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
     }
 }

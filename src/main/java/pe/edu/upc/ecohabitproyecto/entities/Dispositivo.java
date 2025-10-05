@@ -27,17 +27,26 @@ public class Dispositivo {
     private String ubicacion;
 
     @Column(name = "fecha_registro", nullable = false)
-    private Timestamp fecha_registro;
+    private Timestamp fechaRegistro;
+
+    // ⬅️ ¡ESTO RESUELVE AMBOS ERRORES!
+    @PrePersist
+    protected void prePersist() {
+        if (this.fechaRegistro == null) {
+            // Garantiza que la fecha se establece SIEMPRE en el servidor
+            this.fechaRegistro = new Timestamp(System.currentTimeMillis());
+        }
+    }
 
     public Dispositivo() {}
 
-    public Dispositivo(int idDispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, Timestamp fecha_registro) {
+    public Dispositivo(int idDispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, Timestamp fechaRegistro) {
         this.idDispositivo = idDispositivo;
         this.usuario = usuario;
         this.nombre = nombre;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
-        this.fecha_registro = fecha_registro;
+        this.fechaRegistro = fechaRegistro;
     }
 
     public int getIdDispositivo() {
@@ -80,11 +89,11 @@ public class Dispositivo {
         this.ubicacion = ubicacion;
     }
 
-    public Timestamp getFecha_registro() {
-        return fecha_registro;
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }
