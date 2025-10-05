@@ -45,7 +45,8 @@ public class DesafioController {
         Desafio e = m.map(dto, Desafio.class);
         dS.update(e);
     }
-    @PostMapping("/api/desafios/unirse")
+
+    @PostMapping("/unirse-desafios")
     public ResponseEntity<Void> unirseAlDesafio(
             @RequestParam Integer idUsuario,
             @RequestParam Integer idDesafio) {

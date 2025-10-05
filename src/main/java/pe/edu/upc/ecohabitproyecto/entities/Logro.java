@@ -16,9 +16,6 @@ public class Logro {
     @Column(name = "descripcion", columnDefinition = "text")
     private String descripcion;
 
-    @Column(name = "puntos", nullable = false)
-    private Integer puntos;
-
     @ManyToOne
     @JoinColumn(name = "idRecompensa", nullable = false)
     private Recompensa recompensa;
@@ -30,11 +27,10 @@ public class Logro {
 
     }
 
-    public Logro(Integer idLogro, String nombre, String descripcion, Integer puntos, Recompensa recompensa, String estado) {
+    public Logro(Integer idLogro, String nombre, String descripcion, Recompensa recompensa, String estado) {
         this.idLogro = idLogro;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.puntos = puntos;
         this.recompensa = recompensa;
         this.estado = estado;
     }
@@ -61,14 +57,6 @@ public class Logro {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Integer getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(Integer puntos) {
-        this.puntos = puntos;
     }
 
     public Recompensa getRecompensa() {
