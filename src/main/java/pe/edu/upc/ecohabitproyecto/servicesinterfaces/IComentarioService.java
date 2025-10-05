@@ -1,5 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.servicesinterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.ecohabitproyecto.entities.Comentario;
 
 import java.util.List;

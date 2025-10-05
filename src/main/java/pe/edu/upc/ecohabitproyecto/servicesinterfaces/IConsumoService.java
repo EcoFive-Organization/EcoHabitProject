@@ -8,5 +8,7 @@ public interface IConsumoService {
     public List<Consumo> list();
     public void insert(Consumo consumo);
     List<Object[]> findAllByTipoConsumo();
+    List<String[]> getByTotalConsumoTipo(String tipoConsumo);
+
 
 }

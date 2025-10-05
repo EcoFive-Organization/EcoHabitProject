@@ -24,4 +24,9 @@ public class ConsumoServiceImplement implements IConsumoService {
     public List<Object[]> findAllByTipoConsumo() {
         return cR.findAllByTipoConsumo();
     }
+
+    @Override
+    public List<String[]> getByTotalConsumoTipo(String tipoConsumo) {
+        return cR.getByTotalConsumoTipo(tipoConsumo);
+    }
 }
