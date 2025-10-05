@@ -3,6 +3,7 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class DispositivoDTOInsert {
     private int idDispositivo;
@@ -10,7 +11,7 @@ public class DispositivoDTOInsert {
     private String nombre;
     private String tipo;
     private String ubicacion;
-    private Timestamp fechaRegistro;
+    private LocalDate fechaRegistro;
 
     public int getIdDispositivo() {
         return idDispositivo;
@@ -52,11 +53,11 @@ public class DispositivoDTOInsert {
         this.ubicacion = ubicacion;
     }
 
-    public Timestamp getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 }
