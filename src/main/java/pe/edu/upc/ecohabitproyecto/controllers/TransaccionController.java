@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.CantidadTransaccionesDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.MontoTransaccionesDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.SumTipoConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.TransaccionDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 import pe.edu.upc.ecohabitproyecto.entities.Transaccion;
@@ -94,6 +96,25 @@ public class TransaccionController {
             dto.setMontoTotal((BigDecimal) columna[1]);
             dto.setCantidadTransacciones(((Number) columna[2]).longValue());
             dto.setCantidadBilleterasUnicas(((Number) columna[3]).longValue());
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
+    @GetMapping("/MontoTransaciones")
+    public ResponseEntity<?> TransaccionesMonto() {
+        List<MontoTransaccionesDTO> listaDTO = new ArrayList<>();
+        List<Object[]> fila = tS.TransaccionesMonto();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de consumo para contar.");
+        }
+
+        for (Object[] columna : fila) {
+            MontoTransaccionesDTO dto = new MontoTransaccionesDTO();
+            dto.setTipo((String) columna[0]);
+            dto.setTotalmonto((BigDecimal) columna[1]);
             listaDTO.add(dto);
         }
 

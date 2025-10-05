@@ -44,4 +44,9 @@ public class TransaccionServiceImplement implements ITransaccionService {
     public List<Object[]> TransaccionesTotales() {
         return tR.TransaccionesTotales();
     }
+
+    @Override
+    public List<Object[]> TransaccionesMonto() {
+        return tR.TransaccionesMonto();
+    }
 }

@@ -13,4 +13,9 @@ public interface ITransaccionRepository extends JpaRepository<Transaccion,Intege
             "COUNT(t.id_transaccio) AS cantidad_transacciones, COUNT(DISTINCT t.id_billetera) AS cantidad_billeteras_unicas\n" +
             "FROM transaccion t GROUP BY t.tipo ORDER BY monto_total_transacciones DESC;", nativeQuery = true)
     List<Object[]> TransaccionesTotales();
+    @Query(value = "SELECT tipo, SUM(monto) AS monto_total\n" +
+            "FROM Transaccion\n" +
+            "GROUP BY tipo\n" +
+            "ORDER BY monto_total DESC;",nativeQuery = true)
+    List<Object[]> TransaccionesMonto();
 }

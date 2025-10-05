@@ -11,4 +11,6 @@ public interface ITransaccionService {
     public void delete(int id);
     public void update(Transaccion transaccion);
     List<Object[]> TransaccionesTotales();
+    List<Object[]> TransaccionesMonto();
+
 }
