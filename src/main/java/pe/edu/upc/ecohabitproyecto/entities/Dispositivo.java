@@ -4,6 +4,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Dispositivo")
@@ -26,21 +27,12 @@ public class Dispositivo {
     @Column(name = "ubicacion", nullable = false, length = 100)
     private String ubicacion;
 
-    @Column(name = "fecha_registro", nullable = false)
-    private Timestamp fechaRegistro;
-
-    // ⬅️ ¡ESTO RESUELVE AMBOS ERRORES!
-    @PrePersist
-    protected void prePersist() {
-        if (this.fechaRegistro == null) {
-            // Garantiza que la fecha se establece SIEMPRE en el servidor
-            this.fechaRegistro = new Timestamp(System.currentTimeMillis());
-        }
-    }
+    @Column(name = "fechaRegistro", nullable = false)
+    private LocalDate fechaRegistro;
 
     public Dispositivo() {}
 
-    public Dispositivo(int idDispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, Timestamp fechaRegistro) {
+    public Dispositivo(int idDispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, LocalDate fechaRegistro) {
         this.idDispositivo = idDispositivo;
         this.usuario = usuario;
         this.nombre = nombre;
@@ -89,11 +81,11 @@ public class Dispositivo {
         this.ubicacion = ubicacion;
     }
 
-    public Timestamp getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 }
