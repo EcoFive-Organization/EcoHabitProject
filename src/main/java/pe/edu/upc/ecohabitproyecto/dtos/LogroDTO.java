@@ -6,7 +6,6 @@ public class LogroDTO {
     private Integer idLogro;
     private String nombre;
     private String descripcion;
-    private Integer puntos;
     private Recompensa recompensa;
     private String estado;
 
@@ -32,14 +31,6 @@ public class LogroDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Integer getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(Integer puntos) {
-        this.puntos = puntos;
     }
 
     public Recompensa getRecompensa() {

@@ -14,7 +14,7 @@ public class Consumo {
     private int id_consumo;
 
     @ManyToOne
-    @JoinColumn(name = "id_Dispositivo", nullable = false)
+    @JoinColumn(name = "idDispositivo", nullable = false)
     private Dispositivo dispositivo;
 
     @Column(name = "tipo", nullable = false, length = 20)
@@ -26,8 +26,8 @@ public class Consumo {
     @Column(name = "unidad", nullable = false, length = 20)
     private String unidad;
 
-    @Column(name = "origen_consumo", nullable = false, length = 100)
-    private String origen_consumo;
+    @Column(name = "origenConsumo", nullable = false, length = 100)
+    private String origenConsumo;
 
     @Column(name = "fecha", nullable = false)
     private Timestamp fecha;
@@ -35,18 +35,18 @@ public class Consumo {
     @Column(name = "umbral", nullable = false)
     private int umbral;
 
-    public Consumo(int id_consumo, Dispositivo dispositivo, String tipo, BigDecimal valor, String unidad, String origen_consumo, Timestamp fecha, int umbral) {
+    public Consumo() {}
+
+    public Consumo(int id_consumo, Dispositivo dispositivo, String tipo, BigDecimal valor, String unidad, String origenConsumo, Timestamp fecha, int umbral) {
         this.id_consumo = id_consumo;
         this.dispositivo = dispositivo;
         this.tipo = tipo;
         this.valor = valor;
         this.unidad = unidad;
-        this.origen_consumo = origen_consumo;
+        this.origenConsumo = origenConsumo;
         this.fecha = fecha;
         this.umbral = umbral;
     }
-
-    public Consumo() {}
 
     public int getId_consumo() {
         return id_consumo;
@@ -88,12 +88,12 @@ public class Consumo {
         this.unidad = unidad;
     }
 
-    public String getOrigen_consumo() {
-        return origen_consumo;
+    public String getOrigenConsumo() {
+        return origenConsumo;
     }
 
-    public void setOrigen_consumo(String origen_consumo) {
-        this.origen_consumo = origen_consumo;
+    public void setOrigenConsumo(String origenConsumo) {
+        this.origenConsumo = origenConsumo;
     }
 
     public Timestamp getFecha() {

@@ -4,6 +4,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Dispositivo")
@@ -26,18 +27,18 @@ public class Dispositivo {
     @Column(name = "ubicacion", nullable = false, length = 100)
     private String ubicacion;
 
-    @Column(name = "fecha_registro", nullable = false)
-    private Timestamp fecha_registro;
+    @Column(name = "fechaRegistro", nullable = false)
+    private LocalDate fechaRegistro;
 
     public Dispositivo() {}
 
-    public Dispositivo(int idDispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, Timestamp fecha_registro) {
+    public Dispositivo(int idDispositivo, Usuario usuario, String nombre, String tipo, String ubicacion, LocalDate fechaRegistro) {
         this.idDispositivo = idDispositivo;
         this.usuario = usuario;
         this.nombre = nombre;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
-        this.fecha_registro = fecha_registro;
+        this.fechaRegistro = fechaRegistro;
     }
 
     public int getIdDispositivo() {
@@ -80,11 +81,11 @@ public class Dispositivo {
         this.ubicacion = ubicacion;
     }
 
-    public Timestamp getFecha_registro() {
-        return fecha_registro;
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setFecha_registro(Timestamp fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }

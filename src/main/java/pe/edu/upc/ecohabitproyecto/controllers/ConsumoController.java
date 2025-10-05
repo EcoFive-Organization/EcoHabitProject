@@ -36,6 +36,7 @@ public class ConsumoController {
         Consumo cons=m.map(s, Consumo.class);
         cS.insert(cons);
     }
+
     @GetMapping("/CantidadPorTipoConsumo")
     public ResponseEntity<?> obtenerCantidadPorTipoConsumo() {
         List<CantidadConsumoDTO> listaDTO = new ArrayList<>();
