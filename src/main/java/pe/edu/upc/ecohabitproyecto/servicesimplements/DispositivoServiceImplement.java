@@ -36,4 +36,9 @@ public class DispositivoServiceImplement implements IDispositivoService {
 
     @Override
     public void update(Dispositivo dispositivo) { dR.save(dispositivo); }
+
+    @Override
+    public List<String[]> getByTipo(String tipo_parametro) {
+        return dR.getByTipo(tipo_parametro);
+    }
 }

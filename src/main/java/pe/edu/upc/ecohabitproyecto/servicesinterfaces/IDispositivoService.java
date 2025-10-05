@@ -10,4 +10,6 @@ public interface IDispositivoService {
     public Dispositivo listId(int id);
     public void delete(int id);
     public void update(Dispositivo dispositivo);
+    List<String[]> getByTipo(String tipo_parametro);
+
 }
