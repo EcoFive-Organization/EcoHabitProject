@@ -20,7 +20,6 @@ public class Alerta {
     @Column(name = "tipoAlerta", nullable = false, length = 50)
     private String tipoAlerta;
 
-    @Lob
     @Column(name = "mensaje", nullable = false)
     private String mensaje;
 

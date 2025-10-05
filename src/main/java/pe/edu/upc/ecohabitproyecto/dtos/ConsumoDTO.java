@@ -11,7 +11,7 @@ public class ConsumoDTO {
     private String tipo;
     private BigDecimal valor;
     private String unidad;
-    private String origenConsumo;
+    private String origen_consumo;
     private Timestamp fecha;
     private int umbral;
 
@@ -56,11 +56,11 @@ public class ConsumoDTO {
     }
 
     public String getOrigenConsumo() {
-        return origenConsumo;
+        return origen_consumo;
     }
 
     public void setOrigenConsumo(String origenConsumo) {
-        this.origenConsumo = origenConsumo;
+        this.origen_consumo = origenConsumo;
     }
 
     public Timestamp getFecha() {

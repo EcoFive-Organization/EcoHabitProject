@@ -5,16 +5,21 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.ecohabitproyecto.dtos.CantidadConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.DispositivoDTOInsert;
 import pe.edu.upc.ecohabitproyecto.dtos.DispositivoDTOList;
+import pe.edu.upc.ecohabitproyecto.dtos.TipoDispositivoListDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDispositivoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/dispositivos")
 public class DispositivoController {
     @Autowired
@@ -70,6 +75,25 @@ public class DispositivoController {
         }
         dS.update(d);
         return ResponseEntity.ok("Registro con ID " + d.getIdDispositivo() + " modificado correctamente.");
+    }
+    @GetMapping("/TipoDispositivoLista")
+    public ResponseEntity<?> getTipoDispositivoLista(@RequestParam String tipo_dispositivo) {
+        List<TipoDispositivoListDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = dS.getByTipo(tipo_dispositivo); // Llama al nuevo método del servicio
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de consumo para contar.");
+        }
+
+        for (Object[] columna : fila) {
+            TipoDispositivoListDTO dto = new TipoDispositivoListDTO();
+            dto.setTipo((String) columna[0]);
+            dto.setNombre((String) columna[1]);
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
     }
 
 }
