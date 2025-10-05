@@ -7,6 +7,7 @@ import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import pe.edu.upc.ecohabitproyecto.repositories.IConsumoRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -39,5 +40,10 @@ public class ConsumoServiceImplement implements IConsumoService {
     @Override
     public List<Object[]> getConsumoTotalByDispositivo() {
         return cR.getConsumoTotalByDispositivo();
+    }
+
+    @Override
+    public List<Object[]> getConsumoTotalByFecha(LocalDate startDate, LocalDate endDate) {
+        return cR.getConsumoTotalByFecha(startDate, endDate);
     }
 }

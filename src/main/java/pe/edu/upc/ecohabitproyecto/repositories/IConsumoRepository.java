@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -32,4 +33,9 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
             "GROUP BY d.id_dispositivo, u.id_usuario, d.nombre " +
             "ORDER BY total_consumo DESC", nativeQuery = true)
     List<Object[]> getConsumoTotalByDispositivo();
+
+    @Query(value = "SELECT tipo, SUM(valor) AS total_consumo\n" +
+            "FROM consumo WHERE fecha::date BETWEEN :startDate  AND :endDate\n" +
+            "GROUP BY tipo ORDER BY total_consumo DESC;",nativeQuery = true)
+    List<Object[]> getConsumoTotalByFecha(@Param("startDate") LocalDate  startDate, @Param("endDate")LocalDate endDate);
 }

@@ -1,9 +1,10 @@
 package pe.edu.upc.ecohabitproyecto.servicesinterfaces;
 
-import io.lettuce.core.dynamic.annotation.Param;
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IConsumoService {
@@ -15,5 +16,6 @@ public interface IConsumoService {
 
     // 🚀 NUEVO METODO
     List<Object[]> getConsumoTotalByDispositivo();
+    List<Object[]> getConsumoTotalByFecha(LocalDate startDate, LocalDate endDate);
 
 }
