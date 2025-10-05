@@ -35,4 +35,9 @@ public class ConsumoServiceImplement implements IConsumoService {
     public List<Object[]> getConsumoByDispositivo() {
         return cR.getConsumoByDispositivo();
     }
+
+    @Override
+    public List<Object[]> getConsumoTotalByDispositivo() {
+        return cR.getConsumoTotalByDispositivo();
+    }
 }

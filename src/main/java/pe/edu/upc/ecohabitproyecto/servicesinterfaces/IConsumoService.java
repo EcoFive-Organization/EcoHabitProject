@@ -13,4 +13,7 @@ public interface IConsumoService {
     List<Object[]> getByTotalConsumoTipo(String tipoConsumo);
     List<Object[]> getConsumoByDispositivo();
 
+    // 🚀 NUEVO METODO
+    List<Object[]> getConsumoTotalByDispositivo();
+
 }

@@ -5,31 +5,41 @@ import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import java.math.BigDecimal;
 
 public class CantConsumoDispDTO {
-    private int id_consumo;
-    private Dispositivo dispositivo;
-    private BigDecimal valor;
+    private Integer idDispositivo; // Nuevo
+    private Integer idUsuario;     // Nuevo
+    private String nombreDispositivo;
+    private BigDecimal totalConsumo;
 
-    public int getId_consumo() {
-        return id_consumo;
+    public Integer getIdDispositivo() {
+        return idDispositivo;
     }
 
-    public void setId_consumo(int id_consumo) {
-        this.id_consumo = id_consumo;
+    public void setIdDispositivo(Integer idDispositivo) {
+        this.idDispositivo = idDispositivo;
     }
 
-    public Dispositivo getDispositivo() {
-        return dispositivo;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setDispositivo(Dispositivo dispositivo) {
-        this.dispositivo = dispositivo;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public BigDecimal getValor() {
-        return valor;
+    // --- Getters y Setters existentes ---
+    public String getNombreDispositivo() {
+        return nombreDispositivo;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void setNombreDispositivo(String nombreDispositivo) {
+        this.nombreDispositivo = nombreDispositivo;
+    }
+
+    public BigDecimal getTotalConsumo() {
+        return totalConsumo;
+    }
+
+    public void setTotalConsumo(BigDecimal totalConsumo) {
+        this.totalConsumo = totalConsumo;
     }
 }
