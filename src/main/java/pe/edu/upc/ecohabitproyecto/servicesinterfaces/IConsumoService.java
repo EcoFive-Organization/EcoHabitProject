@@ -4,7 +4,10 @@ import org.springframework.data.repository.query.Param;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IConsumoService {
@@ -16,6 +19,5 @@ public interface IConsumoService {
 
     // 🚀 NUEVO METODO
     List<Object[]> getConsumoTotalByDispositivo();
-    List<Object[]> getConsumoTotalByFecha(LocalDate startDate, LocalDate endDate);
-
+    List<Object[]> getImpactoEcologicoMensual(LocalDate startDate, LocalDate endDate);
 }

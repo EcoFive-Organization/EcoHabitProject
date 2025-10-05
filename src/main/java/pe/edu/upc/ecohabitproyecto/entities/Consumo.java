@@ -2,9 +2,12 @@ package pe.edu.upc.ecohabitproyecto.entities;
 
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="Consumo")
@@ -30,14 +33,14 @@ public class Consumo {
     private String origenConsumo;
 
     @Column(name = "fecha", nullable = false)
-    private Timestamp fecha;
+    private LocalDate fecha;
 
     @Column(name = "umbral", nullable = false)
     private int umbral;
 
     public Consumo() {}
 
-    public Consumo(int id_consumo, Dispositivo dispositivo, String tipo, BigDecimal valor, String unidad, String origenConsumo, Timestamp fecha, int umbral) {
+    public Consumo(int id_consumo, Dispositivo dispositivo, String tipo, BigDecimal valor, String unidad, String origenConsumo, LocalDate fecha, int umbral) {
         this.id_consumo = id_consumo;
         this.dispositivo = dispositivo;
         this.tipo = tipo;
@@ -96,11 +99,11 @@ public class Consumo {
         this.origenConsumo = origenConsumo;
     }
 
-    public Timestamp getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Timestamp fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

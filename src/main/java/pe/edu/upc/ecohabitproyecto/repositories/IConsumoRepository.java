@@ -1,13 +1,17 @@
 package pe.edu.upc.ecohabitproyecto.repositories;
 
 
+import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -34,9 +38,13 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
             "ORDER BY total_consumo DESC", nativeQuery = true)
     List<Object[]> getConsumoTotalByDispositivo();
 
-    @Query(value = "SELECT tipo, SUM(valor) AS total_consumo\n" +
-            "FROM consumo WHERE fecha::date BETWEEN :startDate  AND :endDate\n" +
-            "GROUP BY tipo ORDER BY total_consumo DESC;",nativeQuery = true)
-    List<Object[]> getConsumoTotalByFecha(@Param("startDate") LocalDate  startDate,
-                                          @Param("endDate")LocalDate endDate);
+    // 🚀 CORRECCIÓN CLAVE: Agrupación por Mes/Año e Impacto (suma del valor)
+    // Usamos TO_CHAR para obtener el año y el mes como una cadena.
+    @Query(value = "SELECT TO_CHAR(fecha, 'YYYY-MM') AS mes_anio, SUM(valor) AS total_impacto " +
+            "FROM consumo " +
+            "WHERE fecha BETWEEN :startDate AND :endDate " +
+            "GROUP BY mes_anio " +
+            "ORDER BY mes_anio ASC;", nativeQuery = true)
+    List<Object[]> getImpactoEcologicoMensual(@Param("startDate") LocalDate startDate,
+                                              @Param("endDate") LocalDate endDate);
 }

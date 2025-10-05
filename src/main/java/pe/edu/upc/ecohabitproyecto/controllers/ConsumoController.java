@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.*;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
-import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
 import java.math.BigDecimal;
@@ -103,20 +102,31 @@ public class ConsumoController {
 
         return ResponseEntity.ok(listaDTO);
     }*/
-    @GetMapping("/TipoConsumo")
-    public ResponseEntity<?> getConsumoTotalByFecha(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
-        List<ConsumoFechasDTO> listaDTO = new ArrayList<>();
-        List<Object[]> fila = cS.getConsumoTotalByFecha(startDate, endDate);
+    @GetMapping("/FechaConsumo")
+    public ResponseEntity<?> getImpactoEcologicoMensual(
+            @RequestParam("startDate") LocalDate startDate,
+            @RequestParam("endDate") LocalDate endDate) {
 
-        if (fila.isEmpty()) {
+        List<ImpactoEcologicoMensualDTO> listaDTO = new ArrayList<>();
+
+        // 1. Llama al servicio que agrupa por mes/año y suma el impacto
+        List<Object[]> resultados = cS.getImpactoEcologicoMensual(startDate, endDate);
+
+        if (resultados.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron registros de consumo para contar.");
+                    .body("No se encontraron registros de impacto en el rango de fechas especificado.");
         }
 
-        for (Object[] columna : fila) {
-            ConsumoFechasDTO dto = new ConsumoFechasDTO();
-            dto.setTipo((String) columna[0]);
-            dto.setTotalvalor((BigDecimal) columna[1]);
+        // 2. Mapeo seguro de Object[] a DTO
+        for (Object[] columna : resultados) {
+            ImpactoEcologicoMensualDTO dto = new ImpactoEcologicoMensualDTO();
+
+            // Columna 0: Mes/Año como String (Ej: "2025-09")
+            dto.setMesAnio((String) columna[0]);
+
+            // Columna 1: Impacto total (SUM(valor) como BigDecimal)
+            dto.setImpactoTotal((BigDecimal) columna[1]);
+
             listaDTO.add(dto);
         }
 
