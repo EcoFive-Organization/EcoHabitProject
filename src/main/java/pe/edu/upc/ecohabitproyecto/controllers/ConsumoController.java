@@ -12,6 +12,7 @@ import pe.edu.upc.ecohabitproyecto.dtos.QuantyTipoConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +67,7 @@ public class ConsumoController {
         for (String[] columna : fila) {
             QuantyTipoConsumoDTO dto = new QuantyTipoConsumoDTO();
             dto.setTipo(columna[0]);
-            dto.setTipo((columna[1]));
+            dto.setQuantityValor(new BigDecimal(columna[1]));
             listaDTO.add(dto);
         }
         return ResponseEntity.ok(listaDTO);
