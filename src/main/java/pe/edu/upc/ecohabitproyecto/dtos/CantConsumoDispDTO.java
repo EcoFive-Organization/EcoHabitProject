@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class CantConsumoDispDTO {
     private int id_consumo;
-    private Dispositivo dispositivo;
+    private Integer dispositivo;
     private BigDecimal valor;
 
     public int getId_consumo() {
@@ -17,11 +17,11 @@ public class CantConsumoDispDTO {
         this.id_consumo = id_consumo;
     }
 
-    public Dispositivo getDispositivo() {
+    public Integer getDispositivo() {
         return dispositivo;
     }
 
-    public void setDispositivo(Dispositivo dispositivo) {
+    public void setDispositivo(Integer dispositivo) {
         this.dispositivo = dispositivo;
     }
 

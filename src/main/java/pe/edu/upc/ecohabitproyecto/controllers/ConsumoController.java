@@ -89,15 +89,8 @@ public class ConsumoController {
         for (Object[] columna : fila) {
             CantConsumoDispDTO dto = new CantConsumoDispDTO();
             dto.setId_consumo(((Number) columna[0]).intValue());
-
-            Integer idDispositivo = ((Number) columna[1]).intValue();
-            Dispositivo tempDisp = new Dispositivo();
-            tempDisp.setIdDispositivo(idDispositivo);
-            dto.setDispositivo(tempDisp);
-
+            dto.setDispositivo(((Number) columna[1]).intValue());
             dto.setValor((BigDecimal) columna[2]);
-
-            listaDTO.add(dto);
         }
 
         return ResponseEntity.ok(listaDTO);
