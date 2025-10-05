@@ -47,14 +47,6 @@ public class DesafioController {
         dS.update(e);
     }
 
-    //@PostMapping("/unirse-desafios")
-    //public ResponseEntity<Void> unirseAlDesafio(
-    //        @RequestParam Integer idUsuario,
-    //        @RequestParam Integer idDesafio) {
-    //    dS.unirseADesafio(idUsuario, idDesafio);
-    //    return ResponseEntity.ok().build();
-    //}
-
     @PostMapping("/unirse-desafios")
     public ResponseEntity<Void> unirseDesafios(@RequestBody ParticipacionDesafioDTO dto) {
 
