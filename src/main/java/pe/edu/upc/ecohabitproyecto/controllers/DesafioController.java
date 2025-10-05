@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.DesafioDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.ParticipacionDesafioDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Desafio;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDesafioService;
 
@@ -46,11 +47,26 @@ public class DesafioController {
         dS.update(e);
     }
 
+    //@PostMapping("/unirse-desafios")
+    //public ResponseEntity<Void> unirseAlDesafio(
+    //        @RequestParam Integer idUsuario,
+    //        @RequestParam Integer idDesafio) {
+    //    dS.unirseADesafio(idUsuario, idDesafio);
+    //    return ResponseEntity.ok().build();
+    //}
+
     @PostMapping("/unirse-desafios")
-    public ResponseEntity<Void> unirseAlDesafio(
-            @RequestParam Integer idUsuario,
-            @RequestParam Integer idDesafio) {
+    public ResponseEntity<Void> unirseDesafios(@RequestBody ParticipacionDesafioDTO dto) {
+
+        // 1. EXTRAER los IDs de los objetos anidados (Usuario y Desafio)
+        // Asumimos que los IDs vienen cargados dentro del DTO
+        Integer idUsuario = dto.getUsuario().getIdUsuario();
+        Integer idDesafio = dto.getDesafio().getIdDesafio();
+
+        // 2. LLAMAR al metodo del servicio que maneja la lógica de negocio (tu metodo 'unirseADesafio')
         dS.unirseADesafio(idUsuario, idDesafio);
+
+        // 3. Devolver la respuesta de éxito
         return ResponseEntity.ok().build();
     }
 
