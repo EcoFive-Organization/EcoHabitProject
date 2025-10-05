@@ -8,11 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.CantidadConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.ConsumoDTO;
-import pe.edu.upc.ecohabitproyecto.dtos.QuantyTipoConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +36,7 @@ public class ConsumoController {
         Consumo cons=m.map(s, Consumo.class);
         cS.insert(cons);
     }
-    @GetMapping("/CantidadConsumo")
+    @GetMapping("/CantidadPorTipoConsumo")
     public ResponseEntity<?> obtenerCantidadPorTipoConsumo() {
         List<CantidadConsumoDTO> listaDTO = new ArrayList<>();
         List<Object[]> fila = cS.findAllByTipoConsumo(); // Llama al nuevo método del servicio
@@ -55,21 +53,6 @@ public class ConsumoController {
             listaDTO.add(dto);
         }
 
-        return ResponseEntity.ok(listaDTO);
-    }
-    @GetMapping("/CantidadTipoConsumo")
-    public ResponseEntity<?> TipoConsumo(@RequestParam String tipoConsumo) {
-        List<QuantyTipoConsumoDTO> listaDTO  =new ArrayList<>();
-        List<String[]> fila = cS.getByTotalConsumoTipo(tipoConsumo);
-        if (fila.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un registro de " + tipoConsumo);
-        }
-        for (String[] columna : fila) {
-            QuantyTipoConsumoDTO dto = new QuantyTipoConsumoDTO();
-            dto.setTipo(columna[0]);
-            dto.setQuantityValor(new BigDecimal(columna[1]));
-            listaDTO.add(dto);
-        }
         return ResponseEntity.ok(listaDTO);
     }
 
