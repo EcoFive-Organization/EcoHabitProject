@@ -1,40 +1,35 @@
 package pe.edu.upc.ecohabitproyecto.entities;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "UsuarioLogro")
-
+@Table(name = "usuario_logro")
 public class UsuarioLogro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int usuarioLogroId;
+    @Column(name = "id_usuario_logro")
+    private int idUsuarioLogro;
 
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY) // Lazy para evitar cargas innecesarias
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "idLogro", nullable = false)
-    private int idLogro;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_logro", nullable = false)
+    private Logro logro;
 
-    @Column(name = "fechaObtenido", nullable = false)
-    private LocalDateTime fechaObtenido;
+    @Column(name = "fecha_desbloqueo", nullable = false)
+    private LocalDateTime fechaDesbloqueo = LocalDateTime.now();
 
-    public UsuarioLogro() {}
-
-    public UsuarioLogro(int usuarioLogroId, Usuario usuario, int idLogro, LocalDateTime fechaObtenido) {
-        this.usuarioLogroId = usuarioLogroId;
-        this.usuario = usuario;
-        this.idLogro = idLogro;
-        this.fechaObtenido = fechaObtenido;
+    // --- Getters y Setters ---
+    public int getIdUsuarioLogro() {
+        return idUsuarioLogro;
     }
 
-    public int getUsuarioLogroId() {
-        return usuarioLogroId;
-    }
-
-    public void setUsuarioLogroId(int usuarioLogroId) {
-        this.usuarioLogroId = usuarioLogroId;
+    public void setIdUsuarioLogro(int idUsuarioLogro) {
+        this.idUsuarioLogro = idUsuarioLogro;
     }
 
     public Usuario getUsuario() {
@@ -45,19 +40,19 @@ public class UsuarioLogro {
         this.usuario = usuario;
     }
 
-    public int getIdLogro() {
-        return idLogro;
+    public Logro getLogro() {
+        return logro;
     }
 
-    public void setIdLogro(int idLogro) {
-        this.idLogro = idLogro;
+    public void setLogro(Logro logro) {
+        this.logro = logro;
     }
 
-    public LocalDateTime getFechaObtenido() {
-        return fechaObtenido;
+    public LocalDateTime getFechaDesbloqueo() {
+        return fechaDesbloqueo;
     }
 
-    public void setFechaObtenido(LocalDateTime fechaObtenido) {
-        this.fechaObtenido = fechaObtenido;
+    public void setFechaDesbloqueo(LocalDateTime fechaDesbloqueo) {
+        this.fechaDesbloqueo = fechaDesbloqueo;
     }
 }

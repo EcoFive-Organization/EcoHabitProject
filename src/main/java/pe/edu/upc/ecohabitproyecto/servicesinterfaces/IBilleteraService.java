@@ -3,6 +3,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 import pe.edu.upc.ecohabitproyecto.repositories.IBilleteraRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface IBilleteraService {
@@ -11,4 +12,5 @@ public interface IBilleteraService {
 
     // Registrar
     public void insert(Billetera billetera);
+    BigDecimal getSaldoPuntos(int idUsuario);
 }

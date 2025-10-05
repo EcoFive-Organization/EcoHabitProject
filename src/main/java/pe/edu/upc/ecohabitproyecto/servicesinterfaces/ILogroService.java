@@ -1,5 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.servicesinterfaces;
 
+import pe.edu.upc.ecohabitproyecto.dtos.LogroDesbloqueadoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Logro;
 
 import java.util.List;
@@ -16,6 +17,6 @@ public interface ILogroService {
 
     void update(Logro logro);
 
-    void desbloquearLogro(Integer idUsuario, String nombreLogro);
+    LogroDesbloqueadoDTO desbloquearLogro(int idUsuario, int idLogro);
 
 }
