@@ -37,5 +37,6 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
     @Query(value = "SELECT tipo, SUM(valor) AS total_consumo\n" +
             "FROM consumo WHERE fecha::date BETWEEN :startDate  AND :endDate\n" +
             "GROUP BY tipo ORDER BY total_consumo DESC;",nativeQuery = true)
-    List<Object[]> getConsumoTotalByFecha(@Param("startDate") LocalDate  startDate, @Param("endDate")LocalDate endDate);
+    List<Object[]> getConsumoTotalByFecha(@Param("startDate") LocalDate  startDate,
+                                          @Param("endDate")LocalDate endDate);
 }

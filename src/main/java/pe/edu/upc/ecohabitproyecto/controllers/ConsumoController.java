@@ -12,6 +12,7 @@ import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,7 +77,7 @@ public class ConsumoController {
 
         return ResponseEntity.ok(listaDTO);
     }
-    @GetMapping("/CantidadConsumoDisp")
+    /*@GetMapping("/CantidadConsumoDisp")
     public ResponseEntity<?> getConsumoByDispositivo() {
         List<CantConsumoDispDTO> listaDTO = new ArrayList<>();
         List<Object[]> fila = cS.getConsumoByDispositivo(); // Llama al nuevo método del servicio
@@ -97,6 +98,25 @@ public class ConsumoController {
 
 
 
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }*/
+    @GetMapping("/TipoConsumo")
+    public ResponseEntity<?> getConsumoTotalByFecha(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
+        List<ConsumoFechasDTO> listaDTO = new ArrayList<>();
+        List<Object[]> fila = cS.getConsumoTotalByFecha(startDate, endDate);
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de consumo para contar.");
+        }
+
+        for (Object[] columna : fila) {
+            ConsumoFechasDTO dto = new ConsumoFechasDTO();
+            dto.setTipo((String) columna[0]);
+            dto.setTotalvalor((BigDecimal) columna[1]);
             listaDTO.add(dto);
         }
 
