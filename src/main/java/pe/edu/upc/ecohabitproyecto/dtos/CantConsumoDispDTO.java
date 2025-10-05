@@ -1,7 +1,5 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
-
 import java.math.BigDecimal;
 
 public class CantConsumoDispDTO {

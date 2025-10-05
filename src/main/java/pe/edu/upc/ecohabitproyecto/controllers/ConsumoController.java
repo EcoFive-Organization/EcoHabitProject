@@ -76,32 +76,34 @@ public class ConsumoController {
 
         return ResponseEntity.ok(listaDTO);
     }
-    /*@GetMapping("/CantidadConsumoDisp")
-    public ResponseEntity<?> getConsumoByDispositivo() {
+    @GetMapping("/ConsumoTotalPorDispositivo")
+    public ResponseEntity<?> getConsumoTotalPorDispositivo() {
         List<CantConsumoDispDTO> listaDTO = new ArrayList<>();
-        List<Object[]> fila = cS.getConsumoByDispositivo(); // Llama al nuevo método del servicio
+        List<Object[]> fila = cS.getConsumoTotalByDispositivo();
 
         if (fila.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron registros de consumo para contar.");
+                    .body("No se encontró consumo total por dispositivo.");
         }
 
         for (Object[] columna : fila) {
             CantConsumoDispDTO dto = new CantConsumoDispDTO();
-            dto.setId_consumo(((Number) columna[0]).intValue());
-            int idDispositivo = ((Number) columna[1]).intValue();
-            Dispositivo tempDisp = new Dispositivo();
-            tempDisp.setIdDispositivo(idDispositivo);
-            dto.setDispositivo(tempDisp);
-            dto.setValor((BigDecimal) columna[2]);
 
-
+            // Mapeo de las nuevas columnas:
+            // Columna 0: ID del Dispositivo (Integer)
+            dto.setIdDispositivo(((Number) columna[0]).intValue());
+            // Columna 1: ID del Usuario (Integer)
+            dto.setIdUsuario(((Number) columna[1]).intValue());
+            // Columna 2: Nombre del dispositivo (String)
+            dto.setNombreDispositivo((String) columna[2]);
+            // Columna 3: Consumo total (BigDecimal)
+            dto.setTotalConsumo((BigDecimal) columna[3]);
 
             listaDTO.add(dto);
         }
 
         return ResponseEntity.ok(listaDTO);
-    }*/
+    }
     @GetMapping("/FechaConsumo")
     public ResponseEntity<?> getImpactoEcologicoMensual(
             @RequestParam("startDate") LocalDate startDate,
