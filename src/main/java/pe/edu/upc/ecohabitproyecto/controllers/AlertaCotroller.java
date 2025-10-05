@@ -2,11 +2,17 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.AlertaDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.SumTipoConsumoDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.TipoAlertaDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Alerta;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IAlertaService;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,5 +39,23 @@ public class AlertaCotroller {
         Alerta aler=m.map(s, Alerta.class);
         aS.insert(aler);
     }
+    @GetMapping("/TipoAlerta")
+    public ResponseEntity<?> getByTipoAlerta(@RequestParam String tipoAlerta) {
+        List<TipoAlertaDTO> listaDTO = new ArrayList<>();
+        List<Object[]> fila = aS.getByTipoAlerta(tipoAlerta);
 
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de consumo para contar.");
+        }
+
+        for (Object[] columna : fila) {
+            TipoAlertaDTO dto = new TipoAlertaDTO();
+            dto.setIdAlerta((Integer) columna[0]);
+            dto.setTipoAlerta((String) columna[1]);
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
 }
