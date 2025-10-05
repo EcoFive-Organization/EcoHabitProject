@@ -25,4 +25,9 @@ public class AlertaServiceImplement implements IAlertaService {
     public List<Object[]> getByTipoAlerta(String tipoAlerta) {
         return aS.getByTipoAlerta(tipoAlerta);
     }
+
+    @Override
+    public List<Object[]> getByTipoIrregular(String tipoAlerta) {
+        return aS.getByTipoIrregular(tipoAlerta);
+    }
 }

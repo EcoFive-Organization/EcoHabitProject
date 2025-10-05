@@ -9,4 +9,5 @@ public interface IAlertaService {
     public List<Alerta> list();
     public void insert(Alerta alerta);
     List<Object[]> getByTipoAlerta(@Param("tipoAlerta") String tipoAlerta);
+    List<Object[]> getByTipoIrregular(@Param("tipoAlerta") String tipoAlerta);
 }

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.AlertaDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.AlertaIrregularDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.SumTipoConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.TipoAlertaDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Alerta;
@@ -56,6 +57,25 @@ public class AlertaCotroller {
             listaDTO.add(dto);
         }
 
+        return ResponseEntity.ok(listaDTO);
+    }
+    @GetMapping("/AlertaIrregular")
+    public ResponseEntity<?> getByTipoIrregular(@RequestParam String tipoAlerta) {
+        List<AlertaIrregularDTO> listaDTO = new ArrayList<>();
+        List<Object[]> fila = aS.getByTipoIrregular(tipoAlerta);
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de consumo para contar.");
+        }
+
+        for (Object[] columna : fila) {
+            AlertaIrregularDTO dto = new AlertaIrregularDTO();
+            dto.setIdAlerta((Integer) columna[0]);
+            dto.setTipoAlerta((String) columna[1]);
+            dto.setMensaje((String) columna[2]);
+            listaDTO.add(dto);
+        }
         return ResponseEntity.ok(listaDTO);
     }
 }
