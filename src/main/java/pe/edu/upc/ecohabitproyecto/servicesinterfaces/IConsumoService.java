@@ -11,4 +11,6 @@ public interface IConsumoService {
     public void insert(Consumo consumo);
     List<Object[]> findAllByTipoConsumo();
     List<Object[]> getByTotalConsumoTipo(String tipoConsumo);
+    List<Object[]> getConsumoByDispositivo();
+
 }

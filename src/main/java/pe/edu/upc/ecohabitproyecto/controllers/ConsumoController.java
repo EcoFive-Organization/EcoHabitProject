@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.ecohabitproyecto.dtos.CantidadConsumoDTO;
-import pe.edu.upc.ecohabitproyecto.dtos.ConsumoDTO;
-import pe.edu.upc.ecohabitproyecto.dtos.SumTipoConsumoDTO;
-import pe.edu.upc.ecohabitproyecto.dtos.TipoDispositivoListDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.*;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
+import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
 import java.math.BigDecimal;
@@ -78,6 +76,31 @@ public class ConsumoController {
 
         return ResponseEntity.ok(listaDTO);
     }
+    @GetMapping("/CantidadConsumoDisp")
+    public ResponseEntity<?> getConsumoByDispositivo() {
+        List<CantConsumoDispDTO> listaDTO = new ArrayList<>();
+        List<Object[]> fila = cS.getConsumoByDispositivo(); // Llama al nuevo método del servicio
 
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de consumo para contar.");
+        }
+
+        for (Object[] columna : fila) {
+            CantConsumoDispDTO dto = new CantConsumoDispDTO();
+            dto.setId_consumo(((Number) columna[0]).intValue());
+
+            Integer idDispositivo = ((Number) columna[1]).intValue();
+            Dispositivo tempDisp = new Dispositivo();
+            tempDisp.setIdDispositivo(idDispositivo);
+            dto.setDispositivo(tempDisp);
+
+            dto.setValor((BigDecimal) columna[2]);
+
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
 
 }
