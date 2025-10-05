@@ -89,7 +89,7 @@ public class ConsumoController {
         for (Object[] columna : fila) {
             CantConsumoDispDTO dto = new CantConsumoDispDTO();
             dto.setId_consumo(((Number) columna[0]).intValue());
-            dto.setDispositivo(((Number) columna[1]).intValue());
+            dto.setDispositivo(((Dispositivo) columna[1]));
             dto.setValor((BigDecimal) columna[2]);
         }
 
