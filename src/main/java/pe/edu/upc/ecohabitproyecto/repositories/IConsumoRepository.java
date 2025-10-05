@@ -14,7 +14,7 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
     @Query(value = "SELECT tipo, COUNT(id_consumo) AS cantidad_consumos FROM consumo\n" +
             "GROUP BY tipo ORDER BY cantidad_consumos DESC;", nativeQuery = true)
     List<Object[]> findAllByTipoConsumo();
-    @Query(value = "SELECT tipo_consumo,\n" +
+    @Query(value = "SELECT tipo,\n" +
             "SUM(valor) AS total_consumo FROM consumo WHERE tipo = :tipoConsumo\n" +
             "GROUP BY tipo;", nativeQuery = true)
     List<String[]> getByTotalConsumoTipo(
