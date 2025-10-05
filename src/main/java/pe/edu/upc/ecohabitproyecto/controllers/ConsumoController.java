@@ -135,4 +135,33 @@ public class ConsumoController {
         return ResponseEntity.ok(listaDTO);
     }
 
+    @GetMapping("/montoAhorrado")
+    public ResponseEntity<?> calcularMontoAhorrado(
+            @RequestParam("tipo") String tipoConsumo,
+            @RequestParam("startDate") LocalDate startDate,
+            @RequestParam("endDate") LocalDate endDate) {
+
+        List<Object[]> resultado = cS.calcularMontoAhorrado(tipoConsumo, startDate, endDate);
+
+        if (resultado.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de consumo para el tipo y periodo especificados.");
+        }
+
+        Object[] columna = resultado.get(0);
+
+        String tipo = (String) columna[0];
+
+        BigDecimal consumoReal = new BigDecimal(columna[1].toString());
+
+        BigDecimal consumoReferencia = new BigDecimal(columna[2].toString());
+
+        BigDecimal montoAhorrado = consumoReferencia.subtract(consumoReal);
+
+        MontoAhorradoDTO dto = new MontoAhorradoDTO();
+        dto.setTipoConsumo(tipo);
+        dto.setMontoAhorrado(montoAhorrado);
+
+        return ResponseEntity.ok(dto);
+    }
 }

@@ -47,4 +47,13 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
             "ORDER BY mes_anio ASC;", nativeQuery = true)
     List<Object[]> getImpactoEcologicoMensual(@Param("startDate") LocalDate startDate,
                                               @Param("endDate") LocalDate endDate);
+
+    @Query(value = "SELECT c.tipo, SUM(c.valor) AS consumo_real, SUM(c.umbral) AS consumo_referencia " +
+            "FROM consumo c " +
+            "WHERE c.tipo = :tipoConsumo AND c.fecha BETWEEN :startDate AND :endDate " +
+            "GROUP BY c.tipo", nativeQuery = true)
+    List<Object[]> calcularMontoAhorrado(
+            @Param("tipoConsumo") String tipoConsumo,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate);
 }

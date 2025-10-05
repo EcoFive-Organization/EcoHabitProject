@@ -17,7 +17,7 @@ public interface IConsumoService {
     List<Object[]> getByTotalConsumoTipo(String tipoConsumo);
     List<Object[]> getConsumoByDispositivo();
 
-    // 🚀 NUEVO METODO
     List<Object[]> getConsumoTotalByDispositivo();
     List<Object[]> getImpactoEcologicoMensual(LocalDate startDate, LocalDate endDate);
+    List<Object[]> calcularMontoAhorrado(String tipoConsumo, LocalDate startDate, LocalDate endDate);
 }

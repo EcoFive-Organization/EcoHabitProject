@@ -49,4 +49,9 @@ public class ConsumoServiceImplement implements IConsumoService {
     public List<Object[]> getImpactoEcologicoMensual(LocalDate startDate, LocalDate endDate) {
         return cR.getImpactoEcologicoMensual(startDate, endDate);
     }
+
+    @Override
+    public List<Object[]> calcularMontoAhorrado(String tipoConsumo, LocalDate startDate, LocalDate endDate) {
+        return cR.calcularMontoAhorrado(tipoConsumo, startDate, endDate);
+    }
 }
