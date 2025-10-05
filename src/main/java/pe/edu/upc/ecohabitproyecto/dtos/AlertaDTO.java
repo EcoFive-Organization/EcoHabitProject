@@ -10,7 +10,7 @@ public class AlertaDTO {
     private Consumo consumo;
     private String tipoAlerta;
     private String mensaje;
-    private java.sql.Timestamp fecha;
+    private Timestamp fecha;
     private boolean leida;
 
     public int getIdAlerta() {
