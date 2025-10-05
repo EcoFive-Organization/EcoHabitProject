@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="Logro")
-
 public class Logro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,18 +22,24 @@ public class Logro {
     @Column(name = "estado", length = 20, nullable = false)
     private String estado;
 
-    public Logro(){
+    // ✅ Nuevo campo para HU18
+    @Column(name = "puntos", nullable = false)
+    private int puntos;
 
+    public Logro() {
     }
 
-    public Logro(Integer idLogro, String nombre, String descripcion, Recompensa recompensa, String estado) {
+    public Logro(Integer idLogro, String nombre, String descripcion,
+                 Recompensa recompensa, String estado, int puntos) {
         this.idLogro = idLogro;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.recompensa = recompensa;
         this.estado = estado;
+        this.puntos = puntos;
     }
 
+    // Getters y Setters
     public Integer getIdLogro() {
         return idLogro;
     }
@@ -73,5 +78,13 @@ public class Logro {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
     }
 }

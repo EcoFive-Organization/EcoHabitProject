@@ -67,6 +67,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(req -> req
                         // Permite acceso a los endpoints de login, registro y autenticación para todos.
                         .requestMatchers(
+                                "/",
+                                "/status",
                                 "/login",
                                 "/register",
                                 "/authenticate",

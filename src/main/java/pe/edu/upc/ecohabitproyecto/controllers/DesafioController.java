@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.DesafioDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.ParticipacionDesafioDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Desafio;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDesafioService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -47,11 +50,19 @@ public class DesafioController {
     }
 
     @PostMapping("/unirse-desafios")
-    public ResponseEntity<Void> unirseAlDesafio(
-            @RequestParam Integer idUsuario,
-            @RequestParam Integer idDesafio) {
+    public ResponseEntity<Map<String, Object>> unirseDesafios(@RequestBody ParticipacionDesafioDTO dto) {
+
+        Integer idUsuario = dto.getUsuario().getIdUsuario();
+        Integer idDesafio = dto.getDesafio().getIdDesafio();
+
         dS.unirseADesafio(idUsuario, idDesafio);
-        return ResponseEntity.ok().build();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensaje", "Usuario inscrito correctamente en el desafío");
+        response.put("idUsuario", idUsuario);
+        response.put("idDesafio", idDesafio);
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
