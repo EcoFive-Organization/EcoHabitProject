@@ -31,7 +31,7 @@ public class ParticipacionDesafioController {
     }
 
     @GetMapping("/{id}")
-    public ParticipacionDesafioDTO listarId(@PathVariable long id) {
+    public ParticipacionDesafioDTO listarId(@PathVariable Integer id) { // 🔹 corregido a Integer
         ParticipacionDesafio e = pDS.listId(id);
         return new ModelMapper().map(e, ParticipacionDesafioDTO.class);
     }
@@ -43,7 +43,7 @@ public class ParticipacionDesafioController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable long id) {
+    public void eliminar(@PathVariable Integer id) { // 🔹 corregido a Integer
         pDS.delete(id);
     }
 }

@@ -1,59 +1,97 @@
 package pe.edu.upc.ecohabitproyecto.servicesimplements;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pe.edu.upc.ecohabitproyecto.dtos.DesafioAmigoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Desafio;
+import pe.edu.upc.ecohabitproyecto.entities.DesafioAmigo;
 import pe.edu.upc.ecohabitproyecto.entities.ParticipacionDesafio;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+import pe.edu.upc.ecohabitproyecto.repositories.IDesafioAmigoRepository;
+import pe.edu.upc.ecohabitproyecto.repositories.IDesafioRepository;
 import pe.edu.upc.ecohabitproyecto.repositories.IParticipacionDesafioRepository;
 import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDesafioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import pe.edu.upc.ecohabitproyecto.repositories.IDesafioRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DesafioServiceImplement implements IDesafioService {
 
-    @Autowired private IDesafioRepository repo;
-    @Autowired private IParticipacionDesafioRepository partRepo;
-    @Autowired private IUsuarioRepository usuarioRepo;
+    @Autowired
+    private IDesafioRepository repo;
 
+    @Autowired
+    private IParticipacionDesafioRepository partRepo;
+
+    @Autowired
+    private IUsuarioRepository usuarioRepo;
+
+    @Autowired
+    private IDesafioAmigoRepository desafioAmigoRepo;
 
     @Override
     public List<Desafio> list() {
         return repo.findAll();
     }
 
+    // 🔹 HU27: Unirse a un desafío comunitario
     @Override
-    public void unirseADesafio(Integer usuarioId, Integer desafioId) {
-        Desafio d = repo.findById(desafioId)
+    public void unirseADesafioComunitario(Integer usuarioId, Integer desafioId) {
+        // 1. Validar que el desafío exista
+        Desafio desafio = repo.findById(desafioId)
                 .orElseThrow(() -> new RuntimeException("Desafío no encontrado"));
 
-        // 1. Validación de Inscripción
-        if (partRepo.existsByUsuario_IdUsuarioAndDesafio_IdDesafio(usuarioId, desafioId)) {
-            throw new RuntimeException("Ya inscrito al desafío");
-        }
-
-        Usuario u = usuarioRepo.findById(usuarioId)
+        // 2. Validar que el usuario exista
+        Usuario usuario = usuarioRepo.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        // 2. Creación e Inicialización de la Participación
-        ParticipacionDesafio p = new ParticipacionDesafio();
+        // 3. Validar que no esté ya inscrito
+        if (partRepo.existsByUsuario_IdUsuarioAndDesafio_IdDesafio(usuarioId, desafioId)) {
+            throw new RuntimeException("El usuario ya está inscrito en este desafío");
+        }
 
-        // Asignación de Foráneas
-        p.setUsuario(u);
-        p.setDesafio(d);
+        // 4. Crear la participación
+        ParticipacionDesafio participacion = new ParticipacionDesafio();
+        participacion.setUsuario(usuario);
+        participacion.setDesafio(desafio);
+        participacion.setEstado("INICIADO");
+        participacion.setProgreso(BigDecimal.ZERO);
+        participacion.setFecha(LocalDateTime.now());
 
-        // 3. 🚀 INICIALIZACIÓN DE CAMPOS (CORRECCIÓN)
-        p.setEstado("INICIADO"); // Estado inicial
-        p.setProgreso(BigDecimal.ZERO); // Progreso inicial a 0
-        p.setFecha(LocalDateTime.now()); // Fecha actual de inscripción
+        // 5. Guardar la participación
+        partRepo.save(participacion);
+    }
 
-        // 4. Guardar la Participación
-        partRepo.save(p);
+    // 🔹 HU52: Crear desafío con amigos
+    @Override
+    public void crearDesafioAmigo(DesafioAmigoDTO dto) {
+        // 1. Validar que el creador exista
+        Usuario creador = usuarioRepo.findById(dto.getIdCreador())
+                .orElseThrow(() -> new RuntimeException("Usuario creador no encontrado"));
+
+        // 2. Crear el desafío con amigos
+        DesafioAmigo desafioAmigo = new DesafioAmigo();
+        desafioAmigo.setCreador(creador);
+        desafioAmigo.setMeta(dto.getMeta());
+        desafioAmigo.setFechaCreacion(LocalDateTime.now());
+        desafioAmigo.setEstado("ACTIVO");
+
+        // 3. Asociar amigos invitados
+        Set<Usuario> amigos = new HashSet<>();
+        for (Integer amigoId : dto.getAmigosIds()) {
+            Usuario amigo = usuarioRepo.findById(amigoId)
+                    .orElseThrow(() -> new RuntimeException("Amigo con ID " + amigoId + " no encontrado"));
+            amigos.add(amigo);
+        }
+        desafioAmigo.setAmigosInvitados(amigos);
+
+        // 4. Guardar el desafío
+        desafioAmigoRepo.save(desafioAmigo);
     }
 
     @Override

@@ -1,9 +1,10 @@
 package pe.edu.upc.ecohabitproyecto.servicesimplements;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pe.edu.upc.ecohabitproyecto.entities.ParticipacionDesafio;
 import pe.edu.upc.ecohabitproyecto.repositories.IParticipacionDesafioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IParticipacionDesafioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -24,12 +25,12 @@ public class ParticipacionDesafioServiceImplement implements IParticipacionDesaf
     }
 
     @Override
-    public ParticipacionDesafio listId(long id) {
+    public ParticipacionDesafio listId(Integer id) { // 🔹 corregido
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Integer id) { // 🔹 corregido
         repo.deleteById(id);
     }
 
