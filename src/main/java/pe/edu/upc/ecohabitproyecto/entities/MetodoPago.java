@@ -1,90 +1,53 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "MetodoPago")
+@Table(name = "metodo_pago")
 public class MetodoPago {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idMetodoPago;
+    private Integer idMetodoPago;
 
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
+    // 🔹 Aquí usamos "detalles" porque así está en la BD
     @Column(name = "detalles", nullable = false, length = 100)
     private String detalles;
 
-    @Column(name = "activo", nullable = false, length = 150)
-    private boolean activo;
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
 
-    @Column(name = "fechaRegistro", nullable = false)
-    private Timestamp fechaRegistro;
+    @Column(name = "fecha_registro", nullable = false)
+    private LocalDateTime fechaRegistro = LocalDateTime.now();
 
+    // 🔹 Relación correcta con Usuario (muchos métodos de pago pueden pertenecer a un usuario)
     @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    public MetodoPago() {
+    // Constructor vacío
+    public MetodoPago() {}
 
-    }
+    // Getters y setters
+    public Integer getIdMetodoPago() { return idMetodoPago; }
+    public void setIdMetodoPago(Integer idMetodoPago) { this.idMetodoPago = idMetodoPago; }
 
-    public MetodoPago(int idMetodoPago, String tipo, String detalles, boolean activo, Timestamp fechaRegistro, Usuario usuario) {
-        this.idMetodoPago = idMetodoPago;
-        this.tipo = tipo;
-        this.detalles = detalles;
-        this.activo = activo;
-        this.fechaRegistro = fechaRegistro;
-        this.usuario = usuario;
-    }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
-    public int getIdMetodoPago() {
-        return idMetodoPago;
-    }
+    public String getDetalles() { return detalles; }
+    public void setDetalles(String detalles) { this.detalles = detalles; }
 
-    public void setIdMetodoPago(int idMetodoPago) {
-        this.idMetodoPago = idMetodoPago;
-    }
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
 
-    public String getTipo() {
-        return tipo;
-    }
+    public LocalDateTime getFechaRegistro() { return fechaRegistro; }
+    public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
-    }
-
-    public boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 }

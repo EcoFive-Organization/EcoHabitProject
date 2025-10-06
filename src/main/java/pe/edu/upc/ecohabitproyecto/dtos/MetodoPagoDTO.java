@@ -1,16 +1,9 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import pe.edu.upc.ecohabitproyecto.entities.Usuario;
-
-import java.sql.Timestamp;
-
 public class MetodoPagoDTO {
     private int idMetodoPago;
     private String tipo;
-    private String detalles;
-    private boolean activo;
-    private Timestamp fechaRegistro;
-    private Usuario usuario;
+    private String detalles; // <-- alineado con la columna de la BD
 
     public int getIdMetodoPago() {
         return idMetodoPago;
@@ -34,29 +27,5 @@ public class MetodoPagoDTO {
 
     public void setDetalles(String detalles) {
         this.detalles = detalles;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public Timestamp getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }

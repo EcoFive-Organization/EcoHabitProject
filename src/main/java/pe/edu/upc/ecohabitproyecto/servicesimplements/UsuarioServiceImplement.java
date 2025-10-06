@@ -4,8 +4,11 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.ecohabitproyecto.dtos.MetodoPagoDTO;
+import pe.edu.upc.ecohabitproyecto.entities.MetodoPago;
 import pe.edu.upc.ecohabitproyecto.entities.PasswordResetToken;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+import pe.edu.upc.ecohabitproyecto.repositories.IMetodoPagoRepository;
 import pe.edu.upc.ecohabitproyecto.repositories.IPasswordResetTokenRepository;
 import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IUsuarioService;
@@ -16,9 +19,18 @@ import java.util.UUID;
 
 @Service
 public class UsuarioServiceImplement implements IUsuarioService {
-    @Autowired //Notificar que va a usar dos metodos de los muchos que tiene
+
+    @Autowired
     private IUsuarioRepository uR;
-    @Autowired private IPasswordResetTokenRepository tokenRepository;
+
+    @Autowired
+    private IPasswordResetTokenRepository tokenRepository;
+
+    @Autowired
+    private IMetodoPagoRepository metodoPagoRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Usuario> list() {
@@ -30,23 +42,18 @@ public class UsuarioServiceImplement implements IUsuarioService {
         return uR.findById(id).orElse(null);
     }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public Usuario insert(Usuario newUsuario) {
         // Validación: verificar si el usuario ya existe por su correo
         Usuario existingUser = uR.findOneByEmail(newUsuario.getEmail());
         if (existingUser != null) {
-            // Lanza una excepción si el usuario ya existe
             throw new IllegalArgumentException("Ya existe un usuario con este correo.");
         }
 
-        // Encriptar la contraseña antes de guardarla en la base de datos
+        // Encriptar la contraseña antes de guardarla
         String encodedPassword = passwordEncoder.encode(newUsuario.getPasswordHash());
         newUsuario.setPasswordHash(encodedPassword);
 
-        // Guardar el nuevo usuario en el repositorio
         return uR.save(newUsuario);
     }
 
@@ -66,53 +73,63 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-    @Transactional // Necesario para ejecutar deleteByUsuario en el repositorio
+    @Transactional
     public String createPasswordResetToken(String email) {
-
-        // Asumimos que IUsuarioRepository tiene un metodo findByEmail(String email)
         Usuario usuario = uR.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("404: Usuario no encontrado con ese email."));
 
-        // 1. Eliminar tokens viejos asociados a este usuario
         tokenRepository.deleteByUsuario(usuario);
 
-        // 2. Crear y guardar el nuevo token
         String token = UUID.randomUUID().toString();
         PasswordResetToken resetToken = new PasswordResetToken(token, usuario);
         tokenRepository.save(resetToken);
 
-        // 3. SIMULACIÓN DE ENVÍO DE EMAIL
-        // Aquí iría el código real para enviar el email con el enlace.
-
-        return token; // Retornamos el token para fines de prueba en Postman
+        return token; // Simulación de envío de email
     }
 
     @Override
     @Transactional
     public void resetPassword(String token, String newPassword) {
-
-        // 1. Buscar y validar la existencia del token
         PasswordResetToken resetToken = tokenRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("404: Token inválido o expirado."));
 
-        // 2. Validar expiración
         if (resetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
             tokenRepository.delete(resetToken);
             throw new RuntimeException("400: El token ha expirado. Por favor, solicite uno nuevo.");
         }
 
-        // 3. Validar longitud/seguridad de newPassword aquí si es necesario
-        if (newPassword == null || newPassword.length() < 5) {
+        if (newPassword == null || newPassword.length() < 8) {
             throw new RuntimeException("400: La contraseña debe tener al menos 8 caracteres.");
         }
 
-        // 4. Actualizar y encriptar la contraseña del usuario
         Usuario usuario = resetToken.getUsuario();
         usuario.setPasswordHash(passwordEncoder.encode(newPassword));
         uR.save(usuario);
 
-        // 5. Invalidar el token (ya no se puede usar)
         tokenRepository.delete(resetToken);
+    }
+
+    // 🔹 HU22: Configurar o modificar metodo de pago
+    @Override
+    @Transactional
+    public void modificarMetodoPago(Integer idUsuario, MetodoPagoDTO dto) {
+        Usuario usuario = uR.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        MetodoPago metodoPago = metodoPagoRepo.findByUsuarioIdUsuario(idUsuario)
+                .orElse(new MetodoPago());
+
+        metodoPago.setUsuario(usuario);
+        metodoPago.setTipo(dto.getTipo());
+        metodoPago.setDetalles(dto.getDetalles());
+        metodoPago.setFechaRegistro(LocalDateTime.now());
+
+        // 🔹 Asegurar que nunca sea null
+        if (metodoPago.getActivo() == null) {
+            metodoPago.setActivo(true); // por defecto activo
+        }
+
+        metodoPagoRepo.save(metodoPago);
     }
 
 }

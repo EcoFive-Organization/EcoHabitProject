@@ -3,10 +3,12 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Logro")
+@Table(name = "logro") // ← Asegúrate de que el nombre coincida con la tabla en la BD
 public class Logro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_logro") // ← Mapeo explícito para evitar errores de búsqueda
     private Integer idLogro;
 
     @Column(name = "nombre", length = 150, nullable = false)
@@ -22,10 +24,14 @@ public class Logro {
     @Column(name = "estado", length = 20, nullable = false)
     private String estado;
 
-    // ✅ Nuevo campo para HU18
     @Column(name = "puntos", nullable = false)
     private int puntos;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+
+    // Constructores
     public Logro() {
     }
 
@@ -86,5 +92,13 @@ public class Logro {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
