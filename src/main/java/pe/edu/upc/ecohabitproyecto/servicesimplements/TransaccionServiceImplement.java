@@ -60,6 +60,11 @@ public class TransaccionServiceImplement implements ITransaccionService {
         return tR.TransaccionesTotales();
     }
 
+    @Override
+    public List<Object[]> TransaccionesMonto() {
+        return tR.TransaccionesMonto();
+    }
+
     // 🔹 HU20: Canjear puntos
     @Override
     public void canjearPuntos(Integer idUsuario, CanjePuntosDTO dto) {
@@ -88,7 +93,6 @@ public class TransaccionServiceImplement implements ITransaccionService {
         transaccion.setFecha(Timestamp.valueOf(LocalDateTime.now()));
         tR.save(transaccion);
     }
-
 
     @Override
     public List<HistorialTransaccionesDTO> getHistorialTransacciones(Integer idUsuario) {

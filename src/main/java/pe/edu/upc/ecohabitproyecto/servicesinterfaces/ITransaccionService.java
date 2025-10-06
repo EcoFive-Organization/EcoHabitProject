@@ -13,6 +13,7 @@ public interface ITransaccionService {
     void delete(int id);
     void update(Transaccion transaccion);
     List<Object[]> TransaccionesTotales();
+    List<Object[]> TransaccionesMonto();
 
     // 🔹 HU20: Canjear puntos
     void canjearPuntos(Integer idUsuario, CanjePuntosDTO dto);
