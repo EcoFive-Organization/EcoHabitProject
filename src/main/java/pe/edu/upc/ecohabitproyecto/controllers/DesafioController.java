@@ -39,14 +39,14 @@ public class DesafioController {
         dS.insert(e);
     }
 
-    // Buscar desafío por ID
+    // 🔹 Buscar desafío por ID
     @GetMapping("/{id}")
     public DesafioDTO listarId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         return m.map(dS.listId(id), DesafioDTO.class);
     }
 
-    // Actualizar desafío
+    // 🔹 Actualizar desafío
     @PutMapping
     public void actualizar(@RequestBody DesafioDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -54,7 +54,7 @@ public class DesafioController {
         dS.update(e);
     }
 
-    // HU27: Unirse a un desafío comunitario
+    // 🔹 HU27: Unirse a un desafío comunitario
     @PostMapping("/comunitarios/unirse")
     public ResponseEntity<Map<String, Object>> unirseADesafio(@RequestBody ParticipacionDesafioDTO dto) {
 
@@ -71,7 +71,7 @@ public class DesafioController {
         return ResponseEntity.ok(response);
     }
 
-    // HU52: Crear desafío con amigos
+    // 🔹 HU52: Crear desafío con amigos
     @PostMapping("/amigos")
     public ResponseEntity<Map<String, Object>> crearDesafioAmigo(@RequestBody DesafioAmigoDTO dto) {
         dS.crearDesafioAmigo(dto);
@@ -85,7 +85,39 @@ public class DesafioController {
         return ResponseEntity.ok(response);
     }
 
-    // Eliminar desafío
+    // 🔹 HU53: Eliminar desafío con amigos
+    @DeleteMapping("/amigos/{idDesafio}/{idCreador}")
+    public ResponseEntity<Map<String, Object>> eliminarDesafioAmigo(
+            @PathVariable Integer idDesafio,
+            @PathVariable Integer idCreador) {
+
+        dS.eliminarDesafioAmigo(idDesafio, idCreador);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensaje", "Desafío con amigos eliminado correctamente");
+        response.put("idDesafio", idDesafio);
+        response.put("idCreador", idCreador);
+
+        return ResponseEntity.ok(response);
+    }
+
+    // 🔹 HU54: Unirse a un desafío con amigos
+    @PostMapping("/amigos/unirse")
+    public ResponseEntity<Map<String, Object>> unirseADesafioAmigo(
+            @RequestParam Integer idUsuario,
+            @RequestParam Integer idDesafioAmigo) {
+
+        dS.unirseADesafioAmigo(idUsuario, idDesafioAmigo);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensaje", "Usuario inscrito correctamente en el desafío con amigos");
+        response.put("idUsuario", idUsuario);
+        response.put("idDesafioAmigo", idDesafioAmigo);
+
+        return ResponseEntity.ok(response);
+    }
+
+    // 🔹 Eliminar desafío normal
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable int id) {
         dS.delete(id);

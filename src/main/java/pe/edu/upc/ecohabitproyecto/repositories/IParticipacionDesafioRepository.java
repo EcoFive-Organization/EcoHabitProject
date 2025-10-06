@@ -12,6 +12,8 @@ public interface IParticipacionDesafioRepository extends JpaRepository<Participa
 
     // Verificar si un usuario ya está inscrito en un desafío
     boolean existsByUsuario_IdUsuarioAndDesafio_IdDesafio(Integer usuarioId, Integer desafioId);
+    boolean existsByUsuario_IdUsuarioAndDesafioAmigo_IdDesafioAmigo(Integer idUsuario, Integer idDesafioAmigo);
+
 
     // Obtener la participación de un usuario en un desafío (si existe)
     Optional<ParticipacionDesafio> findByUsuario_IdUsuarioAndDesafio_IdDesafio(Integer usuarioId, Integer desafioId);

@@ -1,14 +1,14 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
-import pe.edu.upc.ecohabitproyecto.entities.Recompensa;
-
 public class LogroDTO {
     private Integer idLogro;
     private String nombre;
     private String descripcion;
-    private Recompensa recompensa;
+    private Integer puntos;
+    private Integer idRecompensa;
     private String estado;
 
+    // Getters y setters
     public Integer getIdLogro() {
         return idLogro;
     }
@@ -33,12 +33,20 @@ public class LogroDTO {
         this.descripcion = descripcion;
     }
 
-    public Recompensa getRecompensa() {
-        return recompensa;
+    public Integer getPuntos() {
+        return puntos;
     }
 
-    public void setRecompensa(Recompensa recompensa) {
-        this.recompensa = recompensa;
+    public void setPuntos(Integer puntos) {
+        this.puntos = puntos;
+    }
+
+    public Integer getIdRecompensa() {
+        return idRecompensa;
+    }
+
+    public void setIdRecompensa(Integer idRecompensa) {
+        this.idRecompensa = idRecompensa;
     }
 
     public String getEstado() {

@@ -10,20 +10,26 @@ import java.util.Optional;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
-    public Usuario findOneByEmail(String email);
-    public Usuario findOneByNombre(String nombre);
+    Usuario findOneByEmail(String email);
+    Usuario findOneByNombre(String nombre);
 
     Optional<Usuario> findByEmail(String email);
     Optional<Usuario> findByNombre(String nombre);
 
-    // Contar cuántos usuarios tienen un rol específico
-    @Query(value = " SELECT r.nombre_rol, COUNT(u.id_usuario) FROM usuario u INNER JOIN rol r ON u.id_usuario = r.id_usuario GROUP BY r.nombre_rol", nativeQuery = true)
-    public List<String[]> contarUsuariosRol();
+    // 🔹 Contar cuántos usuarios tienen un rol específico
+    @Query(value = "SELECT r.nombre_rol, COUNT(u.id_usuario) FROM usuario u INNER JOIN rol r ON u.id_usuario = r.id_usuario GROUP BY r.nombre_rol", nativeQuery = true)
+    List<String[]> contarUsuariosRol();
 
-    // Contar usuarios por estado y por rol
-    @Query(value = " SELECT r.nombre_rol, u.enabled, COUNT(r.id_usuario) AS total_usuarios\n" +
-            " FROM usuario u\n" +
-            " INNER JOIN rol r ON u.id_usuario = r.id_usuario\n" +
-            " GROUP BY r.nombre_rol, u.enabled;", nativeQuery = true)
-    public List<String[]> contarUsuariosEstadoRol();
+    // 🔹 Contar usuarios por estado y por rol
+    @Query(value = "SELECT r.nombre_rol, u.enabled, COUNT(r.id_usuario) AS total_usuarios " +
+            "FROM usuario u " +
+            "INNER JOIN rol r ON u.id_usuario = r.id_usuario " +
+            "GROUP BY r.nombre_rol, u.enabled", nativeQuery = true)
+    List<String[]> contarUsuariosEstadoRol();
+
+    // 🔹 Obtener amigos de un usuario (HU55)
+    @Query(value = "SELECT u.* FROM usuario u " +
+            "INNER JOIN usuario_amigo ua ON u.id_usuario = ua.id_amigo " +
+            "WHERE ua.id_usuario = :idUsuario", nativeQuery = true)
+    List<Usuario> findAmigosDe(Integer idUsuario);
 }

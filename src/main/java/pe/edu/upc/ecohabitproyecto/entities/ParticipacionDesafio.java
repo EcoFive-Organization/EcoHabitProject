@@ -16,9 +16,15 @@ public class ParticipacionDesafio {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
+    // 🔹 Relación con desafío comunitario
     @ManyToOne
-    @JoinColumn(name = "id_desafio", nullable = false)
+    @JoinColumn(name = "id_desafio", nullable = true) // puede ser null si es un desafío de amigos
     private Desafio desafio;
+
+    // 🔹 Relación con desafío de amigos
+    @ManyToOne
+    @JoinColumn(name = "id_desafio_amigo", nullable = true) // puede ser null si es un desafío comunitario
+    private DesafioAmigo desafioAmigo;
 
     @Column(name = "progreso", nullable = false, precision = 12, scale = 2)
     private BigDecimal progreso = BigDecimal.ZERO; // inicia en 0
@@ -55,6 +61,14 @@ public class ParticipacionDesafio {
 
     public void setDesafio(Desafio desafio) {
         this.desafio = desafio;
+    }
+
+    public DesafioAmigo getDesafioAmigo() {
+        return desafioAmigo;
+    }
+
+    public void setDesafioAmigo(DesafioAmigo desafioAmigo) {
+        this.desafioAmigo = desafioAmigo;
     }
 
     public BigDecimal getProgreso() {

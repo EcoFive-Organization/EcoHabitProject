@@ -22,4 +22,10 @@ public interface IDesafioService {
 
     // 🔹 HU52: Crear desafío con amigos
     void crearDesafioAmigo(DesafioAmigoDTO dto);
+
+    void eliminarDesafioAmigo(Integer idDesafioAmigo, Integer idCreador);
+
+    void unirseADesafioAmigo(Integer idUsuario, Integer idDesafioAmigo);
+
+
 }

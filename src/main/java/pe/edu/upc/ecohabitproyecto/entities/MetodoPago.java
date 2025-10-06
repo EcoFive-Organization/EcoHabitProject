@@ -9,7 +9,7 @@ public class MetodoPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idMetodoPago;
+    private Integer idMetodoPago;
 
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
@@ -24,13 +24,17 @@ public class MetodoPago {
     @Column(name = "fecha_registro", nullable = false)
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario", nullable = false, unique = true)
+    // 🔹 Relación correcta con Usuario (muchos métodos de pago pueden pertenecer a un usuario)
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
+    // Constructor vacío
+    public MetodoPago() {}
+
     // Getters y setters
-    public int getIdMetodoPago() { return idMetodoPago; }
-    public void setIdMetodoPago(int idMetodoPago) { this.idMetodoPago = idMetodoPago; }
+    public Integer getIdMetodoPago() { return idMetodoPago; }
+    public void setIdMetodoPago(Integer idMetodoPago) { this.idMetodoPago = idMetodoPago; }
 
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
