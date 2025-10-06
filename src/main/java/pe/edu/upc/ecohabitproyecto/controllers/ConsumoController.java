@@ -164,4 +164,52 @@ public class ConsumoController {
 
         return ResponseEntity.ok(dto);
     }
+
+    // Endpoint 1: Impacto por Tipo de Consumo (Agua, Energía, etc.)
+    @GetMapping("/ImpactoPorTipo")
+    public ResponseEntity<?> getImpactoTotalByTipo() {
+        List<ImpactoPorCategoriaDTO> listaDTO = new ArrayList<>();
+        List<Object[]> resultados = cS.getImpactoTotalByTipo();
+
+        if (resultados.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de impacto para este reporte.");
+        }
+
+        for (Object[] columna : resultados) {
+            ImpactoPorCategoriaDTO dto = new ImpactoPorCategoriaDTO();
+            // Columna 0: Tipo (String)
+            dto.setCategoria((String) columna[0]);
+            // Columna 1: Impacto total (SUM(valor) como BigDecimal)
+            dto.setImpactoTotal(new BigDecimal(columna[1].toString()));
+
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    // Endpoint 2: Impacto por Origen de Consumo (Dispositivo, Grifo, etc.)
+    @GetMapping("/ImpactoPorOrigen")
+    public ResponseEntity<?> getImpactoTotalByOrigen() {
+        List<ImpactoPorCategoriaDTO> listaDTO = new ArrayList<>();
+        List<Object[]> resultados = cS.getImpactoTotalByOrigen();
+
+        if (resultados.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron registros de impacto para este reporte.");
+        }
+
+        for (Object[] columna : resultados) {
+            ImpactoPorCategoriaDTO dto = new ImpactoPorCategoriaDTO();
+            // Columna 0: OrigenConsumo (String)
+            dto.setCategoria((String) columna[0]);
+            // Columna 1: Impacto total (SUM(valor) como BigDecimal)
+            dto.setImpactoTotal(new BigDecimal(columna[1].toString()));
+
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
 }

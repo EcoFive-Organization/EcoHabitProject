@@ -56,4 +56,18 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
             @Param("tipoConsumo") String tipoConsumo,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
+
+    //Estadística 1: Impacto agrupado por TIPO (Ej: Agua, Electricidad)
+    @Query(value = "SELECT tipo, SUM(valor) AS impacto_total " +
+            "FROM consumo " +
+            "GROUP BY tipo " +
+            "ORDER BY impacto_total DESC", nativeQuery = true)
+    List<Object[]> getImpactoTotalByTipo();
+
+    //Estadística 2: Impacto agrupado por ORIGEN (Ej: Lavadora, Grifo)
+    @Query(value = "SELECT origen_consumo, SUM(valor) AS impacto_total " +
+            "FROM consumo " +
+            "GROUP BY origen_consumo " +
+            "ORDER BY impacto_total DESC", nativeQuery = true)
+    List<Object[]> getImpactoTotalByOrigen();
 }
