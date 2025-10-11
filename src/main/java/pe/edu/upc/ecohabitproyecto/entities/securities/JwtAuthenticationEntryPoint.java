@@ -1,4 +1,4 @@
-package pe.edu.upc.ecohabitproyecto.securities;
+package pe.edu.upc.ecohabitproyecto.entities.securities;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package pe.edu.upc.ecohabitproyecto.securities;
+package pe.edu.upc.ecohabitproyecto.entities.securities;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;

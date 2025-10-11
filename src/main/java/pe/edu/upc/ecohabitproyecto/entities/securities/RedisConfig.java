@@ -1,4 +1,4 @@
-package pe.edu.upc.ecohabitproyecto.securities;
+package pe.edu.upc.ecohabitproyecto.entities.securities;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

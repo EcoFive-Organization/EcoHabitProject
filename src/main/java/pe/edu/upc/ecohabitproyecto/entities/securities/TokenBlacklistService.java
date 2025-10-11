@@ -1,4 +1,4 @@
-package pe.edu.upc.ecohabitproyecto.securities;
+package pe.edu.upc.ecohabitproyecto.entities.securities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

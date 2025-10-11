@@ -1,4 +1,4 @@
-package pe.edu.upc.ecohabitproyecto.securities;
+package pe.edu.upc.ecohabitproyecto.entities.securities;
 
 // Importar todas las clases necesarias
 import jakarta.servlet.http.HttpServletRequest;
