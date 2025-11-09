@@ -77,7 +77,7 @@ public class WebSecurityConfig {
                                 "/swagger_ui.html",
                                 "/usuarios/forgot-password",
                                 "/usuarios/reset-password",
-                                "/usuarios"
+                                "/usuarios/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
