@@ -32,15 +32,12 @@ public class CORS implements Filter {
 //			return;
 //		}
 //
-//
 //		response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 //		//response.setHeader("Access-Control-Allow-Methods", "DELETE, GET, OPTIONS, PATCH, POST, PUT");
 //		response.setHeader("Access-Control-Allow-Methods", "GET");
 //		response.setHeader("Access-Control-Max-Age", "3600");
 //		response.setHeader("Access-Control-Allow-Headers",
 //				"x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN");
-//
-//
 //
 //		if ("OPTIONS".equalsIgnoreCase(method)) {
 //			response.setStatus(HttpServletResponse.SC_OK);
@@ -50,7 +47,6 @@ public class CORS implements Filter {
 //		} else {
 //			chain.doFilter(req, res);
 //		}
-//
 //	}
 
     @Override
