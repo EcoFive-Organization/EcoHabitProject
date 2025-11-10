@@ -79,7 +79,9 @@ public class WebSecurityConfig {
                                 "/usuarios/reset-password",
                                 "/usuarios/**",
                                 "/foros/**",
-                                "/recompensas/**"
+                                "/recompensas/**",
+                                "/educacion/**",
+                                "/plan-suscripcion/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
