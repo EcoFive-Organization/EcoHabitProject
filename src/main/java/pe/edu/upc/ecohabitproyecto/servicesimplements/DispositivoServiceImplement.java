@@ -16,7 +16,7 @@ public class DispositivoServiceImplement implements IDispositivoService {
 
     @Override
     public List<Dispositivo> list() {
-        return dR.findAll();
+        return dR.findAllWithUsuario();
     }
 
     @Override
@@ -24,9 +24,10 @@ public class DispositivoServiceImplement implements IDispositivoService {
         dR.save(dispositivo);
     }
 
+    // Metodo actualizado
     @Override
     public Dispositivo listId(int id) {
-        return dR.findById(id).orElse(null);
+        return dR.findWithUsuarioById(id).orElse(null);
     }
 
     @Override
