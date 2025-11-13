@@ -179,9 +179,9 @@ public class ConsumoController {
         for (Object[] columna : resultados) {
             ImpactoPorCategoriaDTO dto = new ImpactoPorCategoriaDTO();
             // Columna 0: Tipo (String)
-            dto.setCategoria((String) columna[0]);
+            //dto.setCategoria((String) columna[0]);
             // Columna 1: Impacto total (SUM(valor) como BigDecimal)
-            dto.setImpactoTotal(new BigDecimal(columna[1].toString()));
+            dto.setImpactoTotal(new BigDecimal(columna[0].toString()));
 
             listaDTO.add(dto);
         }
@@ -209,7 +209,6 @@ public class ConsumoController {
 
             listaDTO.add(dto);
         }
-
         return ResponseEntity.ok(listaDTO);
     }
 }
