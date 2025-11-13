@@ -14,7 +14,7 @@ public class Dispositivo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDispositivo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
