@@ -23,4 +23,5 @@ public interface IConsumoService {
 
     List<Object[]> getImpactoTotalByTipo();
     List<Object[]> getImpactoTotalByOrigen();
+
 }

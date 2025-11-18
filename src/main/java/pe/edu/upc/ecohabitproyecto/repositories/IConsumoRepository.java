@@ -70,4 +70,8 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
             "GROUP BY origen_consumo " +
             "ORDER BY impacto_total DESC", nativeQuery = true)
     List<Object[]> getImpactoTotalByOrigen();
+
+    @Query("SELECT c FROM Consumo c JOIN FETCH c.dispositivo d JOIN FETCH d.usuario")
+    List<Consumo> findAllWithDispositivoAndUsuario();
+
 }

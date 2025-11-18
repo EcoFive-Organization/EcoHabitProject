@@ -20,7 +20,7 @@ public class ConsumoServiceImplement implements IConsumoService {
     private IConsumoRepository cR;
 
     @Override
-    public List<Consumo> list() { return cR.findAll(); }
+    public List<Consumo> list() { return cR.findAllWithDispositivoAndUsuario(); }
 
     @Override
     public void insert(Consumo consumo) { cR.save(consumo); }
@@ -64,4 +64,5 @@ public class ConsumoServiceImplement implements IConsumoService {
     public List<Object[]> getImpactoTotalByOrigen() {
         return cR.getImpactoTotalByOrigen();
     }
+
 }
