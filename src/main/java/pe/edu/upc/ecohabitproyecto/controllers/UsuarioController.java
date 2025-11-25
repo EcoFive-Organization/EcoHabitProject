@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.*;
+import pe.edu.upc.ecohabitproyecto.entities.Foro;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IUsuarioService;
 
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 //@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/usuarios")
@@ -29,6 +29,20 @@ public class UsuarioController {
             ModelMapper m = new ModelMapper();
             return m.map(x,UsuarioDTOList.class);
         }).collect(Collectors.toList());
+    }
+
+    // Listar por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listId(@PathVariable("id") Integer id) {
+        Usuario usuario = uS.listId(id);
+        if (usuario == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        UsuarioDTOList dto = m.map(usuario, UsuarioDTOList.class);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")

@@ -2,15 +2,20 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.RecompensaDTO;
+import pe.edu.upc.ecohabitproyecto.dtos.UsuarioDTOList;
 import pe.edu.upc.ecohabitproyecto.entities.Recompensa;
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IRecompensaService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/recompensas")
 public class RecompensaController {
@@ -31,11 +36,18 @@ public class RecompensaController {
         Recompensa e = new ModelMapper().map(dto, Recompensa.class);
         rS.insert(e);
     }
-
+    // Listar por ID
     @GetMapping("/{id}")
-    public RecompensaDTO listarId(@PathVariable int id) {
+    public ResponseEntity<?> listId(@PathVariable("id") Integer id) {
         Recompensa e = rS.listId(id);
-        return new ModelMapper().map(e, RecompensaDTO.class);
+        if (e == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        RecompensaDTO dto = m.map(e, RecompensaDTO.class);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping

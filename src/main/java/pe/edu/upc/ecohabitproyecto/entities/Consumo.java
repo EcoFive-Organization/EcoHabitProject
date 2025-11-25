@@ -16,7 +16,7 @@ public class Consumo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_consumo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idDispositivo", nullable = false)
     private Dispositivo dispositivo;
 
@@ -29,7 +29,7 @@ public class Consumo {
     @Column(name = "unidad", nullable = false, length = 20)
     private String unidad;
 
-    @Column(name = "origenConsumo", nullable = false, length = 100)
+    @Column(name = "origen_consumo", nullable = false, length = 100)
     private String origenConsumo;
 
     @Column(name = "fecha", nullable = false)
