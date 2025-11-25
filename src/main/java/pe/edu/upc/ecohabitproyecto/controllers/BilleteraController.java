@@ -76,7 +76,7 @@ public class BilleteraController {
     }
 
     // USER o ADMIN pueden obtener su billetera
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/{idUsuario}")
     public ResponseEntity<BilleteraDTO> obtenerBilletera(@PathVariable int idUsuario) {
         Billetera billetera = bS.obtenerBilleteraPorUsuario(idUsuario);
@@ -85,7 +85,7 @@ public class BilleteraController {
     }
 
     // USER o ADMIN pueden canjear puntos
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @PostMapping("/canjear")
     public ResponseEntity<Map<String, Object>> canjearPuntos(
             @RequestParam int idUsuario,
@@ -102,7 +102,7 @@ public class BilleteraController {
     }
 
     // USER o ADMIN pueden ver historial de transacciones
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/historial/{idUsuario}")
     public ResponseEntity<List<HistorialTransaccionesDTO>> historial(@PathVariable int idUsuario) {
         List<HistorialTransaccionesDTO> historial = transaccionService.getHistorialTransacciones(idUsuario);
@@ -110,7 +110,7 @@ public class BilleteraController {
     }
 
     // USER o ADMIN pueden configurar/actualizar método de pago
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @PutMapping("/retiros")
     public ResponseEntity<Map<String, Object>> configurarMetodoPago(
             @RequestParam int idUsuario,

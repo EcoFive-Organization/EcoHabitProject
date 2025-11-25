@@ -3,9 +3,18 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 public class DispositivoDTOList {
+    private int idDispositivo;
     private Usuario usuario;
     private String nombre;
     private String ubicacion;
+
+    public int getIdDispositivo() {
+        return idDispositivo;
+    }
+
+    public void setIdDispositivo(int idDispositivo) {
+        this.idDispositivo = idDispositivo;
+    }
 
     public Usuario getUsuario() {
         return usuario;

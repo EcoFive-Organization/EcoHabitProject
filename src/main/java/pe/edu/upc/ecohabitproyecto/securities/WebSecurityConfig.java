@@ -81,13 +81,8 @@ public class WebSecurityConfig {
                                 "/foros/**",
                                 "/recompensas/**",
                                 "/educacion/**",
-                                "/plan-suscripcion/**",
-                                "/billeteras/**",
-                                "/transacciones/**",
-                                "/suscripciones_pagos/**",
-                                "/suscripciones/**",
-                                "/metodos_pagos/**"
-                                ).permitAll()
+                                "/plan-suscripcion/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 // AÑADIR LA CONFIGURACIÓN DE LOGOUT (HU39)
