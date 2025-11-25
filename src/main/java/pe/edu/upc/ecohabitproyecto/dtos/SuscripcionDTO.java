@@ -4,11 +4,12 @@ import pe.edu.upc.ecohabitproyecto.entities.PlanSuscripcion;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class SuscripcionDTO {
     private int idSuscripcion;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private String estado;
     private Usuario usuario;
     private PlanSuscripcion planSuscripcion;
@@ -21,19 +22,19 @@ public class SuscripcionDTO {
         this.idSuscripcion = idSuscripcion;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
