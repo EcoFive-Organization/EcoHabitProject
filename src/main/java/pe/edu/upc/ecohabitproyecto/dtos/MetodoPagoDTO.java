@@ -1,7 +1,10 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+
 public class MetodoPagoDTO {
     private int idMetodoPago;
+    private Usuario usuario;
     private String tipo;
     private String detalles; // <-- alineado con la columna de la BD
 
