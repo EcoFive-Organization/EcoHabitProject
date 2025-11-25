@@ -86,7 +86,10 @@ public class WebSecurityConfig {
                                 "/dispositivos/**",
                                 "/transacciones/**",
                                 "/billeteras/**",
-                                "/consumos/**"
+                                "/consumos/**",
+                                "/metodos_pagos/**",
+                                "/suscripciones/**",
+                                "/suscripciones_pagos/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
