@@ -4,15 +4,16 @@ import pe.edu.upc.ecohabitproyecto.entities.MetodoPago;
 import pe.edu.upc.ecohabitproyecto.entities.Suscripcion;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class SuscripcionPagoDTO {
     private int idSuscripcionPago;
     private BigDecimal monto;
-    private Timestamp fecha;
+    private LocalDateTime fecha;
     private String estado;
+    private String referenciaExterna;
     private Suscripcion suscripcion;
-    private MetodoPago metodo_pago;
+    private MetodoPago metodoPago;
 
     public int getIdSuscripcionPago() {
         return idSuscripcionPago;
@@ -30,11 +31,11 @@ public class SuscripcionPagoDTO {
         this.monto = monto;
     }
 
-    public Timestamp getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Timestamp fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
@@ -46,6 +47,14 @@ public class SuscripcionPagoDTO {
         this.estado = estado;
     }
 
+    public String getReferenciaExterna() {
+        return referenciaExterna;
+    }
+
+    public void setReferenciaExterna(String referenciaExterna) {
+        this.referenciaExterna = referenciaExterna;
+    }
+
     public Suscripcion getSuscripcion() {
         return suscripcion;
     }
@@ -54,11 +63,11 @@ public class SuscripcionPagoDTO {
         this.suscripcion = suscripcion;
     }
 
-    public MetodoPago getMetodo_pago() {
-        return metodo_pago;
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
     }
 
-    public void setMetodo_pago(MetodoPago metodo_pago) {
-        this.metodo_pago = metodo_pago;
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
     }
 }

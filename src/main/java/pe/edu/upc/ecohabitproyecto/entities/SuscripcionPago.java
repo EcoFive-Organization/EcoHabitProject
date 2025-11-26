@@ -3,7 +3,7 @@ package pe.edu.upc.ecohabitproyecto.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Entity
@@ -17,10 +17,13 @@ public class SuscripcionPago {
     private BigDecimal monto;
 
     @Column(name = "fecha", nullable = false)
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     @Column(name = "estado", nullable = false, length = 20)
     private String estado;
+
+    @Column(name = "referenciaExterna", nullable = false, length = 100)
+    private String referenciaExterna;
 
     @ManyToOne
     @JoinColumn(name = "idSuscripcion", nullable = false)
@@ -34,11 +37,12 @@ public class SuscripcionPago {
 
     }
 
-    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, LocalDateTime fecha, String estado, Suscripcion suscripcion, MetodoPago metodoPago) {
+    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, LocalDateTime fecha, String estado, String referenciaExterna, Suscripcion suscripcion, MetodoPago metodoPago) {
         this.idSuscripcionPago = idSuscripcionPago;
         this.monto = monto;
         this.fecha = fecha;
         this.estado = estado;
+        this.referenciaExterna = referenciaExterna;
         this.suscripcion = suscripcion;
         this.metodoPago = metodoPago;
     }
@@ -73,6 +77,14 @@ public class SuscripcionPago {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getReferenciaExterna() {
+        return referenciaExterna;
+    }
+
+    public void setReferenciaExterna(String referenciaExterna) {
+        this.referenciaExterna = referenciaExterna;
     }
 
     public Suscripcion getSuscripcion() {

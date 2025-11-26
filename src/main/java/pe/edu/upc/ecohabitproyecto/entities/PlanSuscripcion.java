@@ -21,16 +21,20 @@ public class PlanSuscripcion {
     @Column(name = "activo")
     private Boolean activo;
 
+    @Column(name = "paypalPlanId", nullable = false, length = 100)
+    private String paypalPlanId;
+
     public PlanSuscripcion() {
 
     }
 
-    public PlanSuscripcion(Integer idPlanSuscripcion, String nombre, Double costo, String descripcion, Boolean activo) {
+    public PlanSuscripcion(Integer idPlanSuscripcion, String nombre, Double costo, String descripcion, Boolean activo, String paypalPlanId) {
         this.idPlanSuscripcion = idPlanSuscripcion;
         this.nombre = nombre;
         this.costo = costo;
         this.descripcion = descripcion;
         this.activo = activo;
+        this.paypalPlanId = paypalPlanId;
     }
 
     public Integer getIdPlanSuscripcion() {
@@ -71,5 +75,13 @@ public class PlanSuscripcion {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public String getPaypalPlanId() {
+        return paypalPlanId;
+    }
+
+    public void setPaypalPlanId(String paypalPlanId) {
+        this.paypalPlanId = paypalPlanId;
     }
 }

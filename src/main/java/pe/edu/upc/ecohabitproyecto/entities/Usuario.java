@@ -47,10 +47,6 @@ public class Usuario {
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<MetodoPago> metodoPagos;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Publicacion> publicaciones;
 
     @JsonIgnore
@@ -66,18 +62,16 @@ public class Usuario {
     private List<ParticipacionDesafio> participacionDesafios;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Billetera> billeteras;
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Billetera billetera;
 
     // 🔹 Constructor vacío
     public Usuario() {}
 
     // 🔹 Constructor con parámetros
-    public Usuario(Integer idUsuario, String nombre, String email, String passwordHash, Boolean enabled,
-                   List<Rol> roles, List<Dispositivo> dispositivos, List<UsuarioRecompensa> usuarioRecompensas,
-                   List<Suscripcion> suscripciones, List<UsuarioLogro> usuarioLogros, List<MetodoPago> metodoPagos,
-                   List<Publicacion> publicaciones, List<Comentario> comentarios, List<Reaccion> reacciones,
-                   List<ParticipacionDesafio> participacionDesafios, List<Billetera> billeteras) {
+
+
+    public Usuario(Integer idUsuario, String nombre, String email, String passwordHash, Boolean enabled, List<Rol> roles, List<Dispositivo> dispositivos, List<UsuarioRecompensa> usuarioRecompensas, List<Suscripcion> suscripciones, List<UsuarioLogro> usuarioLogros, List<Publicacion> publicaciones, List<Comentario> comentarios, List<Reaccion> reacciones, List<ParticipacionDesafio> participacionDesafios, Billetera billetera) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
@@ -88,12 +82,11 @@ public class Usuario {
         this.usuarioRecompensas = usuarioRecompensas;
         this.suscripciones = suscripciones;
         this.usuarioLogros = usuarioLogros;
-        this.metodoPagos = metodoPagos;
         this.publicaciones = publicaciones;
         this.comentarios = comentarios;
         this.reacciones = reacciones;
         this.participacionDesafios = participacionDesafios;
-        this.billeteras = billeteras;
+        this.billetera = billetera;
     }
 
     // 🔹 Getters y Setters
@@ -177,14 +170,6 @@ public class Usuario {
         this.usuarioLogros = usuarioLogros;
     }
 
-    public List<MetodoPago> getMetodoPagos() {
-        return metodoPagos;
-    }
-
-    public void setMetodoPagos(List<MetodoPago> metodoPagos) {
-        this.metodoPagos = metodoPagos;
-    }
-
     public List<Publicacion> getPublicaciones() {
         return publicaciones;
     }
@@ -217,13 +202,15 @@ public class Usuario {
         this.participacionDesafios = participacionDesafios;
     }
 
-    public List<Billetera> getBilleteras() {
-        return billeteras;
+    public Billetera getBilletera() {
+        return billetera;
     }
 
-    public void setBilleteras(List<Billetera> billeteras) {
-        this.billeteras = billeteras;
+    public void setBilletera(Billetera billetera) {
+        this.billetera = billetera;
     }
+
+    //
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

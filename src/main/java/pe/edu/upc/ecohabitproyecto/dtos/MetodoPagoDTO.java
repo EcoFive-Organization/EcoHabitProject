@@ -2,11 +2,13 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
+import java.time.LocalDate;
+
 public class MetodoPagoDTO {
     private int idMetodoPago;
-    private Usuario usuario;
     private String tipo;
     private String detalles; // <-- alineado con la columna de la BD
+    private LocalDate fechaRegistro;
 
     public int getIdMetodoPago() {
         return idMetodoPago;
@@ -30,5 +32,13 @@ public class MetodoPagoDTO {
 
     public void setDetalles(String detalles) {
         this.detalles = detalles;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }

@@ -11,8 +11,8 @@ public class Billetera {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idBilletera;
 
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "idUsuario", nullable = false, unique = true)
     private Usuario usuario;
 
     @Column(name = "saldo", nullable = false, precision = 12, scale = 2)

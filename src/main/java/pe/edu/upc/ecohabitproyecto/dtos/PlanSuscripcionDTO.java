@@ -6,6 +6,7 @@ public class PlanSuscripcionDTO {
     private String nombre;
     private Double costo; // Mapea numeric(10,2)
     private String descripcion;
+    private String paypalPlanId;
 
     public Integer getIdPlanSuscripcion() {
         return idPlanSuscripcion;
@@ -37,5 +38,13 @@ public class PlanSuscripcionDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getPaypalPlanId() {
+        return paypalPlanId;
+    }
+
+    public void setPaypalPlanId(String paypalPlanId) {
+        this.paypalPlanId = paypalPlanId;
     }
 }

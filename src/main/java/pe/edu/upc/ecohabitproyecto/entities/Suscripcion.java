@@ -22,6 +22,9 @@ public class Suscripcion {
     @Column(name = "estado", nullable = false, length = 20)
     private String estado;
 
+    @Column(name = "paypalSuscripcionId", nullable = false, length = 100)
+    private String paypalSuscripcionId;
+
     // Relaciones
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
@@ -36,13 +39,14 @@ public class Suscripcion {
 
     }
 
-    public Suscripcion(PlanSuscripcion planSuscripcion, Usuario usuario, String estado, LocalDate fechaFin, LocalDate fechaInicio, int idSuscripcion) {
-        this.planSuscripcion = planSuscripcion;
-        this.usuario = usuario;
-        this.estado = estado;
-        this.fechaFin = fechaFin;
-        this.fechaInicio = fechaInicio;
+    public Suscripcion(int idSuscripcion, LocalDate fechaInicio, LocalDate fechaFin, String estado, String paypalSuscripcionId, Usuario usuario, PlanSuscripcion planSuscripcion) {
         this.idSuscripcion = idSuscripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.estado = estado;
+        this.paypalSuscripcionId = paypalSuscripcionId;
+        this.usuario = usuario;
+        this.planSuscripcion = planSuscripcion;
     }
 
     public int getIdSuscripcion() {
@@ -75,6 +79,14 @@ public class Suscripcion {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getPaypalSuscripcionId() {
+        return paypalSuscripcionId;
+    }
+
+    public void setPaypalSuscripcionId(String paypalSuscripcionId) {
+        this.paypalSuscripcionId = paypalSuscripcionId;
     }
 
     public Usuario getUsuario() {

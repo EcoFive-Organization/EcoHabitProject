@@ -3,14 +3,17 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class TransaccionDTO {
     private int idTransaccion;
     private Billetera billetera;
     private String tipo;
-    private BigDecimal monto;
-    private Timestamp fecha;
+    private BigDecimal montoPuntos;
+    private LocalDateTime fecha;
+    private int montoDineroReal;
+    private String emailDestino;
+    private String referenciaPaypal;
 
     public int getIdTransaccion() {
         return idTransaccion;
@@ -36,19 +39,43 @@ public class TransaccionDTO {
         this.tipo = tipo;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public BigDecimal getMontoPuntos() {
+        return montoPuntos;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setMontoPuntos(BigDecimal montoPuntos) {
+        this.montoPuntos = montoPuntos;
     }
 
-    public Timestamp getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Timestamp fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
+    }
+
+    public int getMontoDineroReal() {
+        return montoDineroReal;
+    }
+
+    public void setMontoDineroReal(int montoDineroReal) {
+        this.montoDineroReal = montoDineroReal;
+    }
+
+    public String getEmailDestino() {
+        return emailDestino;
+    }
+
+    public void setEmailDestino(String emailDestino) {
+        this.emailDestino = emailDestino;
+    }
+
+    public String getReferenciaPaypal() {
+        return referenciaPaypal;
+    }
+
+    public void setReferenciaPaypal(String referenciaPaypal) {
+        this.referenciaPaypal = referenciaPaypal;
     }
 }

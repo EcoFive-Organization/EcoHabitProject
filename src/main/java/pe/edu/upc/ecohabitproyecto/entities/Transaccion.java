@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Transaccion")
@@ -21,20 +22,32 @@ public class Transaccion {
     @Column(name = "tipo", nullable = false, length = 20)
     private String tipo;
 
-    @Column(name = "monto", nullable = false, precision = 12, scale = 2)
-    private BigDecimal monto;
+    @Column(name = "montoPuntos", nullable = false, precision = 12, scale = 2)
+    private BigDecimal montoPuntos;
 
     @Column(name = "fecha", nullable = false)
-    private Timestamp fecha;
+    private LocalDateTime fecha;
+
+    @Column(name = "montoDineroReal", nullable = false)
+    private int montoDineroReal;
+
+    @Column(name = "emailDestino", nullable = false, length = 100)
+    private String emailDestino;
+
+    @Column(name = "referenciaPaypal", nullable = false, length = 100)
+    private String referenciaPaypal;
 
     public Transaccion() {}
 
-    public Transaccion(int idTransaccion, Billetera billetera, String tipo, BigDecimal monto, Timestamp fecha) {
+    public Transaccion(int idTransaccion, Billetera billetera, String tipo, BigDecimal montoPuntos, LocalDateTime fecha, int montoDineroReal, String emailDestino, String referenciaPaypal) {
         this.idTransaccion = idTransaccion;
         this.billetera = billetera;
         this.tipo = tipo;
-        this.monto = monto;
+        this.montoPuntos = montoPuntos;
         this.fecha = fecha;
+        this.montoDineroReal = montoDineroReal;
+        this.emailDestino = emailDestino;
+        this.referenciaPaypal = referenciaPaypal;
     }
 
     public int getIdTransaccion() {
@@ -61,19 +74,43 @@ public class Transaccion {
         this.tipo = tipo;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public BigDecimal getMontoPuntos() {
+        return montoPuntos;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setMontoPuntos(BigDecimal montoPuntos) {
+        this.montoPuntos = montoPuntos;
     }
 
-    public Timestamp getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Timestamp fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
+    }
+
+    public int getMontoDineroReal() {
+        return montoDineroReal;
+    }
+
+    public void setMontoDineroReal(int montoDineroReal) {
+        this.montoDineroReal = montoDineroReal;
+    }
+
+    public String getEmailDestino() {
+        return emailDestino;
+    }
+
+    public void setEmailDestino(String emailDestino) {
+        this.emailDestino = emailDestino;
+    }
+
+    public String getReferenciaPaypal() {
+        return referenciaPaypal;
+    }
+
+    public void setReferenciaPaypal(String referenciaPaypal) {
+        this.referenciaPaypal = referenciaPaypal;
     }
 }

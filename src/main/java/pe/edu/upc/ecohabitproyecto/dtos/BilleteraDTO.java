@@ -4,7 +4,8 @@ import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
 import java.math.BigDecimal;
 
-public class BilleteraDTO {
+public class
+BilleteraDTO {
     // Traer atributos de la carpeta entities
     private int idBilletera;
     private Usuario usuario;

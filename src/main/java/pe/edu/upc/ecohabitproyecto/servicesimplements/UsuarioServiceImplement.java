@@ -13,6 +13,7 @@ import pe.edu.upc.ecohabitproyecto.repositories.IPasswordResetTokenRepository;
 import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IUsuarioService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -122,7 +123,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
         metodoPago.setUsuario(usuario);
         metodoPago.setTipo(dto.getTipo());
         metodoPago.setDetalles(dto.getDetalles());
-        metodoPago.setFechaRegistro(LocalDateTime.now());
+        metodoPago.setFechaRegistro(LocalDate.now());
 
         // 🔹 Asegurar que nunca sea null
         if (metodoPago.getActivo() == null) {

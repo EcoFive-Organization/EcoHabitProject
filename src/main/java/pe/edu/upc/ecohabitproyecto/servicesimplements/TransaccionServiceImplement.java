@@ -2,6 +2,7 @@ package pe.edu.upc.ecohabitproyecto.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional; // Importante para consistencia
 import pe.edu.upc.ecohabitproyecto.dtos.CanjePuntosDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.HistorialTransaccionesDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
@@ -13,9 +14,9 @@ import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ITransaccionService;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; // ✅ Usamos solo LocalDateTime
 import java.util.List;
+import java.util.UUID; // Para simular la referencia de PayPal si no tienes la API real aún
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +38,10 @@ public class TransaccionServiceImplement implements ITransaccionService {
 
     @Override
     public void insert(Transaccion transaccion) {
+        // Asegurar que la fecha se ponga automática si viene nula
+        if (transaccion.getFecha() == null) {
+            transaccion.setFecha(LocalDateTime.now());
+        }
         tR.save(transaccion);
     }
 
@@ -67,48 +72,70 @@ public class TransaccionServiceImplement implements ITransaccionService {
 
     // 🔹 HU20: Canjear puntos
     @Override
+    @Transactional // ✅ Asegura que si falla el guardado, no se descuenten los puntos
     public void canjearPuntos(Integer idUsuario, CanjePuntosDTO dto) {
-        // 1. Verificar usuario
+
+        // 1. Validaciones básicas
         Usuario usuario = usuarioRepo.findById(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        // 2. Obtener billetera
         Billetera billetera = billeteraRepo.findByUsuarioIdUsuario(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Billetera no encontrada"));
 
-        // 3. Validar saldo suficiente
-        if (billetera.getSaldo().compareTo(BigDecimal.valueOf(dto.getPuntosACanjear())) < 0) {
+        BigDecimal puntosRequeridos = BigDecimal.valueOf(dto.getPuntosACanjear());
+
+        if (billetera.getSaldo().compareTo(puntosRequeridos) < 0) {
             throw new RuntimeException("Saldo insuficiente para canjear");
         }
 
-        // 4. Descontar puntos
-        billetera.setSaldo(billetera.getSaldo().subtract(BigDecimal.valueOf(dto.getPuntosACanjear())));
+        // 2. Lógica de Conversión (Ejemplo: 1000 Puntos = 1 USD)
+        // Esto evita división por cero
+        if (dto.getPuntosACanjear() < 1000) {
+            throw new RuntimeException("El monto mínimo de canje es 1000 puntos");
+        }
+        int dineroReal = dto.getPuntosACanjear() / 1000;
+
+        // 3. Descontar puntos de la billetera
+        billetera.setSaldo(billetera.getSaldo().subtract(puntosRequeridos));
         billeteraRepo.save(billetera);
 
-        // 5. Registrar transacción
+        // 4. Registrar la transacción COMPLETA
         Transaccion transaccion = new Transaccion();
         transaccion.setBilletera(billetera);
-        transaccion.setMonto(BigDecimal.valueOf(dto.getPuntosACanjear()));
-        transaccion.setTipo("CANJE");
-        transaccion.setFecha(Timestamp.valueOf(LocalDateTime.now()));
+        transaccion.setTipo("SALIDA"); // O "CANJE"
+
+        // ✅ Usamos LocalDateTime directo (Más limpio)
+        transaccion.setFecha(LocalDateTime.now());
+
+        transaccion.setMontoPuntos(puntosRequeridos);
+
+        // ✅ Campos NUEVOS que faltaban y son obligatorios en BD:
+        transaccion.setMontoDineroReal(dineroReal);
+        transaccion.setEmailDestino(dto.getEmailPaypal());
+
+        // Aquí deberías poner el ID que te devuelve PayPal.
+        // Como aún no conectas la API real en este método, generamos uno falso temporalmente:
+        transaccion.setReferenciaPaypal(UUID.randomUUID().toString());
+
         tR.save(transaccion);
     }
 
     @Override
     public List<HistorialTransaccionesDTO> getHistorialTransacciones(Integer idUsuario) {
-        // 1. Obtener billetera del usuario
         Billetera billetera = billeteraRepo.findByUsuarioIdUsuario(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Billetera no encontrada"));
 
-        // 2. Consultar transacciones de esa billetera
         List<Transaccion> transacciones = tR.findByBilletera(billetera);
 
-        // 3. Mapear a DTO
         return transacciones.stream().map(tx -> {
             HistorialTransaccionesDTO dto = new HistorialTransaccionesDTO();
-            dto.setFecha(tx.getFecha().toLocalDateTime()); // convertir Timestamp → LocalDateTime
+
+            // ✅ CORRECCIÓN: Como en la Entity ya es LocalDateTime, NO necesitas .toLocalDateTime()
+            // dto.setFecha(tx.getFecha().toLocalDateTime()); <--- ESTO ERA ANTES
+            dto.setFecha(tx.getFecha()); // <--- ESTO ES AHORA (Mucho más simple)
+
             dto.setTipo(tx.getTipo());
-            dto.setMonto(tx.getMonto());
+            dto.setMonto(tx.getMontoPuntos());
             return dto;
         }).collect(Collectors.toList());
     }

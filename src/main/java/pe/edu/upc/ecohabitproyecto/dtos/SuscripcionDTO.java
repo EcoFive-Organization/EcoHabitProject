@@ -11,6 +11,7 @@ public class SuscripcionDTO {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private String estado;
+    private String paypalSuscripcionId;
     private Usuario usuario;
     private PlanSuscripcion planSuscripcion;
 
@@ -44,6 +45,14 @@ public class SuscripcionDTO {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getPaypalSuscripcionId() {
+        return paypalSuscripcionId;
+    }
+
+    public void setPaypalSuscripcionId(String paypalSuscripcionId) {
+        this.paypalSuscripcionId = paypalSuscripcionId;
     }
 
     public Usuario getUsuario() {
