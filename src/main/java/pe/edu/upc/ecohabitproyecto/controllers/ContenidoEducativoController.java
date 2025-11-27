@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.ContenidoEducativoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.ListarTipoContenidoDTO;
@@ -23,6 +24,7 @@ public class ContenidoEducativoController {
 
     // Listar
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<ContenidoEducativoDTO> listar() {
         return contenido_educativoService.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -32,6 +34,7 @@ public class ContenidoEducativoController {
 
     // Registrar
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody ContenidoEducativoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         ContenidoEducativo contenidoEducativo = modelMapper.map(dto, ContenidoEducativo.class);
@@ -40,6 +43,7 @@ public class ContenidoEducativoController {
 
     // Eliminar fisico
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         ContenidoEducativo contenido_educativo = contenido_educativoService.listIdContenidoEducativo(id);
         if (contenido_educativo == null) {
@@ -52,6 +56,7 @@ public class ContenidoEducativoController {
 
     // Modificar
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody ContenidoEducativoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         ContenidoEducativo contenidoEducativo = modelMapper.map(dto, ContenidoEducativo.class);

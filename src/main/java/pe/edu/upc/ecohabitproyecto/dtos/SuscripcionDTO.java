@@ -13,9 +13,12 @@ public class SuscripcionDTO {
     private String estado;
     private String paypalSuscripcionId;
 
-    // 🔴 CAMBIO CRÍTICO: Usamos Integer, NO objetos Usuario/Plan
+    // Usamos Integer, NO objetos Usuario/Plan
     private Integer idUsuario;
     private Integer idPlanSuscripcion;
+
+    private String nombreUsuario;
+    private String nombrePlan;
 
     public int getIdSuscripcion() {
         return idSuscripcion;
@@ -71,5 +74,21 @@ public class SuscripcionDTO {
 
     public void setIdPlanSuscripcion(Integer idPlanSuscripcion) {
         this.idPlanSuscripcion = idPlanSuscripcion;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getNombrePlan() {
+        return nombrePlan;
+    }
+
+    public void setNombrePlan(String nombrePlan) {
+        this.nombrePlan = nombrePlan;
     }
 }

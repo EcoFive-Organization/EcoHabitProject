@@ -3,6 +3,7 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity; // ⬅️ Nuevo import necesario
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication; // ⬅️ Nuevo import necesario
 import org.springframework.security.core.context.SecurityContextHolder; // ⬅️ Nuevo import necesario
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class SuscripcionController {
     private ISuscripcionService sS;
 
     @Autowired
-    private JwtUserDetailsService jwtUserDetailsService; // ⬅️ Necesario para la seguridad
+    private JwtUserDetailsService jwtUserDetailsService; // Necesario para la seguridad
 
     @GetMapping("/validar/{idUsuario}")
     public boolean validarSuscripcion(@PathVariable("idUsuario") Integer idUsuario) {
@@ -32,14 +33,30 @@ public class SuscripcionController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<SuscripcionDTO> listar(){
-        return sS.list().stream().map(x->{
-            ModelMapper m = new ModelMapper();
-            return m.map(x,SuscripcionDTO.class);
+        return sS.list().stream().map(x -> {
+            SuscripcionDTO dto = new SuscripcionDTO();
+            dto.setIdSuscripcion(x.getIdSuscripcion());
+            dto.setFechaInicio(x.getFechaInicio());
+            dto.setFechaFin(x.getFechaFin());
+            dto.setEstado(x.getEstado());
+            dto.setPaypalSuscripcionId(x.getPaypalSuscripcionId());
+
+            // IDs
+            dto.setIdUsuario(x.getUsuario().getIdUsuario());
+            dto.setIdPlanSuscripcion(x.getPlanSuscripcion().getIdPlanSuscripcion());
+
+            // LLENAR LOS NOMBRES PARA LA VISTA
+            dto.setNombreUsuario(x.getUsuario().getNombre());
+            dto.setNombrePlan(x.getPlanSuscripcion().getNombre());
+
+            return dto;
         }).collect(Collectors.toList());
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody SuscripcionDTO s){
         sS.insert(s);
     }

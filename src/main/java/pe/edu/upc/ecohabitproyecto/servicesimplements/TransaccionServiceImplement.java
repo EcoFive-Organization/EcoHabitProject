@@ -1,6 +1,8 @@
 package pe.edu.upc.ecohabitproyecto.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; // Importante para consistencia
 import pe.edu.upc.ecohabitproyecto.dtos.CanjePuntosDTO;
@@ -14,7 +16,8 @@ import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ITransaccionService;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime; // ✅ Usamos solo LocalDateTime
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID; // Para simular la referencia de PayPal si no tienes la API real aún
 import java.util.stream.Collectors;
@@ -33,10 +36,25 @@ public class TransaccionServiceImplement implements ITransaccionService {
 
     @Override
     public List<Transaccion> list() {
-        return tR.findAll();
+        // 1. Obtener autenticación
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+        if (isAdmin) {
+            // ADMIN: Ve todo el historial del sistema
+            return tR.findAll();
+        } else {
+            // CLIENT: Solo ve SUS movimientos
+            Usuario u = usuarioRepo.findByNombre(username).orElse(null);
+            if (u == null) return Collections.emptyList();
+
+            return tR.findByUsuarioId(u.getIdUsuario());
+        }
     }
 
     @Override
+    @Transactional
     public void insert(Transaccion transaccion) {
         // Asegurar que la fecha se ponga automática si viene nula
         if (transaccion.getFecha() == null) {
@@ -74,8 +92,9 @@ public class TransaccionServiceImplement implements ITransaccionService {
     @Override
     @Transactional // ✅ Asegura que si falla el guardado, no se descuenten los puntos
     public void canjearPuntos(Integer idUsuario, CanjePuntosDTO dto) {
+        // Validación de seguridad: ¿El que llama es el dueño de la cuenta?
+        validarAccesoUsuario(idUsuario);
 
-        // 1. Validaciones básicas
         Usuario usuario = usuarioRepo.findById(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
@@ -88,36 +107,40 @@ public class TransaccionServiceImplement implements ITransaccionService {
             throw new RuntimeException("Saldo insuficiente para canjear");
         }
 
-        // 2. Lógica de Conversión (Ejemplo: 1000 Puntos = 1 USD)
-        // Esto evita división por cero
         if (dto.getPuntosACanjear() < 1000) {
             throw new RuntimeException("El monto mínimo de canje es 1000 puntos");
         }
         int dineroReal = dto.getPuntosACanjear() / 1000;
 
-        // 3. Descontar puntos de la billetera
+        // Descontar
         billetera.setSaldo(billetera.getSaldo().subtract(puntosRequeridos));
         billeteraRepo.save(billetera);
 
-        // 4. Registrar la transacción COMPLETA
+        // Registrar
         Transaccion transaccion = new Transaccion();
         transaccion.setBilletera(billetera);
-        transaccion.setTipo("SALIDA"); // O "CANJE"
-
-        // ✅ Usamos LocalDateTime directo (Más limpio)
+        transaccion.setTipo("SALIDA");
         transaccion.setFecha(LocalDateTime.now());
-
         transaccion.setMontoPuntos(puntosRequeridos);
-
-        // ✅ Campos NUEVOS que faltaban y son obligatorios en BD:
         transaccion.setMontoDineroReal(dineroReal);
         transaccion.setEmailDestino(dto.getEmailPaypal());
-
-        // Aquí deberías poner el ID que te devuelve PayPal.
-        // Como aún no conectas la API real en este método, generamos uno falso temporalmente:
-        transaccion.setReferenciaPaypal(UUID.randomUUID().toString());
+        transaccion.setReferenciaPaypal(UUID.randomUUID().toString()); // Simulación
 
         tR.save(transaccion);
+    }
+
+    // Método auxiliar de seguridad (Reutilizable)
+    private void validarAccesoUsuario(Integer idUsuarioObjetivo) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin) {
+            Usuario u = usuarioRepo.findByNombre(username).orElseThrow();
+            if (!u.getIdUsuario().equals(idUsuarioObjetivo)) {
+                throw new RuntimeException("Acceso denegado: No puedes operar en la cuenta de otro usuario.");
+            }
+        }
     }
 
     @Override

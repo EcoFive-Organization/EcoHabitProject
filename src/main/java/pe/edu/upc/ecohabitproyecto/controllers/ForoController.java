@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.ForoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.QuantityPostForumDTO;
@@ -25,6 +26,7 @@ public class ForoController {
 
     // Listar los foros registrados
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<ForoDTO> listar() {
         return iForoService.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -34,6 +36,7 @@ public class ForoController {
 
     // Registrar un foro
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody ForoDTO foroDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Foro foro = modelMapper.map(foroDTO,Foro.class);
@@ -56,6 +59,7 @@ public class ForoController {
 
     // Eliminar fisico
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
         Foro foro = iForoService.listId(id);
         if (foro == null) {
@@ -68,6 +72,7 @@ public class ForoController {
 
     // Modificar un registro
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificar(@RequestBody ForoDTO dto) {
         ModelMapper m = new ModelMapper();
         // Transforma de dto a software

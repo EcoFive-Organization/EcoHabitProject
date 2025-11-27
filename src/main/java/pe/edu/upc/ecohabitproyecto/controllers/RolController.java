@@ -3,6 +3,7 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 import org.modelmapper.ModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.RolDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Rol;
@@ -19,6 +20,7 @@ public class RolController {
     private IRolService rS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolDTO> listar() {
         return rS.list().stream().map(x -> {
             ModelMapper mapper = new ModelMapper();
@@ -27,6 +29,7 @@ public class RolController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody RolDTO rolDTO) {
 
         ModelMapper mapper = new ModelMapper();

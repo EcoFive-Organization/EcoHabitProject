@@ -24,6 +24,7 @@ public class UsuarioController {
     private IUsuarioService uS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<UsuarioDTOList> listar(){
         return uS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -46,6 +47,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Usuario u = uS.listId(id);
         if (u == null) {

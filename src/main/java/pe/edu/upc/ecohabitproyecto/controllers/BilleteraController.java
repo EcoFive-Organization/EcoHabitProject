@@ -4,12 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.BilleteraDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.CanjePuntosDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.HistorialTransaccionesDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.MetodoPagoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
+import pe.edu.upc.ecohabitproyecto.servicesimplements.JwtUserDetailsService;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IBilleteraService;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ITransaccionService;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IUsuarioService;
@@ -33,8 +35,11 @@ public class BilleteraController {
     @Autowired
     private IUsuarioService usuarioService;
 
+    @Autowired
+    private JwtUserDetailsService jwtService;
+
     // Solo ADMIN puede listar todas las billeteras
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     @GetMapping
     public List<BilleteraDTO> listar() {
         return bS.list().stream().map(x -> {
@@ -43,8 +48,22 @@ public class BilleteraController {
         }).collect(Collectors.toList());
     }
 
+    // 2. MI BILLETERA (Endpoint rápido para el cliente)
+    @GetMapping("/mi-saldo")
+    @PreAuthorize("hasAuthority('CLIENT')")
+    public ResponseEntity<BilleteraDTO> miBilletera() {
+        // Obtenemos el ID del usuario logueado automáticamente
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Integer idUsuario = jwtService.getIdUsuarioByUsername(username);
+
+        Billetera billetera = bS.obtenerBilleteraPorUsuario(idUsuario);
+        BilleteraDTO dto = new ModelMapper().map(billetera, BilleteraDTO.class);
+
+        return ResponseEntity.ok(dto);
+    }
+
     // Solo ADMIN puede insertar billeteras
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public void insertar(@RequestBody BilleteraDTO s) {
         ModelMapper m = new ModelMapper();

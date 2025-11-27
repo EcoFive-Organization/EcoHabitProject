@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.CantidadTransaccionesDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.MontoTransaccionesDTO;
@@ -28,6 +29,7 @@ public class TransaccionController {
     private ITransaccionService tS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<TransaccionDTO> listar(){
         return tS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -36,6 +38,7 @@ public class TransaccionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody TransaccionDTO s){
         ModelMapper m = new ModelMapper();
         Transaccion tran=m.map(s, Transaccion.class);

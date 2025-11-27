@@ -2,6 +2,7 @@ package pe.edu.upc.ecohabitproyecto.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.ecohabitproyecto.entities.Billetera;
 import pe.edu.upc.ecohabitproyecto.entities.Transaccion;
@@ -42,4 +43,8 @@ public interface ITransaccionRepository extends JpaRepository<Transaccion, Integ
 
     // Buscar transacciones por billetera
     List<Transaccion> findByBilletera(Billetera billetera);
+
+    //Buscar transacciones por ID de Usuario (A través de la Billetera)
+    @Query("SELECT t FROM Transaccion t JOIN t.billetera b WHERE b.usuario.idUsuario = :idUsuario")
+    List<Transaccion> findByUsuarioId(@Param("idUsuario") Integer idUsuario);
 }

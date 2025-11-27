@@ -26,6 +26,7 @@ public class DispositivoController {
     private IDispositivoService dS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<DispositivoDTOList> listar(){
         return dS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -34,6 +35,7 @@ public class DispositivoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public void insertar(@RequestBody DispositivoDTOInsert s){
         ModelMapper m = new ModelMapper();
         Dispositivo disp=m.map(s, Dispositivo.class);

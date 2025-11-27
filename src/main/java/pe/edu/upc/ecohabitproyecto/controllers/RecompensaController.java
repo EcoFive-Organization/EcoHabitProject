@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.RecompensaDTO;
@@ -25,6 +26,7 @@ public class RecompensaController {
 
     // ---------------- CRUD de Recompensas ----------------
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<RecompensaDTO> listar() {
         return rS.list().stream()
                 .map(e -> new ModelMapper().map(e, RecompensaDTO.class))
@@ -32,6 +34,7 @@ public class RecompensaController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody RecompensaDTO dto) {
         Recompensa e = new ModelMapper().map(dto, Recompensa.class);
         rS.insert(e);

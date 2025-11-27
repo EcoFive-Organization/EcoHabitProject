@@ -2,6 +2,7 @@ package pe.edu.upc.ecohabitproyecto.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.MetodoPagoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.MetodoPago;
@@ -17,6 +18,7 @@ public class MetodoPagoController {
     private IMetodoPagoService mS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<MetodoPagoDTO> listar(){
         return mS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -25,6 +27,7 @@ public class MetodoPagoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody MetodoPagoDTO l){
         ModelMapper m = new ModelMapper();
         MetodoPago metodo = m.map(l, MetodoPago.class);
