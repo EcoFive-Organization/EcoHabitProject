@@ -37,7 +37,7 @@ public class SuscripcionPago {
 
     }
 
-    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, LocalDateTime fecha, String estado, String referenciaExterna, Suscripcion suscripcion, MetodoPago metodoPago) {
+    public SuscripcionPago(int idSuscripcionPago, BigDecimal monto, LocalDate fecha, String estado, String referenciaExterna, Suscripcion suscripcion, MetodoPago metodoPago) {
         this.idSuscripcionPago = idSuscripcionPago;
         this.monto = monto;
         this.fecha = fecha;
@@ -63,11 +63,11 @@ public class SuscripcionPago {
         this.monto = monto;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

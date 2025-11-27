@@ -25,7 +25,4 @@ public interface IUsuarioService {
 
     // 2. Fase de restablecimiento (valida token y cambia password)
     void resetPassword(String token, String newPassword);
-
-    //  Configurar o modificar métod de pago para retiros
-    void modificarMetodoPago(Integer idUsuario, MetodoPagoDTO dto);
 }

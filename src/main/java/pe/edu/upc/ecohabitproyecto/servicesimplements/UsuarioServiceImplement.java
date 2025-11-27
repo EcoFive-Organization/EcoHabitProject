@@ -110,27 +110,6 @@ public class UsuarioServiceImplement implements IUsuarioService {
         tokenRepository.delete(resetToken);
     }
 
-    // 🔹 HU22: Configurar o modificar metodo de pago
-    @Override
-    @Transactional
-    public void modificarMetodoPago(Integer idUsuario, MetodoPagoDTO dto) {
-        Usuario usuario = uR.findById(idUsuario)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        MetodoPago metodoPago = metodoPagoRepo.findByUsuarioIdUsuario(idUsuario)
-                .orElse(new MetodoPago());
-
-        metodoPago.setUsuario(usuario);
-        metodoPago.setTipo(dto.getTipo());
-        metodoPago.setDetalles(dto.getDetalles());
-        metodoPago.setFechaRegistro(LocalDate.now());
-
-        // 🔹 Asegurar que nunca sea null
-        if (metodoPago.getActivo() == null) {
-            metodoPago.setActivo(true); // por defecto activo
-        }
-
-        metodoPagoRepo.save(metodoPago);
-    }
 
 }

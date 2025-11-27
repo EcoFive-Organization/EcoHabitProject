@@ -26,6 +26,11 @@ public class SuscripcionController {
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService; // ⬅️ Necesario para la seguridad
 
+    @GetMapping("/validar/{idUsuario}")
+    public boolean validarSuscripcion(@PathVariable("idUsuario") Integer idUsuario) {
+        return sS.verificarSuscripcionActiva(idUsuario);
+    }
+
     @GetMapping
     public List<SuscripcionDTO> listar(){
         return sS.list().stream().map(x->{
@@ -36,9 +41,7 @@ public class SuscripcionController {
 
     @PostMapping
     public void insertar(@RequestBody SuscripcionDTO s){
-        ModelMapper m = new ModelMapper();
-        Suscripcion suscripcion = m.map(s, Suscripcion.class);
-        sS.insert(suscripcion);
+        sS.insert(s);
     }
 
     // ✅ NUEVO ENDPOINT PARA SELECCIONAR PLAN

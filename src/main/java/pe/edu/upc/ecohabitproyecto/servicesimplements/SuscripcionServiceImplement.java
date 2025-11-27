@@ -3,6 +3,7 @@ package pe.edu.upc.ecohabitproyecto.servicesimplements;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.ecohabitproyecto.dtos.SuscripcionDTO;
 import pe.edu.upc.ecohabitproyecto.entities.*;
 import pe.edu.upc.ecohabitproyecto.repositories.*;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.ISuscripcionService;
@@ -37,7 +38,32 @@ public class SuscripcionServiceImplement implements ISuscripcionService {
     }
 
     @Override
-    public void insert(Suscripcion suscripcion) {
+    @Transactional
+    public void insert(SuscripcionDTO dto) {
+        Suscripcion suscripcion = new Suscripcion();
+
+        // Validación ID PayPal
+        if (dto.getPaypalSuscripcionId() == null || dto.getPaypalSuscripcionId().isEmpty()) {
+            throw new RuntimeException("El ID de suscripción de PayPal es nulo o vacío");
+        }
+        suscripcion.setPaypalSuscripcionId(dto.getPaypalSuscripcionId());
+
+        // Fechas
+        suscripcion.setFechaInicio(dto.getFechaInicio());
+        suscripcion.setFechaFin(dto.getFechaFin());
+        suscripcion.setEstado("ACTIVA");
+
+        // 🔴 CORRECCIÓN: Usamos dto.getIdUsuario() directamente
+        Usuario usuario = uR.findById(dto.getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + dto.getIdUsuario()));
+        suscripcion.setUsuario(usuario);
+
+        // 🔴 CORRECCIÓN: Usamos dto.getIdPlanSuscripcion() directamente
+        PlanSuscripcion plan = psR.findById(dto.getIdPlanSuscripcion())
+                .orElseThrow(() -> new RuntimeException("Plan no encontrado con ID: " + dto.getIdPlanSuscripcion()));
+        suscripcion.setPlanSuscripcion(plan);
+
+        // Guardar
         sR.save(suscripcion);
     }
 
@@ -105,7 +131,7 @@ public class SuscripcionServiceImplement implements ISuscripcionService {
         SuscripcionPago pago = new SuscripcionPago();
         pago.setSuscripcion(suscripcion);
         pago.setMonto(BigDecimal.valueOf(montoPlan));
-        pago.setFecha(LocalDateTime.now());
+        pago.setFecha(LocalDate.now());
         pago.setEstado(estadoTransaccionDB);
         pago.setMetodoPago(metodoPago); // ⬅️ Usando el setter correcto
 
@@ -142,6 +168,13 @@ public class SuscripcionServiceImplement implements ISuscripcionService {
 
         // 4. Guardar los cambios
         return sR.save(suscripcion);
+    }
+
+    @Override
+    public boolean verificarSuscripcionActiva(Integer idUsuario) {
+        Usuario u = new Usuario();
+        u.setIdUsuario(idUsuario); // Solo necesitamos el ID para la consulta
+        return sR.existsByUsuarioAndEstado(u, "ACTIVA");
     }
 }
 

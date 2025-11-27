@@ -12,8 +12,10 @@ public class SuscripcionDTO {
     private LocalDate fechaFin;
     private String estado;
     private String paypalSuscripcionId;
-    private Usuario usuario;
-    private PlanSuscripcion planSuscripcion;
+
+    // 🔴 CAMBIO CRÍTICO: Usamos Integer, NO objetos Usuario/Plan
+    private Integer idUsuario;
+    private Integer idPlanSuscripcion;
 
     public int getIdSuscripcion() {
         return idSuscripcion;
@@ -55,19 +57,19 @@ public class SuscripcionDTO {
         this.paypalSuscripcionId = paypalSuscripcionId;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public PlanSuscripcion getPlanSuscripcion() {
-        return planSuscripcion;
+    public Integer getIdPlanSuscripcion() {
+        return idPlanSuscripcion;
     }
 
-    public void setPlanSuscripcion(PlanSuscripcion planSuscripcion) {
-        this.planSuscripcion = planSuscripcion;
+    public void setIdPlanSuscripcion(Integer idPlanSuscripcion) {
+        this.idPlanSuscripcion = idPlanSuscripcion;
     }
 }

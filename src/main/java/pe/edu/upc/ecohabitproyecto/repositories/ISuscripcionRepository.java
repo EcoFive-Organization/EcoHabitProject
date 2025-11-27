@@ -5,10 +5,14 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upc.ecohabitproyecto.entities.Suscripcion;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ISuscripcionRepository extends JpaRepository<Suscripcion, Integer> {
     // ✅ METODO SIMPLE: Spring Data JPA genera: SELECT * FROM suscripcion WHERE id_usuario = ?
     Optional<Suscripcion> findByUsuario(Usuario usuario);
+
+    // Devuelve true si encuentra al menos una fila
+    boolean existsByUsuarioAndEstado(Usuario usuario, String estado);
 }

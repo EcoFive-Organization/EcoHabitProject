@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface IMetodoPagoRepository extends JpaRepository<MetodoPago, Integer> {
-    Optional<MetodoPago> findByUsuarioIdUsuario(Integer idUsuario);
 }

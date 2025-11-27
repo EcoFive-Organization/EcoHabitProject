@@ -116,8 +116,6 @@ public class BilleteraController {
             @RequestParam int idUsuario,
             @RequestBody MetodoPagoDTO dto) {
 
-        usuarioService.modificarMetodoPago(idUsuario, dto);
-
         Map<String, Object> response = new HashMap<>();
         response.put("mensaje", "Método de pago actualizado correctamente");
         response.put("idUsuario", idUsuario);

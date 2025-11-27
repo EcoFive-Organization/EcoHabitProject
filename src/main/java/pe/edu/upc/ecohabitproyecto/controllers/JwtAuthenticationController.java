@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upc.ecohabitproyecto.dtos.JwtRequestDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.JwtResponseDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.securities.JwtTokenUtil;
 import pe.edu.upc.ecohabitproyecto.servicesimplements.JwtUserDetailsService;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IUsuarioService;
@@ -39,13 +40,23 @@ public class JwtAuthenticationController {
     @Autowired
     private IUsuarioService uS;
 
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
+
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponseDTO> login(@RequestBody JwtRequestDTO req) throws Exception {
         authenticate(req.getUsername(), req.getPassword());
+
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponseDTO(token));
+
+        // 🔴 CAMBIO 2: Buscamos al usuario completo para obtener su ID
+        // Asegúrate de que tu repositorio tenga findByNombre (o findByEmail si usas email)
+        Usuario usuario = usuarioRepository.findByNombre(req.getUsername()).orElse(null);
+
+        // 🔴 CAMBIO 3: Enviamos el Token Y el ID en la respuesta
+        return ResponseEntity.ok(new JwtResponseDTO(token, usuario.getIdUsuario()));
     }
 
     private void authenticate(String username, String password) throws Exception {
