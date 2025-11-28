@@ -82,7 +82,7 @@ public class UsuarioController {
 
     // Listar por cantidad de Usuarios, estado y rol
     @GetMapping("/estados_roles")
-    public ResponseEntity<?> obtenerVideos() {
+    public ResponseEntity<?> obtenerUsuarioEstadoRol() {
         List<UsuarioRolStatusDTO> listaDTO = new ArrayList<>();
         List<String[]> fila = uS.getUsuariosEstadoRol(); // aqui están los datos
 
