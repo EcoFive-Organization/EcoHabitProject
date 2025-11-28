@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.ecohabitproyecto.dtos.CantidadConsumoDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.DispositivoDTOInsert;
 import pe.edu.upc.ecohabitproyecto.dtos.DispositivoDTOList;
 import pe.edu.upc.ecohabitproyecto.dtos.TipoDispositivoListDTO;
@@ -15,6 +14,7 @@ import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IDispositivoService;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,11 +27,16 @@ public class DispositivoController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
-    public List<DispositivoDTOList> listar(){
-        return dS.list().stream().map(x->{
-            ModelMapper m = new ModelMapper();
-            return m.map(x,DispositivoDTOList.class);
-        }).collect(Collectors.toList());
+    public List<DispositivoDTOList> listar() {
+        // 1. Instanciamos el mapper FUERA del stream (Mejora de rendimiento crítica)
+        ModelMapper m = new ModelMapper();
+
+        return dS.list().stream()
+                // 2. Agregamos el sort usando un Comparator
+                // Cambia 'getId' por el campo que desees (ej. getNombre)
+                .sorted(Comparator.comparing(Dispositivo::getIdDispositivo))
+                .map(x -> m.map(x, DispositivoDTOList.class))
+                .collect(Collectors.toList());
     }
 
     @PostMapping
