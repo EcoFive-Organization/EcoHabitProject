@@ -56,7 +56,7 @@ public class SuscripcionController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public void insertar(@RequestBody SuscripcionDTO s){
         sS.insert(s);
     }
