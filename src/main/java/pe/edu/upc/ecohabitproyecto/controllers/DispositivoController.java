@@ -98,4 +98,18 @@ public class DispositivoController {
         return ResponseEntity.ok(listaDTO);
     }
 
+    // *** METODO NUEVO REQUERIDO PARA EL DASHBOARD ***
+    // Endpoint: GET /dispositivos/usuario/{idUsuario}
+    @GetMapping("/usuario/{idUsuario}")
+    public List<DispositivoDTOList> listarPorUsuario(@PathVariable("idUsuario") Integer idUsuario) {
+        // Llama al servicio para obtener la lista filtrada por el ID del usuario
+        List<Dispositivo> lista = dS.listByUserId(idUsuario);
+
+        // Mapea las entidades a DTOs de lista y retorna
+        return lista.stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, DispositivoDTOList.class);
+        }).collect(Collectors.toList());
+    }
+
 }

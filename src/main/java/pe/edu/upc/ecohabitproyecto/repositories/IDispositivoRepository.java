@@ -31,4 +31,9 @@ public interface IDispositivoRepository extends JpaRepository<Dispositivo, Integ
     //Buscamos por ID
     @Query("SELECT d FROM Dispositivo d JOIN FETCH d.usuario u WHERE u.idUsuario = :idUsuario")
     List<Dispositivo> findByUsuarioId(@Param("idUsuario") int idUsuario);
+
+    //List<Dispositivo> findByUsuarioIdUsuario(Integer idUsuario);
+
+    @Query("SELECT d FROM Dispositivo d JOIN FETCH d.usuario u WHERE u.idUsuario = :idUsuario")
+    List<Dispositivo> listByUserId(Integer idUsuario);
 }

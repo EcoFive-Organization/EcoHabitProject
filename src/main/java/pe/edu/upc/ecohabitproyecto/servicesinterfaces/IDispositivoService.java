@@ -11,5 +11,5 @@ public interface IDispositivoService {
     public void delete(int id);
     public void update(Dispositivo dispositivo);
     List<String[]> getByTipo(String tipo_parametro);
-
+    List<Dispositivo> listByUserId(Integer idUsuario);
 }

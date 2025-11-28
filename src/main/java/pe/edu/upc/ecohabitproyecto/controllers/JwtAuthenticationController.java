@@ -49,13 +49,16 @@ public class JwtAuthenticationController {
         authenticate(req.getUsername(), req.getPassword());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
 
-        // 🔴 CAMBIO 2: Buscamos al usuario completo para obtener su ID
-        // Asegúrate de que tu repositorio tenga findByNombre (o findByEmail si usas email)
-        Usuario usuario = usuarioRepository.findByNombre(req.getUsername()).orElse(null);
+        // 1. PRIMERO: Buscamos al usuario completo en la BD para tener su ID disponible
+        Usuario usuario = usuarioRepository.findByNombre(req.getUsername())
+                .orElseThrow(() -> new Exception("Usuario no encontrado en base de datos"));
 
-        // 🔴 CAMBIO 3: Enviamos el Token Y el ID en la respuesta
+        // 2. SEGUNDO: Generamos el token pasando el userDetails Y el ID del usuario
+        // Nota cómo ahora pasamos 'usuario.getIdUsuario()' al metodo
+        final String token = jwtTokenUtil.generateToken(userDetails, usuario.getIdUsuario().longValue());
+
+        // 3. Devolvemos el token (que ahora lleva el ID encriptado dentro) y también el ID suelto por si acaso
         return ResponseEntity.ok(new JwtResponseDTO(token, usuario.getIdUsuario()));
     }
 

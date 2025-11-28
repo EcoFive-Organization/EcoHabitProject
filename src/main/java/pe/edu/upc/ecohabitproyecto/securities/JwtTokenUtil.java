@@ -58,10 +58,20 @@ public class JwtTokenUtil implements Serializable {
     }
 
     //generate token for user
-    public String generateToken(UserDetails userDetails) {
+    // CAMBIO: Ahora recibimos también el idUsuario (Long)
+    public String generateToken(UserDetails userDetails, Long idUsuario) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("nombre", "rosa");
-        claims.put("role", userDetails.getAuthorities().stream().map(r -> r.getAuthority()).collect(Collectors.joining()));
+
+        // Agregamos el ID al payload del token
+        claims.put("id", idUsuario);
+
+        // Opcional: Reemplacé "rosa" por el nombre real del userDetails para que sea dinámico
+        claims.put("nombre", userDetails.getUsername());
+
+        claims.put("role", userDetails.getAuthorities().stream()
+                .map(r -> r.getAuthority())
+                .collect(Collectors.joining()));
+
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

@@ -43,7 +43,7 @@ public class ConsumoController {
     @GetMapping("/CantidadPorTipoConsumo")
     public ResponseEntity<?> obtenerCantidadPorTipoConsumo() {
         List<CantidadConsumoDTO> listaDTO = new ArrayList<>();
-        List<Object[]> fila = cS.findAllByTipoConsumo(); // Llama al nuevo método del servicio
+        List<Object[]> fila = cS.findAllByTipoConsumo(); // Llama al nuevo metodo del servicio
 
         if (fila.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

@@ -2,11 +2,15 @@ package pe.edu.upc.ecohabitproyecto.dtos;
 
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 
+import java.time.LocalDate;
+
 public class DispositivoDTOList {
     private int idDispositivo;
     private Usuario usuario;
     private String nombre;
     private String ubicacion;
+    private String tipo;
+    private LocalDate fechaRegistro;
 
     public int getIdDispositivo() {
         return idDispositivo;
@@ -38,5 +42,21 @@ public class DispositivoDTOList {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }

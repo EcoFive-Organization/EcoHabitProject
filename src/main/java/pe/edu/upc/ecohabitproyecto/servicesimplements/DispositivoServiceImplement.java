@@ -141,5 +141,9 @@ public class DispositivoServiceImplement implements IDispositivoService {
         return dR.getByTipo(tipo_parametro);
     }
 
-
+    @Override
+    public List<Dispositivo> listByUserId(Integer idUsuario) {
+        // Llama al repositorio con la query que fuerza la carga del Usuario
+        return dR.listByUserId(idUsuario);
+    }
 }
