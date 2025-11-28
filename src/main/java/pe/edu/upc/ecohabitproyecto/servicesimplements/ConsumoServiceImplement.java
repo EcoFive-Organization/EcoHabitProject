@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.ecohabitproyecto.dtos.ConsumoGraficoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
@@ -11,10 +12,12 @@ import pe.edu.upc.ecohabitproyecto.repositories.IConsumoRepository;
 import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -92,6 +95,35 @@ public class ConsumoServiceImplement implements IConsumoService {
     @Override
     public List<Object[]> getImpactoTotalByOrigen() {
         return cR.getImpactoTotalByOrigen();
+    }
+
+    @Override
+    public List<ConsumoGraficoDTO> obtenerConsumoSemanal(Integer idUsuario) {
+        // Calculamos la semana actual (Lunes a Domingo)
+        LocalDate hoy = LocalDate.now();
+        LocalDate lunes = hoy.with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
+        LocalDate domingo = hoy.with(java.time.temporal.TemporalAdjusters.nextOrSame(java.time.DayOfWeek.SUNDAY));
+
+        List<Object[]> resultados = cR.obtenerConsumoDiarioPorRango(idUsuario, lunes, domingo);
+
+        // Mapeamos a DTO
+        List<ConsumoGraficoDTO> dtos = new ArrayList<>();
+
+        for (Object[] fila : resultados) {
+            // 🔴 CORRECCIÓN AQUÍ:
+            // 1. Recibimos el objeto como java.sql.Date (lo que devuelve la BD)
+            java.sql.Date sqlDate = (java.sql.Date) fila[0];
+
+            // 2. Lo convertimos a LocalDate usando su método nativo
+            LocalDate fechaConvertida = sqlDate.toLocalDate();
+
+            dtos.add(new ConsumoGraficoDTO(
+                    fechaConvertida,     // Pasamos la fecha ya convertida
+                    (String) fila[1],
+                    (BigDecimal) fila[2]
+            ));
+        }
+        return dtos;
     }
 
 }

@@ -1,6 +1,7 @@
 package pe.edu.upc.ecohabitproyecto.servicesinterfaces;
 
 import org.springframework.data.repository.query.Param;
+import pe.edu.upc.ecohabitproyecto.dtos.ConsumoGraficoDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
 import pe.edu.upc.ecohabitproyecto.entities.Dispositivo;
 
@@ -23,5 +24,6 @@ public interface IConsumoService {
 
     List<Object[]> getImpactoTotalByTipo();
     List<Object[]> getImpactoTotalByOrigen();
+    List<ConsumoGraficoDTO> obtenerConsumoSemanal(Integer idUsuario);
 
 }

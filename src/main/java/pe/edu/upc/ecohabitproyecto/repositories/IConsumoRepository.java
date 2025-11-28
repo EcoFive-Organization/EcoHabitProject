@@ -78,4 +78,16 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
     @Query("SELECT c FROM Consumo c JOIN FETCH c.dispositivo d JOIN FETCH d.usuario")
     List<Consumo> findAllWithDispositivoAndUsuario();
 
+    // Agrega esto en IConsumoRepository
+    @Query(value = "SELECT c.fecha, c.tipo, SUM(c.valor) \n" +
+            "FROM Consumo c \n" +
+            "JOIN Dispositivo d ON c.id_dispositivo = d.id_dispositivo\n" +
+            "JOIN Usuario u ON d.id_usuario = u.id_usuario         \n" +
+            "WHERE u.id_usuario = :idUsuario \n" +
+            "  AND c.fecha BETWEEN :startDate AND :endDate \n" +
+            "GROUP BY c.fecha, c.tipo \n" +
+            "ORDER BY c.fecha ASC", nativeQuery = true)
+    List<Object[]> obtenerConsumoDiarioPorRango(@Param("idUsuario") Integer idUsuario,
+                                                @Param("startDate") LocalDate startDate,
+                                                @Param("endDate") LocalDate endDate);
 }

@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.*;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
+import pe.edu.upc.ecohabitproyecto.entities.Usuario;
+import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IConsumoService;
 
 import java.math.BigDecimal;
@@ -23,6 +27,8 @@ public class ConsumoController {
 
     @Autowired
     private IConsumoService cS;
+    @Autowired
+    private IUsuarioRepository uR;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
@@ -214,4 +220,17 @@ public class ConsumoController {
         }
         return ResponseEntity.ok(listaDTO);
     }
+
+    @GetMapping("/grafico-semanal")
+    public ResponseEntity<List<ConsumoGraficoDTO>> getGraficoSemanal() {
+        // Obtenemos el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Usuario u = uR.findByNombre(username).orElse(null);
+
+        if (u == null) return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(cS.obtenerConsumoSemanal(u.getIdUsuario()));
+    }
+
 }
