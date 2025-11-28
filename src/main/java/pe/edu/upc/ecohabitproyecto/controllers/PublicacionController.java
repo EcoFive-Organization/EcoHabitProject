@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@PreAuthorize("hasAuthority('ADMIN')")
+@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
 @RequestMapping("/publicaciones")
 public class PublicacionController {
     @Autowired
@@ -87,26 +87,31 @@ public class PublicacionController {
         return ResponseEntity.ok("Registro con ID " + publicacion.getIdPublicacion() + " modificado correctamente.");
     }
 
-    // Cantidad de publicaciones según foro
-    @GetMapping("/cantidadReacciones")
-    public ResponseEntity<?> getCantidadReacciones() {
+    // Cantidad de reacciones segun publicacion
+    // MODIFICADO: Ahora recibe el ID en la ruta
+    @GetMapping("/cantidadReacciones/{idUsuario}")
+    public ResponseEntity<?> getCantidadReacciones(@PathVariable("idUsuario") int idUsuario) {
+
         List<CantidadReaccionesPublicacionDTO> listaDTO = new ArrayList<>();
-        List<String[]> fila = publicacionService.getCantidadReacciones(); // aqui están las cantidades
+
+        // Pasamos el ID al servicio
+        List<String[]> fila = publicacionService.getCantidadReacciones(idUsuario);
 
         if (fila.isEmpty()) {
+            // Opcional: Si quieres que el gráfico salga vacío en vez de error 404,
+            // puedes devolver OK con lista vacía. Pero mantendré tu lógica:
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron registros.");
+                    .body("No se encontraron registros para este usuario.");
         }
 
         for(String[] columna : fila) {
             CantidadReaccionesPublicacionDTO dto = new CantidadReaccionesPublicacionDTO();
-            dto.setTitulo(columna[0]); // primera columna "Nombre foro"
-            dto.setCantidadReacciones(Integer.parseInt(columna[1])); // segunda columna "Cantidad Publicaciones"
+            dto.setTitulo(columna[0]);
+            dto.setCantidadReacciones(Integer.parseInt(columna[1]));
             listaDTO.add(dto);
         }
 
         return ResponseEntity.ok(listaDTO);
-
     }
 
     // Visualizar Solo Amigos

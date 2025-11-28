@@ -13,10 +13,12 @@ import java.util.Optional;
 @Repository
 public interface IPublicacionRepository extends JpaRepository<Publicacion,Integer> {
     // Cantidad de Reacciones por Titulo de Publicacion
+    // MODIFICADO: Ahora recibe un parámetro :uid y filtra
     @Query(value = "select p.titulo, count(r.id_reaccion) from publicacion p \n" +
-            "left join reaccion r on p.id_publicacion = r.id_publicacion group by p.titulo", nativeQuery = true)
-
-    public List<String[]> getCantidadReacciones();
+            "left join reaccion r on p.id_publicacion = r.id_publicacion " +
+            "where p.id_usuario = :uid " + // <--- FILTRO AGREGADO
+            "group by p.titulo", nativeQuery = true)
+    public List<String[]> getCantidadReacciones(@Param("uid") int uid);
 
     // Buscar por Solo Amigos
     @Query(value = "select titulo, contenido, privacidad, vistas, compartidos, fecha from publicacion where privacidad = 'Solo Amigos'", nativeQuery = true)

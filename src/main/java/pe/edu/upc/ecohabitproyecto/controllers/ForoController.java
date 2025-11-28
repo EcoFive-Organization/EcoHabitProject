@@ -92,6 +92,7 @@ public class ForoController {
 
     // Cantidad de publicaciones según foro
     @GetMapping("/cantidades")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> obtenerCantidad() {
         List<QuantityPostForumDTO> listaDTO = new ArrayList<>();
         List<String[]> fila = iForoService.quantityPostByForum(); // aqui están las cantidades
