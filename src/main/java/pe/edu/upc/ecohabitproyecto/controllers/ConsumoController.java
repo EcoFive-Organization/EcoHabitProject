@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.*;
 import pe.edu.upc.ecohabitproyecto.entities.Consumo;
@@ -24,6 +25,7 @@ public class ConsumoController {
     private IConsumoService cS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<ConsumoDTO> listar(){
         return cS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -32,6 +34,7 @@ public class ConsumoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody ConsumoDTO s){
         ModelMapper m = new ModelMapper();
         Consumo cons=m.map(s, Consumo.class);

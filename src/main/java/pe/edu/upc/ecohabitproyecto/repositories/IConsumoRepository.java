@@ -21,6 +21,10 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
             "GROUP BY tipo ORDER BY cantidad_consumos DESC;", nativeQuery = true)
     List<Object[]> findAllByTipoConsumo();
 
+    //NUEVO MÉTODO (Para Cliente): Filtra por el ID del dueño del dispositivo
+    @Query("SELECT c FROM Consumo c JOIN FETCH c.dispositivo d JOIN FETCH d.usuario u WHERE u.idUsuario = :idUsuario")
+    List<Consumo> findByUsuarioId(@Param("idUsuario") Integer idUsuario);
+
     @Query(value = "SELECT id_consumo, id_dispositivo, valor FROM consumo ORDER BY id_consumo ASC;",nativeQuery = true)
     List<Object[]> getConsumoByDispositivo();
 
