@@ -40,7 +40,7 @@ public class ConsumoController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public void insertar(@RequestBody ConsumoDTO s){
         ModelMapper m = new ModelMapper();
         Consumo cons=m.map(s, Consumo.class);
