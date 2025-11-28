@@ -22,7 +22,7 @@ public interface IPublicacionService {
     public void modificarPublicacion(Publicacion publicacion);
 
     // Cantidad de Reacciones por Titulo de Publicacion
-    public List<String[]> getCantidadReacciones();
+    public List<String[]> getCantidadReacciones(int idUsuario);
 
     // Buscar por Solo Amigos
     public List<String[]> soloAmigosPublicacion();

@@ -41,8 +41,8 @@ public class PublicacionServiceImplement implements IPublicacionService {
     }
 
     @Override
-    public List<String[]> getCantidadReacciones() {
-        return publicacionRepository.getCantidadReacciones();
+    public List<String[]> getCantidadReacciones(int idUsuario) {
+        return publicacionRepository.getCantidadReacciones(idUsuario);
     }
 
     @Override
