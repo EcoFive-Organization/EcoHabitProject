@@ -25,7 +25,7 @@ public interface ITransaccionRepository extends JpaRepository<Transaccion, Integ
 
     // Monto total por tipo de transacción
     @Query(value = "SELECT t.tipo AS tipo_transaccion, " +
-            "SUM(t.monto) AS monto_total " +
+            "SUM(t.monto_puntos) AS monto_total " +
             "FROM transaccion t " +
             "GROUP BY t.tipo " +
             "ORDER BY monto_total DESC;",
