@@ -11,12 +11,15 @@ import java.util.List;
 @Repository
 public interface IContenidoEducativoRepository extends JpaRepository<ContenidoEducativo, Integer>
 {
-    // Listar por tipo Lectura
-    @Query(value = "select c.titulo, c.descripcion, c.url, c.tipo from ContenidoEducativo c where c.tipo = 'Lectura'")
+    // 1. Buscar Lectura (JPQL)
+    // Agregamos 'c.idContenidoEducativo' al principio
+    @Query(value = "select c.idContenidoEducativo, c.titulo, c.descripcion, c.url, c.tipo from ContenidoEducativo c where c.tipo = 'Lectura'")
     public List<String[]> buscarLectura();
+    // Nota: Cambié String[] a Object[] porque el ID es un número, es más seguro.
 
-    // Listar por tipo Video
-    @Query(value = "select c.titulo, c.descripcion, c.url, c.tipo from contenido_educativo c where c.tipo = 'Video'", nativeQuery = true)
+    // 2. Buscar Video (Native Query)
+    // Agregamos 'c.id_contenido_educativo' al principio (nombre de columna en DB)
+    @Query(value = "select c.id_contenido_educativo, c.titulo, c.descripcion, c.url, c.tipo from contenido_educativo c where c.tipo = 'Video'", nativeQuery = true)
     public List<String[]> buscarVideo();
 
 }
