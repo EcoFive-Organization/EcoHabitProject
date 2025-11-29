@@ -46,6 +46,8 @@ public class ConsumoController {
         Consumo cons=m.map(s, Consumo.class);
         cS.insert(cons);
     }
+
+
     @GetMapping("/CantidadPorTipoConsumo")
     public ResponseEntity<?> obtenerCantidadPorTipoConsumo() {
         List<CantidadConsumoDTO> listaDTO = new ArrayList<>();
@@ -85,34 +87,45 @@ public class ConsumoController {
 
         return ResponseEntity.ok(listaDTO);
     }
+
+
     @GetMapping("/ConsumoTotalPorDispositivo")
     public ResponseEntity<?> getConsumoTotalPorDispositivo() {
-        List<CantConsumoDispDTO> listaDTO = new ArrayList<>();
-        List<Object[]> fila = cS.getConsumoTotalByDispositivo();
+
+        // 1. OBTENER EL USUARIO LOGUEADO DESDE EL TOKEN
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Usuario u = uR.findByNombre(username).orElse(null);
+
+        if (u == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado.");
+        }
+
+        // 2. LLAMAR AL SERVICIO PASANDO EL ID DEL USUARIO
+        List<CantidadTransaccionesDTO> listaDTO = new ArrayList<>();
+        List<Object[]> fila = cS.getConsumoTotalByDispositivo(u.getIdUsuario()); // <--- Pasamos el ID aquí
 
         if (fila.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontró consumo total por dispositivo.");
+            // Devolvemos lista vacía en lugar de 404 para que el gráfico simplemente se muestre vacío y no dé error en consola
+            return ResponseEntity.ok(new ArrayList<>());
         }
+
+        List<CantConsumoDispDTO> listaResultados = new ArrayList<>();
 
         for (Object[] columna : fila) {
             CantConsumoDispDTO dto = new CantConsumoDispDTO();
-
-            // Mapeo de las nuevas columnas:
-            // Columna 0: ID del Dispositivo (Integer)
             dto.setIdDispositivo(((Number) columna[0]).intValue());
-            // Columna 1: ID del Usuario (Integer)
             dto.setIdUsuario(((Number) columna[1]).intValue());
-            // Columna 2: Nombre del dispositivo (String)
             dto.setNombreDispositivo((String) columna[2]);
-            // Columna 3: Consumo total (BigDecimal)
             dto.setTotalConsumo((BigDecimal) columna[3]);
 
-            listaDTO.add(dto);
+            listaResultados.add(dto);
         }
 
-        return ResponseEntity.ok(listaDTO);
+        return ResponseEntity.ok(listaResultados);
     }
+
+
     @GetMapping("/FechaConsumo")
     public ResponseEntity<?> getImpactoEcologicoMensual(
             @RequestParam("startDate") LocalDate startDate,

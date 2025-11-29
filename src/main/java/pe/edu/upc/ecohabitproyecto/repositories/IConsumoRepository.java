@@ -38,9 +38,10 @@ public interface IConsumoRepository extends JpaRepository<Consumo,Integer> {
             "FROM consumo c " +
             "JOIN dispositivo d ON c.id_dispositivo = d.id_dispositivo " +
             "JOIN usuario u ON d.id_usuario = u.id_usuario " +
+            "WHERE u.id_usuario = :idUsuario " +  // <--- FILTRO AGREGADO
             "GROUP BY d.id_dispositivo, u.id_usuario, d.nombre " +
             "ORDER BY total_consumo DESC", nativeQuery = true)
-    List<Object[]> getConsumoTotalByDispositivo();
+    List<Object[]> getConsumoTotalByDispositivo(@Param("idUsuario") Integer idUsuario);
 
     // 🚀 CORRECCIÓN CLAVE: Agrupación por Mes/Año e Impacto (suma del valor)
     // Usamos TO_CHAR para obtener el año y el mes como una cadena.
