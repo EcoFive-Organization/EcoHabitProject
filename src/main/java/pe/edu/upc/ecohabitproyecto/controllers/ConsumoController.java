@@ -235,15 +235,15 @@ public class ConsumoController {
     }
 
     @GetMapping("/grafico-semanal")
-    public ResponseEntity<List<ConsumoGraficoDTO>> getGraficoSemanal() {
-        // Obtenemos el usuario autenticado
+    public ResponseEntity<List<ConsumoGraficoDTO>> getGraficoSemanal(
+            @RequestParam(defaultValue = "0") int weeksAgo) { // 0 = actual, 1 = anterior
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         Usuario u = uR.findByNombre(username).orElse(null);
-
         if (u == null) return ResponseEntity.badRequest().build();
 
-        return ResponseEntity.ok(cS.obtenerConsumoSemanal(u.getIdUsuario()));
+        return ResponseEntity.ok(cS.obtenerConsumoSemanal(u.getIdUsuario(), weeksAgo));
     }
 
 }

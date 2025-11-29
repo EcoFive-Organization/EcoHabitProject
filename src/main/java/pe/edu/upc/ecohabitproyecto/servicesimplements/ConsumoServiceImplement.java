@@ -98,9 +98,10 @@ public class ConsumoServiceImplement implements IConsumoService {
     }
 
     @Override
-    public List<ConsumoGraficoDTO> obtenerConsumoSemanal(Integer idUsuario) {
-        // Calculamos la semana actual (Lunes a Domingo)
-        LocalDate hoy = LocalDate.now();
+    public List<ConsumoGraficoDTO> obtenerConsumoSemanal(Integer idUsuario, int weeksAgo) {
+        // Restamos las semanas solicitadas a la fecha de hoy
+        LocalDate hoy = LocalDate.now().minusWeeks(weeksAgo);
+
         LocalDate lunes = hoy.with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
         LocalDate domingo = hoy.with(java.time.temporal.TemporalAdjusters.nextOrSame(java.time.DayOfWeek.SUNDAY));
 
@@ -108,20 +109,10 @@ public class ConsumoServiceImplement implements IConsumoService {
 
         // Mapeamos a DTO
         List<ConsumoGraficoDTO> dtos = new ArrayList<>();
-
         for (Object[] fila : resultados) {
-            // 🔴 CORRECCIÓN AQUÍ:
-            // 1. Recibimos el objeto como java.sql.Date (lo que devuelve la BD)
             java.sql.Date sqlDate = (java.sql.Date) fila[0];
-
-            // 2. Lo convertimos a LocalDate usando su método nativo
             LocalDate fechaConvertida = sqlDate.toLocalDate();
-
-            dtos.add(new ConsumoGraficoDTO(
-                    fechaConvertida,     // Pasamos la fecha ya convertida
-                    (String) fila[1],
-                    (BigDecimal) fila[2]
-            ));
+            dtos.add(new ConsumoGraficoDTO(fechaConvertida, (String) fila[1], (BigDecimal) fila[2]));
         }
         return dtos;
     }

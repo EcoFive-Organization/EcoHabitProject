@@ -24,6 +24,6 @@ public interface IConsumoService {
 
     List<Object[]> getImpactoTotalByTipo();
     List<Object[]> getImpactoTotalByOrigen();
-    List<ConsumoGraficoDTO> obtenerConsumoSemanal(Integer idUsuario);
+    List<ConsumoGraficoDTO> obtenerConsumoSemanal(Integer idUsuario, int weeksAgo);
 
 }
