@@ -1,10 +1,19 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
 public class ListarTipoContenidoDTO {
+    private int idContenidoEducativo;
     private String titulo;
     private String descripcion;
     private String url;
     private String tipo;
+
+    public int getIdContenidoEducativo() {
+        return idContenidoEducativo;
+    }
+
+    public void setIdContenidoEducativo(int idContenidoEducativo) {
+        this.idContenidoEducativo = idContenidoEducativo;
+    }
 
     public String getTitulo() {
         return titulo;

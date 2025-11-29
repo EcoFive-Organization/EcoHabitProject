@@ -77,48 +77,55 @@ public class ContenidoEducativoController {
     @GetMapping("/lecturas")
     public ResponseEntity<?> obtenerLecturas() {
         List<ListarTipoContenidoDTO> listaDTO = new ArrayList<>();
-        List<String[]> fila = contenido_educativoService.getLecturasEducativas(); // aqui están las cantidades
+        // Ahora recibimos Object[] porque mezclamos int (ID) y strings
+        List<String[]> fila = contenido_educativoService.getLecturasEducativas();
 
         if (fila.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se encontraron registros.");
         }
 
-        for(String[] columna : fila) {
+        for(Object[] columna : fila) {
             ListarTipoContenidoDTO dto = new ListarTipoContenidoDTO();
-            dto.setTitulo(columna[0]);
-            dto.setDescripcion(columna[1]);
-            dto.setUrl(columna[2]);
-            dto.setTipo(columna[3]);
+
+            // INDICES ACTUALIZADOS:
+            // [0] = ID, [1] = Titulo, [2] = Descripcion, [3] = URL, [4] = Tipo
+
+            dto.setIdContenidoEducativo(Integer.parseInt(columna[0].toString())); // ¡IMPORTANTE!
+            dto.setTitulo(columna[1].toString());
+            dto.setDescripcion(columna[2].toString());
+            dto.setUrl(columna[3].toString());
+            dto.setTipo(columna[4].toString());
+
             listaDTO.add(dto);
         }
-
         return ResponseEntity.ok(listaDTO);
-
     }
 
     // Listar tipo Video
     @GetMapping("/videos")
     public ResponseEntity<?> obtenerVideos() {
         List<ListarTipoContenidoDTO> listaDTO = new ArrayList<>();
-        List<String[]> fila = contenido_educativoService.getVideosEducativos(); // aqui están los datos
+        List<String[]> fila = contenido_educativoService.getVideosEducativos();
 
         if (fila.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se encontraron registros.");
         }
 
-        for(String[] columna : fila) {
+        for(Object[] columna : fila) {
             ListarTipoContenidoDTO dto = new ListarTipoContenidoDTO();
-            dto.setTitulo(columna[0]);
-            dto.setDescripcion(columna[1]);
-            dto.setUrl(columna[2]);
-            dto.setTipo(columna[3]);
+
+            // MISMOS INDICES QUE ARRIBA
+            dto.setIdContenidoEducativo(Integer.parseInt(columna[0].toString()));
+            dto.setTitulo(columna[1].toString());
+            dto.setDescripcion(columna[2].toString());
+            dto.setUrl(columna[3].toString());
+            dto.setTipo(columna[4].toString());
+
             listaDTO.add(dto);
         }
-
         return ResponseEntity.ok(listaDTO);
-
     }
 
     // Listar por id
