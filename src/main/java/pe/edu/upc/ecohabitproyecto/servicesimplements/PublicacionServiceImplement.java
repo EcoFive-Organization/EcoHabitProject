@@ -55,5 +55,10 @@ public class PublicacionServiceImplement implements IPublicacionService {
         return publicacionRepository.buscarID(nUsuario);
     }
 
+    @Override
+    public List<Publicacion> listByNombreUsuario(String nombre) {
+        return publicacionRepository.findByUsuario_Nombre(nombre);
+    }
+
 
 }

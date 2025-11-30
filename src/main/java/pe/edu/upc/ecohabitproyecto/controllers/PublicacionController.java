@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.ecohabitproyecto.dtos.CantidadReaccionesPublicacionDTO;
 import pe.edu.upc.ecohabitproyecto.dtos.HistorialPublicacionDTO;
@@ -27,8 +30,32 @@ public class PublicacionController {
 
     // Listar publicaciones
     @GetMapping
-    public List<PublicacionDTO> listar(){
-        return publicacionService.list().stream().map(x -> {
+    public List<PublicacionDTO> listar() {
+        // 1. Obtener quién está logueado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        // 2. Verificar si tiene rol ADMIN
+        boolean isAdmin = false;
+        for (GrantedAuthority authority : auth.getAuthorities()) {
+            if (authority.getAuthority().equals("ADMIN")) { // Asegúrate que el rol en BD sea "ADMIN" (o "ROLE_ADMIN")
+                isAdmin = true;
+                break;
+            }
+        }
+
+        List<Publicacion> lista;
+
+        // 3. Decidir qué lista traer
+        if (isAdmin) {
+            // El Admin ve TODO
+            lista = publicacionService.list();
+        } else {
+            // El Cliente ve solo lo SUYO (auth.getName() devuelve el 'nombre' del usuario)
+            lista = publicacionService.listByNombreUsuario(auth.getName());
+        }
+
+        // 4. Convertir a DTO
+        return lista.stream().map(x -> {
             ModelMapper mapper = new ModelMapper();
             return mapper.map(x, PublicacionDTO.class);
         }).collect(Collectors.toList());

@@ -31,6 +31,10 @@ public interface IPublicacionRepository extends JpaRepository<Publicacion,Intege
 
     public List<String[]> buscarID(@Param("nUsuario") int nUsuario);
 
+    // Spring detecta que Publicacion tiene un campo 'usuario'
+    // y Usuario tiene un campo 'nombre'. Crea el filtro automáticamente.
+    List<Publicacion> findByUsuario_Nombre(String nombre);
+
 
 
 

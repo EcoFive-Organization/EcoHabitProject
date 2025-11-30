@@ -30,5 +30,7 @@ public interface IPublicacionService {
     // Buscar por ID (Historial)
     public List<String[]> buscarID(int nUsuario);
 
+    List<Publicacion> listByNombreUsuario(String nombre);
+
 
 }
