@@ -34,20 +34,20 @@ public class Publicacion {
     private int compartidos;
 
     // Relaciones
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idForo", nullable = false) //FK
     @JsonIgnore
     private Foro foro;
 
-    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Reaccion> reacciones;
 
-    @OneToMany(mappedBy = "publicacion", cascade =  CascadeType.ALL)
+    @OneToMany(mappedBy = "publicacion", cascade =  CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Comentario> comentarios;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUsuario", nullable = false)
     @JsonIgnore
     private Usuario usuario;
