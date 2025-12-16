@@ -1,11 +1,13 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "usuario")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
 
     @Id
@@ -46,7 +48,7 @@ public class Usuario {
     private List<UsuarioLogro> usuarioLogros;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Publicacion> publicaciones;
 
     @JsonIgnore

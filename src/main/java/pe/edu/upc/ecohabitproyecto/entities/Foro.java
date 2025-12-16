@@ -1,10 +1,12 @@
 package pe.edu.upc.ecohabitproyecto.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Foro")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Foro {
 
     @Id
