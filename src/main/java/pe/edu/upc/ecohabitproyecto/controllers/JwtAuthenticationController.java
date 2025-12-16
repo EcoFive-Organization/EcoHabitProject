@@ -1,5 +1,6 @@
 package pe.edu.upc.ecohabitproyecto.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,12 @@ import pe.edu.upc.ecohabitproyecto.dtos.JwtResponseDTO;
 import pe.edu.upc.ecohabitproyecto.entities.Usuario;
 import pe.edu.upc.ecohabitproyecto.repositories.IUsuarioRepository;
 import pe.edu.upc.ecohabitproyecto.securities.JwtTokenUtil;
+import pe.edu.upc.ecohabitproyecto.securities.TokenBlacklistService;
 import pe.edu.upc.ecohabitproyecto.servicesimplements.JwtUserDetailsService;
 import pe.edu.upc.ecohabitproyecto.servicesinterfaces.IUsuarioService;
 
+import java.time.Duration;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +47,9 @@ public class JwtAuthenticationController {
     @Autowired
     private IUsuarioRepository usuarioRepository;
 
+    @Autowired
+    private TokenBlacklistService tokenBlacklistService;
+
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponseDTO> login(@RequestBody JwtRequestDTO req) throws Exception {
@@ -60,6 +67,37 @@ public class JwtAuthenticationController {
 
         // 3. Devolvemos el token (que ahora lleva el ID encriptado dentro) y también el ID suelto por si acaso
         return ResponseEntity.ok(new JwtResponseDTO(token, usuario.getIdUsuario()));
+    }
+
+    // --- NUEVO: Endpoint para cerrar sesión (Logout) ---
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        // Obtenemos el token del header Authorization
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7); // Quitamos el "Bearer "
+
+            try {
+                // Calculamos cuánto tiempo le queda de vida al token
+                Date expirationDate = jwtTokenUtil.getExpirationDateFromToken(token);
+                long now = System.currentTimeMillis();
+                long timeRemaining = expirationDate.getTime() - now;
+
+                if (timeRemaining > 0) {
+                    // Si el token aún es válido, lo mandamos a la lista negra en Redis
+                    tokenBlacklistService.blacklistToken(token, Duration.ofMillis(timeRemaining));
+                    return ResponseEntity.ok("Cierre de sesión exitoso. Token invalidado.");
+                } else {
+                    return ResponseEntity.ok("El token ya había expirado, cierre de sesión implícito.");
+                }
+            } catch (Exception e) {
+                // Si el token no es válido o hay error en Redis
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error al procesar el logout: " + e.getMessage());
+            }
+        }
+        return ResponseEntity.badRequest().body("No se proporcionó un token válido en el header.");
     }
 
     private void authenticate(String username, String password) throws Exception {

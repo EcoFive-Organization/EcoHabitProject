@@ -71,12 +71,16 @@ public class UsuarioController {
 
         for(String[] columna : fila) {
             UsuarioRolCountDTO dto = new UsuarioRolCountDTO();
-            dto.setTotalUsuarios(Long.valueOf(columna[0]));
+            // Asumiendo que la columna[0] es la cantidad (ya lo tenías así)
+            dto.setTotalUsuarios(Long.valueOf(columna[1]));
+
+            // 🟢 FALTA ESTO: Asignar el nombre del rol (posiblemente esté en la columna 1)
+            dto.setNombreRol(columna[0]);
+
             listaDTO.add(dto);
         }
 
         return ResponseEntity.ok(listaDTO);
-
     }
 
     // Listar por cantidad de Usuarios, estado y rol

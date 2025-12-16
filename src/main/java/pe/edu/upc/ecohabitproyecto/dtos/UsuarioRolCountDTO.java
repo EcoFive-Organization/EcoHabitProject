@@ -1,6 +1,7 @@
 package pe.edu.upc.ecohabitproyecto.dtos;
 
 public class UsuarioRolCountDTO {
+    private String nombreRol;
     private Long totalUsuarios;
 
     public UsuarioRolCountDTO(String nombreRol, Long totalUsuarios) {
@@ -9,6 +10,14 @@ public class UsuarioRolCountDTO {
 
     public UsuarioRolCountDTO() {
 
+    }
+
+    public String getNombreRol() {
+        return nombreRol;
+    }
+
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
     }
 
     public Long getTotalUsuarios() {
