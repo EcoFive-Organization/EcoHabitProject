@@ -26,7 +26,7 @@ public class ForoController {
 
     // Listar los foros registrados
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
+    //@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CLIENT')")
     public List<ForoDTO> listar() {
         return iForoService.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();

@@ -71,8 +71,7 @@ public class UsuarioController {
 
         for(String[] columna : fila) {
             UsuarioRolCountDTO dto = new UsuarioRolCountDTO();
-            dto.setNombreRol(columna[0]);
-            dto.setTotalUsuarios(Long.valueOf(columna[1]));
+            dto.setTotalUsuarios(Long.valueOf(columna[0]));
             listaDTO.add(dto);
         }
 

@@ -17,7 +17,7 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
     Optional<Usuario> findByNombre(String nombre);
 
     // 🔹 Contar cuántos usuarios tienen un rol específico
-    @Query(value = "SELECT r.nombre_rol, COUNT(u.id_usuario) FROM usuario u INNER JOIN rol r ON u.id_usuario = r.id_usuario GROUP BY r.nombre_rol", nativeQuery = true)
+    @Query(value = "SELECT COUNT(u.id_usuario) FROM usuario u", nativeQuery = true)
     List<String[]> contarUsuariosRol();
 
     // 🔹 Contar usuarios por estado y por rol
